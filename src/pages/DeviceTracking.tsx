@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Search, Filter, Eye, Clock, CheckCircle, XCircle, AlertTriangle, X, RefreshCw } from 'lucide-react'
+import { Search, Filter, Eye, Clock, CheckCircle, XCircle, AlertTriangle, X, RefreshCw, LayoutGrid, Rows } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 import api from '../services/api'
 import type { Device, ProductionWorkLog, TestLog, QualityInspection } from '../types'
@@ -26,6 +26,7 @@ const DeviceTrackingPage: React.FC = () => {
   const [showDeviceDetails, setShowDeviceDetails] = useState(false)
   const [showFilterModal, setShowFilterModal] = useState(false)
   const [filters, setFilters] = useState<FilterState>({})
+  const [viewMode, setViewMode] = useState<'table' | 'grid'>('grid')
 
   useEffect(() => {
     loadData()
@@ -108,6 +109,17 @@ const DeviceTrackingPage: React.FC = () => {
       default: return <Clock className="w-4 h-4 text-gray-600" />
     }
   }
+
+  // Visual styles for operation cards
+  const opGradients = [
+    'from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-900/10',
+    'from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-900/10',
+    'from-amber-50 to-amber-100 dark:from-amber-900/20 dark:to-amber-900/10',
+    'from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-900/10',
+    'from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-900/10',
+    'from-indigo-50 to-indigo-100 dark:from-indigo-900/20 dark:to-indigo-900/10'
+  ]
+  const pickGradient = (idx: number) => opGradients[idx % opGradients.length]
 
   // Get unique values for filter options
   const uniqueTechnicians = useMemo(() => {
@@ -213,9 +225,9 @@ const DeviceTrackingPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Search and Filters */}
+      {/* Search / Filters / View Toggle */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-4">
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col md:flex-row gap-4 items-center">
           <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
@@ -226,7 +238,7 @@ const DeviceTrackingPage: React.FC = () => {
               className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <button
               onClick={() => setShowFilterModal(true)}
               className="flex items-center gap-2 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-all relative"
@@ -248,6 +260,24 @@ const DeviceTrackingPage: React.FC = () => {
                 Reset
               </button>
             )}
+
+            {/* View toggle */}
+            <div className="hidden md:flex items-center gap-2 pl-2 ml-2 border-l border-gray-200 dark:border-gray-700">
+              <button
+                onClick={() => setViewMode('grid')}
+                className={`p-2 rounded-lg transition ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'}`}
+                title="Grid view"
+              >
+                <LayoutGrid className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setViewMode('table')}
+                className={`p-2 rounded-lg transition ${viewMode === 'table' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'}`}
+                title="Table view"
+              >
+                <Rows className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -302,10 +332,24 @@ const DeviceTrackingPage: React.FC = () => {
 
       {/* Workflow Stages Overview */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Production Operations Overview</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Production Operations Overview</h2>
+          <div className="flex items-center gap-2">
+            {filters.operation && (
+              <button
+                onClick={() => removeFilter('operation')}
+                className="px-3 py-1.5 text-xs rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+                title="Clear operation filter"
+              >
+                Clear operation
+              </button>
+            )}
+            <span className="text-xs text-gray-500 dark:text-gray-400">{operations.length} ops</span>
+          </div>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {operations.length > 0 ? (
-            operations.map((operation) => {
+            operations.map((operation, idx) => {
               const operationDevices = devices.filter(d => {
                 const deviceOp = (d as any).operationName?.toLowerCase() || ''
                 const opName = operation.operation_name?.toLowerCase() || ''
@@ -317,28 +361,46 @@ const DeviceTrackingPage: React.FC = () => {
                 const opName = operation.operation_name?.toLowerCase() || ''
                 return deviceOp.includes(opName) || opName.includes(deviceOp)
               }).length
+
+              const isActive = filters.operation === operation.operation_name
+              const devPerHour = operation.standard_time > 0 ? Math.round(60 / operation.standard_time) : 0
               
               return (
                 <div 
                   key={operation.operation_id} 
-                  className="flex flex-col items-center p-5 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-lg hover:scale-105 transition-all duration-200 cursor-pointer"
+                  className={`group relative overflow-hidden flex flex-col gap-3 p-5 bg-gradient-to-br ${pickGradient(idx)} rounded-xl border ${isActive ? 'border-blue-400 dark:border-blue-500 ring-2 ring-blue-300/40 dark:ring-blue-500/30' : 'border-gray-200 dark:border-gray-600'} hover:shadow-xl hover:scale-[1.02] transition-all duration-200 cursor-pointer`}
                   onClick={() => {
                     setFilters(prev => ({ ...prev, operation: operation.operation_name }))
                     setShowFilterModal(false)
                   }}
                 >
-                  <div className="text-3xl mb-2">🔧</div>
-                  <div className="text-sm font-medium text-gray-900 dark:text-white text-center mb-2 line-clamp-2">
-                    {operation.operation_name}
-                  </div>
-                  <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-1">
-                    {filteredCount > 0 ? filteredCount : operationDevices}
-                  </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400">
-                    {filteredCount > 0 && filteredCount !== operationDevices && (
-                      <span className="text-gray-400 line-through mr-1">{operationDevices}</span>
+                  <div className="flex items-start justify-between w-full">
+                    <div className="w-10 h-10 rounded-lg bg-white/70 dark:bg-black/20 border border-white/60 dark:border-white/10 backdrop-blur flex items-center justify-center text-xl">🔧</div>
+                    {isActive && (
+                      <span className="px-2 py-0.5 text-[10px] rounded-full bg-blue-600 text-white">Active</span>
                     )}
-                    devices • {operation.standard_time} min
+                  </div>
+                  <div className="flex-1 w-full">
+                    <div className="text-sm font-semibold text-gray-900 dark:text-white line-clamp-2">{operation.operation_name}</div>
+                    <div className="mt-2 flex items-center justify-between">
+                      <div>
+                        <div className="text-[11px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Devices</div>
+                        <div className="text-2xl font-extrabold text-blue-600 dark:text-blue-400">
+                          {filteredCount > 0 ? filteredCount : operationDevices}
+                          {filteredCount > 0 && filteredCount !== operationDevices && (
+                            <span className="ml-2 text-sm font-medium text-gray-400 line-through">{operationDevices}</span>
+                          )}
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-[11px] uppercase tracking-wide text-gray-500 dark:text-gray-400">Throughput</div>
+                        <div className="text-sm font-semibold text-gray-900 dark:text-white">{devPerHour} / hr</div>
+                        <div className="text-[11px] text-gray-500 dark:text-gray-400">{operation.standard_time} min/op</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="absolute right-3 top-3 px-2 py-1 text-[10px] rounded-md bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-200 border border-black/10 dark:border-white/10">Click to filter</div>
                   </div>
                 </div>
               )
@@ -382,7 +444,7 @@ const DeviceTrackingPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Devices Table */}
+      {/* Devices - grid or table */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
         <div className="p-6 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800">
           <div className="flex items-center justify-between">
@@ -422,7 +484,7 @@ const DeviceTrackingPage: React.FC = () => {
                 </button>
               )}
             </div>
-          ) : (
+          ) : viewMode === 'table' ? (
             <table className="w-full">
               <thead className="bg-gray-50 dark:bg-gray-700">
                 <tr>
@@ -518,6 +580,50 @@ const DeviceTrackingPage: React.FC = () => {
                 ))}
               </tbody>
             </table>
+          ) : (
+            <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {filteredDevices.map((device) => (
+                <div
+                  key={device.id}
+                  onClick={() => handleViewDevice(device)}
+                  className="group rounded-xl border border-gray-200 dark:border-gray-700 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-800/60 p-4 hover:shadow-xl hover:scale-[1.01] transition-all cursor-pointer"
+                >
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <div className="text-sm text-gray-500 dark:text-gray-400 font-mono">{device.jobOrderId}</div>
+                      <div className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                        {device.serialNumber}
+                      </div>
+                    </div>
+                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStageColor(device.currentStage)}`}>
+                      {getStageIcon(device.currentStage)} {device.currentStage.replace('_',' ')}
+                    </span>
+                  </div>
+                  <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
+                    <div>
+                      <div className="text-gray-500 dark:text-gray-400">Operation</div>
+                      <div className="truncate text-gray-900 dark:text-white">{(device as any).operationName || '—'}</div>
+                    </div>
+                    <div>
+                      <div className="text-gray-500 dark:text-gray-400">Technician</div>
+                      <div className="truncate text-gray-900 dark:text-white">{(device as any).technicianName || 'Unassigned'}</div>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      {getQualityStatusIcon(device.qualityStatus)}
+                      <span className="text-sm capitalize text-gray-900 dark:text-white">{device.qualityStatus.replace('_',' ')}</span>
+                    </div>
+                    <button
+                      onClick={(e)=>{ e.stopPropagation(); handleViewDevice(device) }}
+                      className="flex items-center gap-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium"
+                    >
+                      <Eye className="w-4 h-4" /> View
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>

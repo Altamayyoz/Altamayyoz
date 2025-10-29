@@ -6,9 +6,10 @@ import Modal from '../common/Modal'
 interface CreateJobOrderModalProps {
   isOpen: boolean
   onClose: () => void
+  onJobOrderCreated?: () => void
 }
 
-const CreateJobOrderModal: React.FC<CreateJobOrderModalProps> = ({ isOpen, onClose }) => {
+const CreateJobOrderModal: React.FC<CreateJobOrderModalProps> = ({ isOpen, onClose, onJobOrderCreated }) => {
   const [formData, setFormData] = useState({
     jobOrderNumber: '',
     autoGenerate: true,
@@ -47,6 +48,10 @@ const CreateJobOrderModal: React.FC<CreateJobOrderModalProps> = ({ isOpen, onClo
       }
     }
 
+    if (!formData.assignedSupervisor || formData.assignedSupervisor.trim() === '') {
+      newErrors.assignedSupervisor = 'Assigned Supervisor is required'
+    }
+
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
@@ -60,10 +65,21 @@ const CreateJobOrderModal: React.FC<CreateJobOrderModalProps> = ({ isOpen, onClo
 
     setIsLoading(true)
     
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
+    try {
+      // Call real API
+      const jobOrderData = {
+        job_order_id: formData.jobOrderNumber,
+        total_devices: parseInt(formData.totalDevices),
+        due_date: formData.dueDate
+      }
+      
+      const api = (await import('../../services/api')).default
+      await api.createJobOrder(jobOrderData)
+      
       toast.success('Job Order created successfully!')
+      if (onJobOrderCreated) {
+        onJobOrderCreated()
+      }
       onClose()
       setFormData({
         jobOrderNumber: '',
@@ -77,7 +93,12 @@ const CreateJobOrderModal: React.FC<CreateJobOrderModalProps> = ({ isOpen, onClo
         assignedTechnicians: []
       })
       setErrors({})
-    }, 2000)
+    } catch (error: any) {
+      console.error('Create job order error:', error)
+      toast.error(error.message || 'Failed to create job order')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleInputChange = (field: string, value: any) => {
@@ -223,18 +244,21 @@ const CreateJobOrderModal: React.FC<CreateJobOrderModalProps> = ({ isOpen, onClo
         {/* Assigned Supervisor */}
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Assigned Supervisor
+            Assigned Supervisor *
           </label>
           <select
             value={formData.assignedSupervisor}
             onChange={(e) => handleInputChange('assignedSupervisor', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              errors.assignedSupervisor ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+            }`}
           >
             <option value="">Select Supervisor</option>
             <option value="fiona.l">Fiona Li</option>
             <option value="george.h">George Hall</option>
             <option value="tess.o">Tess O'Neil</option>
           </select>
+          {errors.assignedSupervisor && <p className="mt-1 text-sm text-red-600">{errors.assignedSupervisor}</p>}
         </div>
 
         {/* Notes */}

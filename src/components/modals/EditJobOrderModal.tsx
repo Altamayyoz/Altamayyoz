@@ -12,24 +12,41 @@ interface EditJobOrderModalProps {
   onJobOrderUpdated?: () => void
 }
 
+// Map frontend status to backend status
+const mapStatusToBackend = (status: string): string => {
+  if (status === 'in_progress' || status === 'open') return 'active'
+  if (status === 'on_hold') return 'on_hold'
+  if (status === 'completed') return 'completed'
+  return 'active'
+}
+
+// Map backend status to frontend status
+const mapStatusToFrontend = (status: string): string => {
+  if (status === 'active') return 'in_progress'
+  if (status === 'on_hold' || status === 'completed') return status
+  return 'in_progress'
+}
+
 const EditJobOrderModal: React.FC<EditJobOrderModalProps> = ({ isOpen, onClose, jobOrder, onJobOrderUpdated }) => {
   const [formData, setFormData] = useState({
-    totalDevices: jobOrder.totalDevices || 0,
-    dueDate: jobOrder.dueDate ? new Date(jobOrder.dueDate).toISOString().split('T')[0] : '',
-    status: jobOrder.status === 'completed' ? 'completed' : jobOrder.status === 'on_hold' ? 'on_hold' : 'active'
+    totalDevices: 0,
+    dueDate: '',
+    status: 'in_progress'
   })
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
 
   useEffect(() => {
-    if (jobOrder) {
+    if (jobOrder && isOpen) {
       setFormData({
         totalDevices: jobOrder.totalDevices || 0,
         dueDate: jobOrder.dueDate ? new Date(jobOrder.dueDate).toISOString().split('T')[0] : '',
-        status: jobOrder.status === 'completed' ? 'completed' : jobOrder.status === 'on_hold' ? 'on_hold' : 'active'
+        status: mapStatusToFrontend(jobOrder.status)
       })
+      setErrors({})
+      setIsLoading(false)
     }
-  }, [jobOrder])
+  }, [jobOrder, isOpen])
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
@@ -59,7 +76,7 @@ const EditJobOrderModal: React.FC<EditJobOrderModalProps> = ({ isOpen, onClose, 
       await api.updateJobOrder(jobOrder.id, {
         total_devices: formData.totalDevices,
         due_date: formData.dueDate,
-        status: formData.status
+        status: mapStatusToBackend(formData.status)
       })
       
       toast.success('Job Order updated successfully!')
@@ -83,8 +100,10 @@ const EditJobOrderModal: React.FC<EditJobOrderModalProps> = ({ isOpen, onClose, 
     }
   }
 
+  if (!jobOrder) return null
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title={`Edit Job Order: ${jobOrder.id}`} size="lg">
+    <Modal isOpen={isOpen} onClose={onClose} title={`Edit Job Order: ${jobOrder.id || 'Order'}`} size="lg">
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Job Order ID (Read-only) */}
         <div>
@@ -149,7 +168,7 @@ const EditJobOrderModal: React.FC<EditJobOrderModalProps> = ({ isOpen, onClose, 
             onChange={(e) => handleInputChange('status', e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
-            <option value="active">Active</option>
+            <option value="in_progress">Active</option>
             <option value="completed">Completed</option>
             <option value="on_hold">On Hold</option>
           </select>

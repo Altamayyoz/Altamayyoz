@@ -495,6 +495,94 @@ const api = {
     }
   },
 
+  async deleteJobOrder(jobOrderId: string): Promise<boolean> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      const idx = jobOrders.findIndex(j => j.id === jobOrderId)
+      if (idx >= 0) {
+        jobOrders.splice(idx, 1)
+        return true
+      }
+      return false
+    }
+
+    try {
+      await apiRequest<any>(`/api/joborders.php?id=${jobOrderId}`, {
+        method: 'DELETE'
+      })
+      return true
+    } catch (error: any) {
+      console.error('Delete job order error:', error)
+      throw error
+    }
+  },
+
+  async getPlanningEngineerActivities(limit: number = 20): Promise<any> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return {
+        activities: [],
+        recentJobOrders: [],
+        summary: {
+          totalActivities: 0,
+          recentJobOrdersCreated: 0,
+          pendingJobOrders: 0
+        }
+      }
+    }
+
+    try {
+      const response = await apiRequest<any>('/api/planning_activities.php?limit=' + limit)
+      return response.data || response
+    } catch (error) {
+      console.error('Get planning engineer activities error:', error)
+      return {
+        activities: [],
+        recentJobOrders: [],
+        summary: {
+          totalActivities: 0,
+          recentJobOrdersCreated: 0,
+          pendingJobOrders: 0
+        }
+      }
+    }
+  },
+
+  async createJobOrder(jobOrder: { job_order_id: string; total_devices: number; due_date: string }): Promise<boolean> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      const newJobOrder: JobOrder = {
+        id: jobOrder.job_order_id,
+        jobOrderNumber: jobOrder.job_order_id,
+        title: `Job Order ${jobOrder.job_order_id}`,
+        productModel: 'A300',
+        totalDevices: jobOrder.total_devices,
+        completedDevices: 0,
+        dueDate: jobOrder.due_date,
+        status: 'in_progress',
+        priority: 'Medium',
+        assignedSupervisor: '',
+        assignedTo: [],
+        devices: [],
+        progress: 0,
+        createdAt: new Date().toISOString()
+      }
+      jobOrders.unshift(newJobOrder)
+      return true
+    }
+
+    try {
+      await apiRequest<any>('/api/joborders.php', {
+        method: 'POST',
+        body: JSON.stringify(jobOrder)
+      })
+      return true
+    } catch (error: any) {
+      console.error('Create job order error:', error)
+      throw error
+    }
+  },
+
   async getTaskEntries(opts?: { technicianId?: string; last?: number }): Promise<TaskEntry[]> {
     if (USE_MOCK) {
       await ensureGenerated()
@@ -804,6 +892,124 @@ const api = {
     }
   },
 
+  async getPlanningAlerts(): Promise<any[]> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return [
+        {
+          id: '1',
+          type: 'supervisor_alert',
+          message: 'Job Order JO-2024-001 experiencing delays - need additional resources',
+          severity: 'warning',
+          date: new Date().toISOString().split('T')[0],
+          createdAt: new Date().toISOString(),
+          read: false,
+          senderName: 'John Supervisor',
+          senderRole: 'supervisor'
+        },
+        {
+          id: '2',
+          type: 'performance_issue',
+          message: 'Performance below target in Assembly line - efficiency at 78%',
+          severity: 'warning',
+          date: new Date().toISOString().split('T')[0],
+          createdAt: new Date().toISOString(),
+          read: false,
+          senderName: 'System',
+          senderRole: 'supervisor'
+        }
+      ]
+    }
+
+    try {
+      const response = await apiRequest<{ success: boolean; data: any[] }>('/api/planning_alerts.php')
+      return response.data || []
+    } catch (error) {
+      console.error('Get planning alerts error:', error)
+      return []
+    }
+  },
+
+  async sendAlert(target: 'supervisor' | 'admin', message: string, alertType: string, severity: 'info' | 'warning' | 'critical' = 'info', jobOrderId?: string): Promise<boolean> {
+    if (USE_MOCK) {
+      return true
+    }
+
+    try {
+      const response = await apiRequest<{ success: boolean; message: string }>('/api/planning_alerts.php', {
+        method: 'POST',
+        body: JSON.stringify({
+          target,
+          message,
+          alert_type: alertType,
+          severity,
+          job_order_id: jobOrderId
+        })
+      })
+      return true
+    } catch (error: any) {
+      console.error('Send alert error:', error)
+      throw error // Re-throw to let the modal handle the specific error message
+    }
+  },
+
+  async markAlertRead(alertId: string, read: boolean = true): Promise<boolean> {
+    if (USE_MOCK) {
+      return true
+    }
+
+    try {
+      await apiRequest<any>('/api/planning_alerts.php', {
+        method: 'PUT',
+        body: JSON.stringify({
+          alert_id: alertId,
+          read_status: read
+        })
+      })
+      return true
+    } catch (error) {
+      console.error('Mark alert read error:', error)
+      return false
+    }
+  },
+
+  async getPlanningMetrics(period: number = 30): Promise<any> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return {
+        efficiencyTrends: [],
+        productivityTrends: [],
+        currentMetrics: {
+          averageEfficiency: 75,
+          totalProductivity: 85,
+          utilizationRate: 70,
+          onTimeDelivery: 80
+        },
+        bottleneckTasks: [],
+        topPerformers: []
+      }
+    }
+
+    try {
+      const response = await apiRequest<any>(`/api/planning_metrics.php?period=${period}`)
+      return response.data || response
+    } catch (error) {
+      console.error('Get planning metrics error:', error)
+      return {
+        efficiencyTrends: [],
+        productivityTrends: [],
+        currentMetrics: {
+          averageEfficiency: 75,
+          totalProductivity: 85,
+          utilizationRate: 70,
+          onTimeDelivery: 80
+        },
+        bottleneckTasks: [],
+        topPerformers: []
+      }
+    }
+  },
+
   async getOperations(): Promise<any[]> {
     if (USE_MOCK) {
       await ensureGenerated()
@@ -823,6 +1029,59 @@ const api = {
     } catch (error) {
       console.error('Get operations error:', error)
       return []
+    }
+  },
+
+  async createOperation(operation: { operation_name: string; standard_time_minutes: number; description?: string; category?: string }): Promise<boolean> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return true
+    }
+
+    try {
+      await apiRequest<any>('/api/operations_crud.php', {
+        method: 'POST',
+        body: JSON.stringify(operation)
+      })
+      return true
+    } catch (error: any) {
+      console.error('Create operation error:', error)
+      throw error
+    }
+  },
+
+  async updateOperation(operationId: string, updates: { operation_name?: string; standard_time_minutes?: number; description?: string }): Promise<boolean> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return true
+    }
+
+    try {
+      await apiRequest<any>(`/api/operations_crud.php?id=${operationId}`, {
+        method: 'PUT',
+        body: JSON.stringify(updates)
+      })
+      return true
+    } catch (error: any) {
+      console.error('Update operation error:', error)
+      throw error
+    }
+  },
+
+  async deleteOperation(operationId: string): Promise<boolean> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return true
+    }
+
+    try {
+      await apiRequest<any>(`/api/operations_crud.php?id=${operationId}`, {
+        method: 'DELETE'
+      })
+      return true
+    } catch (error: any) {
+      console.error('Delete operation error:', error)
+      throw error
     }
   },
 

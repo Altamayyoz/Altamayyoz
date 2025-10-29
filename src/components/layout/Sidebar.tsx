@@ -66,10 +66,10 @@ const Sidebar: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
                 to={l.to}
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `block px-4 py-3 rounded-lg font-medium transition ${
+                  `block px-4 py-3 rounded-lg font-medium transition-all duration-300 ease-in-out transform hover:scale-105 active:scale-95 ${
                     isActive
-                      ? 'bg-light-primary dark:bg-dark-primary text-white shadow-md'
-                      : 'text-light-text dark:text-dark-text hover:bg-light-bg dark:hover:bg-neutral-700'
+                      ? 'bg-light-primary dark:bg-dark-primary text-white shadow-lg scale-105'
+                      : 'text-light-text dark:text-dark-text hover:bg-light-bg dark:hover:bg-neutral-700 hover:shadow-md'
                   }`
                 }
               >

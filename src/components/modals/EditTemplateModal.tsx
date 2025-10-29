@@ -1,37 +1,40 @@
 import React, { useState, useEffect } from 'react'
-import { FileText, Clock, Tag, Plus } from 'lucide-react'
+import { Save, Tag, Clock, FileText, Info } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 import Modal from '../common/Modal'
+import api from '../../services/api'
 
-interface AddTemplateModalProps {
-  isOpen: boolean
-  onClose: () => void
-  onSave: (template: { name: string; category: string; standardTime: string; description: string }) => Promise<void>
+interface TaskTemplateLocal {
+  id: string
+  name: string
+  category: string
+  standardTime: number
+  description: string
 }
 
-const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ isOpen, onClose, onSave }) => {
+interface EditTemplateModalProps {
+  isOpen: boolean
+  onClose: () => void
+  template: TaskTemplateLocal
+  onTemplateUpdated?: () => void
+  getCategoryColor: (category: string) => string
+}
+
+const EditTemplateModal: React.FC<EditTemplateModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  template, 
+  onTemplateUpdated,
+  getCategoryColor 
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     category: '',
-    standardTime: '',
+    standardTime: 0,
     description: ''
   })
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
-
-  // Reset form when modal opens
-  useEffect(() => {
-    if (isOpen) {
-      setFormData({
-        name: '',
-        category: '',
-        standardTime: '',
-        description: ''
-      })
-      setErrors({})
-      setIsLoading(false)
-    }
-  }, [isOpen])
 
   const categories = [
     'Assembly',
@@ -44,6 +47,19 @@ const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ isOpen, onClose, on
     'Other'
   ]
 
+  useEffect(() => {
+    if (template && isOpen) {
+      setFormData({
+        name: template.name || '',
+        category: template.category || '',
+        standardTime: template.standardTime || 0,
+        description: template.description || ''
+      })
+      setErrors({})
+      setIsLoading(false)
+    }
+  }, [template, isOpen])
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
 
@@ -55,9 +71,7 @@ const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ isOpen, onClose, on
       newErrors.category = 'Category is required'
     }
 
-    if (!formData.standardTime) {
-      newErrors.standardTime = 'Standard time is required'
-    } else if (parseInt(formData.standardTime) < 1) {
+    if (!formData.standardTime || formData.standardTime < 1) {
       newErrors.standardTime = 'Standard time must be at least 1 minute'
     }
 
@@ -79,25 +93,23 @@ const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ isOpen, onClose, on
     }
 
     setIsLoading(true)
-    setErrors({})
     
     try {
-      // Call the async onSave function which handles the API call
-      await onSave(formData)
-      // Only close and reset on success
-      onClose()
-      setFormData({
-        name: '',
-        category: '',
-        standardTime: '',
-        description: ''
+      await api.updateOperation(template.id, {
+        operation_name: formData.name,
+        standard_time_minutes: formData.standardTime,
+        description: formData.description
       })
-      setErrors({})
+      
+      toast.success('Template updated successfully!')
+      onClose()
+      
+      if (onTemplateUpdated) {
+        onTemplateUpdated()
+      }
     } catch (error: any) {
-      // Error is already handled by the parent (handleSaveTemplate)
-      // Just set loading to false to allow retry
-      console.error('Error saving template:', error)
-      // Keep the modal open so user can fix any issues
+      console.error('Update template error:', error)
+      toast.error(error.message || 'Failed to update template. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -111,26 +123,41 @@ const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ isOpen, onClose, on
     }
   }
 
+  if (!template) return null
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose} title="Add Task Template" size="lg">
+    <Modal isOpen={isOpen} onClose={onClose} title={`Edit Template: ${template.name || 'Template'}`} size="lg">
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Task Name */}
+        {/* Template ID (Read-only) */}
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Task Name *
+            Template ID
           </label>
           <div className="relative">
             <FileText className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="text"
-              value={formData.name}
-              onChange={(e) => handleInputChange('name', e.target.value)}
-              className={`w-full pl-10 pr-3 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-              }`}
-              placeholder="Enter task name"
+              value={template.id}
+              disabled
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 cursor-not-allowed"
             />
           </div>
+        </div>
+
+        {/* Task Name */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Task Name *
+          </label>
+          <input
+            type="text"
+            value={formData.name}
+            onChange={(e) => handleInputChange('name', e.target.value)}
+            className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+              errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+            }`}
+            placeholder="Enter task name"
+          />
           {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
         </div>
 
@@ -156,6 +183,13 @@ const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ isOpen, onClose, on
               </select>
             </div>
             {errors.category && <p className="mt-1 text-sm text-red-600">{errors.category}</p>}
+            {formData.category && (
+              <div className="mt-2">
+                <span className={`inline-block px-2 py-1 text-xs font-medium rounded-full ${getCategoryColor(formData.category)}`}>
+                  {formData.category}
+                </span>
+              </div>
+            )}
           </div>
 
           <div>
@@ -168,11 +202,11 @@ const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ isOpen, onClose, on
                 type="number"
                 min="1"
                 value={formData.standardTime}
-                onChange={(e) => handleInputChange('standardTime', e.target.value)}
+                onChange={(e) => handleInputChange('standardTime', parseInt(e.target.value) || 0)}
                 className={`w-full pl-10 pr-3 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
                   errors.standardTime ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
                 }`}
-                placeholder="e.g., 30"
+                placeholder="Enter time in minutes"
               />
             </div>
             {errors.standardTime && <p className="mt-1 text-sm text-red-600">{errors.standardTime}</p>}
@@ -184,34 +218,23 @@ const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ isOpen, onClose, on
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Description *
           </label>
-          <textarea
-            value={formData.description}
-            onChange={(e) => handleInputChange('description', e.target.value)}
-            rows={4}
-            className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-              errors.description ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-            }`}
-            placeholder="Enter detailed task description..."
-          />
+          <div className="relative">
+            <Info className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
+            <textarea
+              value={formData.description}
+              onChange={(e) => handleInputChange('description', e.target.value)}
+              rows={4}
+              className={`w-full pl-10 pr-3 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                errors.description ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+              }`}
+              placeholder="Enter detailed description (minimum 10 characters)"
+            />
+          </div>
           {errors.description && <p className="mt-1 text-sm text-red-600">{errors.description}</p>}
           <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-            Minimum 10 characters required
+            {formData.description.length} characters
           </p>
         </div>
-
-        {/* Preview */}
-        {formData.name && formData.category && (
-          <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-            <h4 className="text-sm font-medium text-gray-900 dark:text-white mb-2">
-              Template Preview
-            </h4>
-            <div className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-              <p><strong>Task:</strong> {formData.name}</p>
-              <p><strong>Category:</strong> {formData.category}</p>
-              <p><strong>Standard Time:</strong> {formData.standardTime ? `${formData.standardTime} minutes` : 'Not set'}</p>
-            </div>
-          </div>
-        )}
 
         {/* Actions */}
         <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
@@ -231,12 +254,12 @@ const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ isOpen, onClose, on
             {isLoading ? (
               <>
                 <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
-                Creating...
+                Updating...
               </>
             ) : (
               <>
-                <Plus className="w-4 h-4" />
-                Create Template
+                <Save className="w-4 h-4" />
+                Save Changes
               </>
             )}
           </button>
@@ -246,4 +269,5 @@ const AddTemplateModal: React.FC<AddTemplateModalProps> = ({ isOpen, onClose, on
   )
 }
 
-export default AddTemplateModal
+export default EditTemplateModal
+

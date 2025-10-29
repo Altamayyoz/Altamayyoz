@@ -35,7 +35,8 @@ try {
 }
 
 function handleGetRequest($conn) {
-    $query = "SELECT operation_id, operation_name, standard_time, description, created_at 
+    // Alias standard_time as standard_time_minutes for frontend consistency
+    $query = "SELECT operation_id, operation_name, standard_time as standard_time_minutes, description, category, created_at 
               FROM operations 
               ORDER BY operation_name ASC";
     

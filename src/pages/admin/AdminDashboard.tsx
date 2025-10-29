@@ -76,6 +76,8 @@ const AdminDashboard: React.FC = () => {
     alert_threshold_efficiency: '70'
   })
   const [recentActivity, setRecentActivity] = useState<any[]>([])
+  const [planningActivities, setPlanningActivities] = useState<any>(null)
+  const [loadingPlanningActivities, setLoadingPlanningActivities] = useState(false)
   
   // Modal states
   const [showImportModal, setShowImportModal] = useState(false)
@@ -92,6 +94,8 @@ const AdminDashboard: React.FC = () => {
   const [editingJobOrder, setEditingJobOrder] = useState<JobOrder | null>(null)
   const [showViewJobOrderModal, setShowViewJobOrderModal] = useState(false)
   const [viewingJobOrder, setViewingJobOrder] = useState<JobOrder | null>(null)
+  const [showViewAlertModal, setShowViewAlertModal] = useState(false)
+  const [viewingAlert, setViewingAlert] = useState<Alert | null>(null)
   
   // Additional action dialog states
   const [showExportAllDialog, setShowExportAllDialog] = useState(false)
@@ -153,11 +157,26 @@ const AdminDashboard: React.FC = () => {
       // Set recent activity
       setRecentActivity(activityData)
       
+      // Load Planning Engineer activities
+      loadPlanningActivities()
+      
       setLoading(false)
     } catch (error) {
       console.error('Error loading admin dashboard:', error)
       toast.error('Failed to load dashboard data')
       setLoading(false)
+    }
+  }
+
+  const loadPlanningActivities = async () => {
+    try {
+      setLoadingPlanningActivities(true)
+      const activities = await api.getPlanningEngineerActivities(10)
+      setPlanningActivities(activities)
+    } catch (error) {
+      console.error('Error loading planning activities:', error)
+    } finally {
+      setLoadingPlanningActivities(false)
     }
   }
 
@@ -407,6 +426,7 @@ const AdminDashboard: React.FC = () => {
             { id: 'overview', label: 'Overview', icon: BarChart3 },
             { id: 'users', label: 'User Management', icon: Users },
             { id: 'joborders', label: 'Job Orders', icon: FileText },
+            { id: 'planning', label: 'Planning Engineer', icon: Activity },
             { id: 'alerts', label: 'Alerts', icon: AlertTriangle },
             { id: 'settings', label: 'System Settings', icon: Settings }
           ].map(({ id, label, icon: Icon }) => (
@@ -712,6 +732,180 @@ const AdminDashboard: React.FC = () => {
         </div>
       )}
 
+      {activeTab === 'planning' && (
+        <div className="space-y-6">
+          {/* Planning Engineer Activities Summary */}
+          {planningActivities && planningActivities.summary && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">Total Activities</p>
+                    <p className="text-2xl font-bold text-light-primary dark:text-dark-primary mt-1">
+                      {planningActivities.summary.totalActivities || 0}
+                    </p>
+                  </div>
+                  <Activity className="w-8 h-8 text-light-primary dark:text-dark-primary opacity-50" />
+                </div>
+              </div>
+              <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">Recent Job Orders</p>
+                    <p className="text-2xl font-bold text-light-accent dark:text-dark-accent mt-1">
+                      {planningActivities.summary.recentJobOrdersCreated || 0}
+                    </p>
+                  </div>
+                  <FileText className="w-8 h-8 text-light-accent dark:text-dark-accent opacity-50" />
+                </div>
+              </div>
+              <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700 p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">Pending Job Orders</p>
+                    <p className="text-2xl font-bold text-orange-600 dark:text-orange-400 mt-1">
+                      {planningActivities.summary.pendingJobOrders || 0}
+                    </p>
+                  </div>
+                  <Clock className="w-8 h-8 text-orange-600 dark:text-orange-400 opacity-50" />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Planning Engineer Activities */}
+          <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700">
+            <div className="p-6 border-b border-neutral-200 dark:border-neutral-700 flex justify-between items-center">
+              <h3 className="font-semibold text-light-text dark:text-dark-text flex items-center gap-2">
+                <Activity className="w-5 h-5" />
+                Planning Engineer Activities
+              </h3>
+              <button
+                onClick={loadPlanningActivities}
+                disabled={loadingPlanningActivities}
+                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition flex items-center gap-2 disabled:opacity-50"
+              >
+                {loadingPlanningActivities ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white" />
+                    Loading...
+                  </>
+                ) : (
+                  <>
+                    <Activity className="w-4 h-4" />
+                    Refresh
+                  </>
+                )}
+              </button>
+            </div>
+            <div className="p-6">
+              {loadingPlanningActivities ? (
+                <div className="flex justify-center py-8">
+                  <LoadingSpinner />
+                </div>
+              ) : planningActivities?.activities && planningActivities.activities.length > 0 ? (
+                <div className="space-y-4">
+                  {planningActivities.activities.map((activity: any, index: number) => {
+                    const timeAgo = activity.time ? (() => {
+                      const date = new Date(activity.time)
+                      const now = new Date()
+                      const diffMs = now.getTime() - date.getTime()
+                      const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
+                      const diffDays = Math.floor(diffHours / 24)
+                      
+                      if (diffDays > 0) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`
+                      if (diffHours > 0) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`
+                      const diffMins = Math.floor(diffMs / (1000 * 60))
+                      return diffMins > 0 ? `${diffMins} minute${diffMins > 1 ? 's' : ''} ago` : 'Just now'
+                    })() : 'Unknown'
+                    
+                    return (
+                      <div key={activity.id || index} className="flex items-start gap-4 p-4 rounded-lg bg-neutral-50 dark:bg-neutral-800/50 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition">
+                        <div className="text-2xl">{activity.icon || '📋'}</div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-sm font-semibold text-light-text dark:text-dark-text">
+                              {activity.action?.replace('_', ' ').replace(/\b\w/g, (l: string) => l.toUpperCase())}
+                            </span>
+                            {activity.userRole === 'engineer' && (
+                              <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400">
+                                Planning Engineer
+                              </span>
+                            )}
+                          </div>
+                          {activity.details && (
+                            <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-1">
+                              {activity.details}
+                            </p>
+                          )}
+                          <div className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+                            <span>By: {activity.user}</span>
+                            <span>•</span>
+                            <span>{timeAgo}</span>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-neutral-500 dark:text-neutral-400">
+                  No Planning Engineer activities found
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Recent Job Orders Created by Planning Engineer */}
+          {planningActivities?.recentJobOrders && planningActivities.recentJobOrders.length > 0 && (
+            <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700">
+              <div className="p-6 border-b border-neutral-200 dark:border-neutral-700">
+                <h3 className="font-semibold text-light-text dark:text-dark-text flex items-center gap-2">
+                  <FileText className="w-5 h-5" />
+                  Recent Job Orders Created
+                </h3>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-neutral-50 dark:bg-neutral-800/50">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Job Order ID</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Total Devices</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Due Date</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">Created</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-neutral-200 dark:divide-neutral-700">
+                    {planningActivities.recentJobOrders.map((job: any) => (
+                      <tr key={job.job_order_id} className="hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-light-text dark:text-dark-text">
+                          {job.job_order_id}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-600 dark:text-neutral-400">
+                          {job.total_devices}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-600 dark:text-neutral-400">
+                          {job.due_date ? new Date(job.due_date).toLocaleDateString() : 'Not set'}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(job.status)}`}>
+                            {job.status || 'active'}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-500 dark:text-neutral-400">
+                          {job.created_date ? new Date(job.created_date).toLocaleDateString() : 'Unknown'}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
       {activeTab === 'alerts' && (
         <div className="space-y-4">
           {alerts.map((alert) => (
@@ -768,7 +962,14 @@ const AdminDashboard: React.FC = () => {
                       Resolve
                     </button>
                   )}
-                  <button className="px-3 py-1 bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 text-sm rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition">
+                  <button 
+                    onClick={() => {
+                      setViewingAlert(alert)
+                      setShowViewAlertModal(true)
+                    }}
+                    className="px-3 py-1 bg-blue-600 dark:bg-blue-700 text-white text-sm rounded-lg hover:bg-blue-700 dark:hover:bg-blue-800 transition-all duration-200 hover:scale-105 active:scale-95 flex items-center gap-2"
+                  >
+                    <Eye className="w-4 h-4" />
                     View Details
                   </button>
                 </div>
@@ -1114,6 +1315,115 @@ const AdminDashboard: React.FC = () => {
         confirmText="Clear Logs"
         cancelText="Cancel"
       />
+
+      {/* View Alert Details Modal */}
+      {viewingAlert && (
+        <Modal
+          isOpen={showViewAlertModal}
+          onClose={() => {
+            setShowViewAlertModal(false)
+            setViewingAlert(null)
+          }}
+          title="Alert Details"
+          size="lg"
+        >
+          <div className="space-y-4">
+            <div className="flex items-start gap-4">
+              <div className={`p-3 rounded-lg ${getSeverityColor(viewingAlert.severity)}`}>
+                <AlertTriangle className="w-6 h-6" />
+              </div>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-2">
+                  <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">
+                    {viewingAlert.type}
+                  </h3>
+                  <span className={`px-3 py-1 text-xs font-medium rounded-full ${getSeverityColor(viewingAlert.severity)}`}>
+                    {viewingAlert.severity}
+                  </span>
+                </div>
+                <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-4">
+                  Created: {new Date(viewingAlert.timestamp).toLocaleString()}
+                </p>
+              </div>
+            </div>
+
+            <div className="border-t border-neutral-200 dark:border-neutral-700 pt-4">
+              <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
+                Message
+              </label>
+              <div className="p-4 bg-neutral-50 dark:bg-neutral-800 rounded-lg">
+                <p className="text-sm text-neutral-700 dark:text-neutral-300 whitespace-pre-wrap">
+                  {viewingAlert.message}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4 pt-4 border-t border-neutral-200 dark:border-neutral-700">
+              <div>
+                <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                  Alert ID
+                </label>
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 font-mono">
+                  {viewingAlert.id}
+                </p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+                  Status
+                </label>
+                <p className="text-sm">
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    viewingAlert.resolved 
+                      ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                      : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+                  }`}>
+                    {viewingAlert.resolved ? 'Resolved' : 'Active'}
+                  </span>
+                </p>
+              </div>
+            </div>
+
+            {!viewingAlert.resolved && (
+              <div className="pt-4 border-t border-neutral-200 dark:border-neutral-700">
+                <button
+                  onClick={async () => {
+                    try {
+                      const success = await api.resolveAlert(viewingAlert.id)
+                      if (success) {
+                        toast.success('Alert resolved successfully!')
+                        setShowViewAlertModal(false)
+                        setViewingAlert(null)
+                        // Reload alerts
+                        const alertsData = await api.getAlerts(false)
+                        setAlerts(alertsData.map((a: any) => ({
+                          id: a.id,
+                          type: a.type,
+                          severity: a.severity as 'Critical' | 'High' | 'Medium' | 'Low',
+                          message: a.message,
+                          timestamp: a.timestamp,
+                          resolved: a.resolved || false
+                        })))
+                        // Reload stats
+                        const statsData = await api.getAdminStats()
+                        setStats(statsData as SystemStats)
+                      } else {
+                        toast.error('Failed to resolve alert')
+                      }
+                    } catch (error: any) {
+                      console.error('Resolve alert error:', error)
+                      toast.error(error.message || 'Failed to resolve alert')
+                    }
+                  }}
+                  className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-all duration-200 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+                >
+                  <CheckCircle className="w-4 h-4" />
+                  Resolve Alert
+                </button>
+              </div>
+            )}
+          </div>
+        </Modal>
+      )}
     </div>
   )
 }

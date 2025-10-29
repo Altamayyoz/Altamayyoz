@@ -21,7 +21,7 @@ class Database {
                 )
             );
         } catch(PDOException $exception) {
-            echo "Connection error: " . $exception->getMessage();
+            error_log("Database connection error: " . $exception->getMessage());
         }
         
         return $this->conn;
@@ -44,7 +44,15 @@ function validateInput($data, $required_fields) {
     $errors = [];
     
     foreach ($required_fields as $field) {
-        if (!isset($data[$field]) || empty(trim($data[$field]))) {
+        if (!isset($data[$field])) {
+            $errors[] = "$field is required";
+        } elseif (is_string($data[$field])) {
+            // Only trim strings, check if empty after trimming
+            if (trim($data[$field]) === '') {
+                $errors[] = "$field is required";
+            }
+        } elseif ($data[$field] === null || $data[$field] === '') {
+            // For non-string types (numbers, etc.), check if null or empty string
             $errors[] = "$field is required";
         }
     }
