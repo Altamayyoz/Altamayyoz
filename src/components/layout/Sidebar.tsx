@@ -6,7 +6,6 @@ import type { Role } from '../../types'
 const NAV_BY_ROLE: Record<Role, Array<{ to: string; label: string }>> = {
   Admin: [
     { to: '/admin-dashboard', label: '🛠️ Admin Dashboard' },
-    { to: '/job-orders', label: '📋 Job Orders' },
     { to: '/device-tracking', label: '📱 Device Tracking' }
   ],
   ProductionWorker: [

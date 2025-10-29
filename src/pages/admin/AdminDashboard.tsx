@@ -26,6 +26,8 @@ import ConfirmationDialog from '../../components/common/ConfirmationDialog'
 import ImportDataModal from '../../components/modals/ImportDataModal'
 import ExportReportModal from '../../components/modals/ExportReportModal'
 import AddUserModal from '../../components/modals/AddUserModal'
+import EditUserModal from '../../components/modals/EditUserModal'
+import EditJobOrderModal from '../../components/modals/EditJobOrderModal'
 import BackupDBModal from '../../components/modals/BackupDBModal'
 import FilterModal from '../../components/modals/FilterModal'
 import type { JobOrder } from '../../types'
@@ -69,14 +71,27 @@ const AdminDashboard: React.FC = () => {
   const [alerts, setAlerts] = useState<Alert[]>([])
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('overview')
+  const [settings, setSettings] = useState<{ standard_work_hours: string; alert_threshold_efficiency: string }>({
+    standard_work_hours: '8',
+    alert_threshold_efficiency: '70'
+  })
+  const [recentActivity, setRecentActivity] = useState<any[]>([])
   
   // Modal states
   const [showImportModal, setShowImportModal] = useState(false)
   const [showExportModal, setShowExportModal] = useState(false)
   const [showAddUserModal, setShowAddUserModal] = useState(false)
+  const [showEditUserModal, setShowEditUserModal] = useState(false)
+  const [editingUser, setEditingUser] = useState<User | null>(null)
   const [showBackupModal, setShowBackupModal] = useState(false)
   const [showDeleteDialog, setShowDeleteDialog] = useState(false)
   const [deleteItem, setDeleteItem] = useState<{ type: string; id: string; name: string } | null>(null)
+  const [showViewUserModal, setShowViewUserModal] = useState(false)
+  const [viewingUser, setViewingUser] = useState<User | null>(null)
+  const [showEditJobOrderModal, setShowEditJobOrderModal] = useState(false)
+  const [editingJobOrder, setEditingJobOrder] = useState<JobOrder | null>(null)
+  const [showViewJobOrderModal, setShowViewJobOrderModal] = useState(false)
+  const [viewingJobOrder, setViewingJobOrder] = useState<JobOrder | null>(null)
   
   // Additional action dialog states
   const [showExportAllDialog, setShowExportAllDialog] = useState(false)
@@ -90,68 +105,54 @@ const AdminDashboard: React.FC = () => {
 
   const loadDashboardData = async () => {
     try {
-      // Load system statistics
-      const [usersData, jobOrdersData] = await Promise.all([
+      setLoading(true)
+      // Load all data in parallel
+      const [usersData, jobOrdersData, statsData, alertsData, settingsData, activityData] = await Promise.all([
         api.getUsers(),
-        api.getJobOrders()
+        api.getJobOrders(),
+        api.getAdminStats(),
+        api.getAlerts(false), // Get unresolved alerts
+        api.getSettings(),
+        api.getRecentActivity(4)
       ])
 
-      // Calculate system stats
-      const systemStats: SystemStats = {
-        totalUsers: usersData.length,
-        activeJobOrders: jobOrdersData.filter(j => j.status === 'in_progress').length,
-        completedJobOrders: jobOrdersData.filter(j => j.status === 'completed').length,
-        pendingApprovals: Math.floor(Math.random() * 15) + 5, // Mock data
-        systemAlerts: Math.floor(Math.random() * 8) + 2, // Mock data
-        totalDevices: jobOrdersData.reduce((sum, j) => sum + (j.totalDevices || 0), 0),
-        completedDevices: jobOrdersData.reduce((sum, j) => sum + (j.completedDevices || 0), 0),
-        averageEfficiency: Math.floor(Math.random() * 20) + 75 // Mock data
-      }
-
-      // Mock alerts data
-      const mockAlerts: Alert[] = [
-        {
-          id: '1',
-          type: 'Low Performance',
-          severity: 'High',
-          message: 'Technician Alex Turner efficiency below 70% for 3 consecutive days',
-          timestamp: '2024-01-15T10:30:00Z',
-          resolved: false
-        },
-        {
-          id: '2',
-          type: 'Approaching Deadline',
-          severity: 'Medium',
-          message: 'Job Order JO-00125 due in 2 days with 65% completion',
-          timestamp: '2024-01-15T09:15:00Z',
-          resolved: false
-        },
-        {
-          id: '3',
-          type: 'System Maintenance',
-          severity: 'Low',
-          message: 'Scheduled maintenance window tonight 11 PM - 1 AM',
-          timestamp: '2024-01-15T08:00:00Z',
-          resolved: false
-        }
-      ]
-
-      setStats(systemStats)
+      // Use stats from API
+      setStats(statsData as SystemStats)
+      
+      // Map users with email if available
       setUsers(usersData.map(u => ({
         ...u,
-        email: `${u.username}@company.com`,
+        email: (u as any).email || `${u.username}@company.com`,
         status: 'Active' as const,
         lastLogin: new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000).toISOString(),
         createdAt: new Date(Date.now() - Math.random() * 365 * 24 * 60 * 60 * 1000).toISOString()
       })))
+      
+      // Use job orders from database
       setJobOrders(jobOrdersData.map(j => ({
         ...j,
         assignedSupervisor: j.assignedSupervisor || 'Unassigned',
-        totalDevices: j.totalDevices || Math.floor(Math.random() * 50) + 10,
-        completedDevices: j.completedDevices || Math.floor(Math.random() * 30) + 5,
-        createdAt: new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString()
+        totalDevices: j.totalDevices || 0,
+        completedDevices: j.completedDevices || 0,
+        createdAt: j.createdAt || new Date().toISOString()
       })))
-      setAlerts(mockAlerts)
+      
+      // Map alerts from API
+      setAlerts(alertsData.map((a: any) => ({
+        id: a.id,
+        type: a.type,
+        severity: a.severity as 'Critical' | 'High' | 'Medium' | 'Low',
+        message: a.message,
+        timestamp: a.timestamp,
+        resolved: a.resolved || false
+      })))
+      
+      // Set settings
+      setSettings(settingsData)
+      
+      // Set recent activity
+      setRecentActivity(activityData)
+      
       setLoading(false)
     } catch (error) {
       console.error('Error loading admin dashboard:', error)
@@ -201,12 +202,25 @@ const AdminDashboard: React.FC = () => {
 
   const confirmExportAll = async () => {
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      const exportData = await api.exportAllData()
+      
+      // Create a downloadable JSON file
+      const dataStr = JSON.stringify(exportData, null, 2)
+      const dataBlob = new Blob([dataStr], { type: 'application/json' })
+      const url = URL.createObjectURL(dataBlob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `system_export_${new Date().toISOString().split('T')[0]}.json`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+      
       toast.success('All data exported successfully!')
       setShowExportAllDialog(false)
-    } catch (error) {
-      toast.error('Failed to export data')
+    } catch (error: any) {
+      console.error('Export error:', error)
+      toast.error(error.message || 'Failed to export data')
     }
   }
 
@@ -216,12 +230,19 @@ const AdminDashboard: React.FC = () => {
 
   const confirmClearLogs = async () => {
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      toast.success('Old logs cleared successfully!')
+      const success = await api.clearOldLogs(90)
+      if (success) {
+        toast.success('Old logs cleared successfully!')
+        // Reload activity logs
+        const activityData = await api.getRecentActivity(4)
+        setRecentActivity(activityData)
+      } else {
+        toast.error('Failed to clear logs')
+      }
       setShowClearLogsDialog(false)
-    } catch (error) {
-      toast.error('Failed to clear logs')
+    } catch (error: any) {
+      console.error('Clear logs error:', error)
+      toast.error(error.message || 'Failed to clear logs')
     }
   }
 
@@ -262,6 +283,22 @@ const AdminDashboard: React.FC = () => {
 
   if (loading) return <LoadingSpinner />
 
+  const getProgressColor = (percentage: number) => {
+    if (percentage >= 80) return 'bg-green-500 dark:bg-green-500'
+    if (percentage >= 60) return 'bg-blue-500 dark:bg-blue-500'
+    if (percentage >= 40) return 'bg-yellow-500 dark:bg-yellow-500'
+    if (percentage >= 20) return 'bg-orange-500 dark:bg-orange-500'
+    return 'bg-red-500 dark:bg-red-500'
+  }
+
+  const getEfficiencyColor = (percentage: number) => {
+    if (percentage >= 90) return 'bg-green-500 dark:bg-green-500'
+    if (percentage >= 75) return 'bg-blue-500 dark:bg-blue-500'
+    if (percentage >= 60) return 'bg-yellow-500 dark:bg-yellow-500'
+    if (percentage >= 50) return 'bg-orange-500 dark:bg-orange-500'
+    return 'bg-red-500 dark:bg-red-500'
+  }
+
   const getSeverityColor = (severity: string) => {
     switch (severity) {
       case 'Critical': return 'text-red-600 bg-red-100 dark:text-red-400 dark:bg-red-900/20'
@@ -301,14 +338,14 @@ const AdminDashboard: React.FC = () => {
         <div className="flex gap-2">
           <button 
             onClick={() => setShowImportModal(true)}
-            className="px-4 py-2 bg-light-primary text-white rounded-lg hover:bg-light-primary/90 transition flex items-center gap-2"
+            className="px-4 py-2 bg-blue-600 dark:bg-light-primary text-white rounded-lg hover:bg-blue-700 dark:hover:bg-light-primary/90 transition flex items-center gap-2"
           >
             <Upload className="w-4 h-4" />
             Import Data
           </button>
           <button 
             onClick={() => setShowExportModal(true)}
-            className="px-4 py-2 bg-light-accent text-white rounded-lg hover:bg-light-accent/90 transition flex items-center gap-2"
+            className="px-4 py-2 bg-green-600 dark:bg-light-accent text-white rounded-lg hover:bg-green-700 dark:hover:bg-light-accent/90 transition flex items-center gap-2"
           >
             <Download className="w-4 h-4" />
             Export Report
@@ -407,7 +444,7 @@ const AdminDashboard: React.FC = () => {
               </div>
               <div className="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-2">
                 <div 
-                  className="bg-gradient-to-r from-light-primary to-light-accent h-2 rounded-full transition-all duration-500"
+                  className={`h-2 rounded-full transition-all duration-500 ${getEfficiencyColor(stats?.averageEfficiency || 0)}`}
                   style={{ width: `${stats?.averageEfficiency}%` }}
                 />
               </div>
@@ -434,25 +471,41 @@ const AdminDashboard: React.FC = () => {
             </div>
             <div className="p-6">
               <div className="space-y-4">
-                {[
-                  { action: 'New user created', user: 'John Doe', time: '2 hours ago', type: 'user' },
-                  { action: 'Job order completed', user: 'JO-00123', time: '4 hours ago', type: 'job' },
-                  { action: 'System alert resolved', user: 'Performance Issue', time: '6 hours ago', type: 'alert' },
-                  { action: 'Data export generated', user: 'Monthly Report', time: '8 hours ago', type: 'report' }
-                ].map((activity, index) => (
-                  <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800/50">
-                    <div className={`w-2 h-2 rounded-full ${
-                      activity.type === 'user' ? 'bg-blue-500' :
-                      activity.type === 'job' ? 'bg-green-500' :
-                      activity.type === 'alert' ? 'bg-red-500' : 'bg-purple-500'
-                    }`} />
-                    <div className="flex-1">
-                      <div className="text-sm font-medium text-light-text dark:text-dark-text">{activity.action}</div>
-                      <div className="text-xs text-neutral-600 dark:text-neutral-400">{activity.user}</div>
-                    </div>
-                    <div className="text-xs text-neutral-500 dark:text-neutral-400">{activity.time}</div>
+                {recentActivity.length > 0 ? (
+                  recentActivity.map((activity, index) => {
+                    const timeAgo = activity.time ? (() => {
+                      const date = new Date(activity.time)
+                      const now = new Date()
+                      const diffMs = now.getTime() - date.getTime()
+                      const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
+                      const diffDays = Math.floor(diffHours / 24)
+                      
+                      if (diffDays > 0) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`
+                      if (diffHours > 0) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`
+                      const diffMins = Math.floor(diffMs / (1000 * 60))
+                      return diffMins > 0 ? `${diffMins} minute${diffMins > 1 ? 's' : ''} ago` : 'Just now'
+                    })() : 'Unknown'
+                    
+                    return (
+                      <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800/50">
+                        <div className={`w-2 h-2 rounded-full ${
+                          activity.type === 'user' ? 'bg-blue-500' :
+                          activity.type === 'job' ? 'bg-green-500' :
+                          activity.type === 'alert' ? 'bg-red-500' : 'bg-purple-500'
+                        }`} />
+                        <div className="flex-1">
+                          <div className="text-sm font-medium text-light-text dark:text-dark-text">{activity.action}</div>
+                          <div className="text-xs text-neutral-600 dark:text-neutral-400">{activity.user}</div>
+                        </div>
+                        <div className="text-xs text-neutral-500 dark:text-neutral-400">{timeAgo}</div>
+                      </div>
+                    )
+                  })
+                ) : (
+                  <div className="text-sm text-neutral-500 dark:text-neutral-400 text-center py-4">
+                    No recent activity
                   </div>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -525,15 +578,30 @@ const AdminDashboard: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex gap-2">
-                        <button className="text-light-primary hover:text-light-primary/80 dark:text-dark-primary dark:hover:text-dark-primary/80">
+                        <button 
+                          onClick={() => {
+                            setViewingUser(user)
+                            setShowViewUserModal(true)
+                          }}
+                          className="text-light-primary hover:text-light-primary/80 dark:text-dark-primary dark:hover:text-dark-primary/80"
+                          title="View user details"
+                        >
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="text-neutral-600 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-200">
+                        <button 
+                          onClick={() => {
+                            setEditingUser(user)
+                            setShowEditUserModal(true)
+                          }}
+                          className="text-neutral-600 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-200"
+                          title="Edit user"
+                        >
                           <Edit className="w-4 h-4" />
                         </button>
                         <button 
                           onClick={() => handleDelete('User', user.id, user.name)}
                           className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-200"
+                          title="Delete user"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -599,7 +667,7 @@ const AdminDashboard: React.FC = () => {
                       <div className="flex items-center gap-2">
                         <div className="w-20 h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-gradient-to-r from-light-primary to-light-accent transition-all duration-500"
+                            className={`h-full transition-all duration-500 ${getProgressColor(job.progress)}`}
                             style={{ width: `${job.progress}%` }}
                           />
                         </div>
@@ -614,10 +682,24 @@ const AdminDashboard: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex gap-2">
-                        <button className="text-light-primary hover:text-light-primary/80 dark:text-dark-primary dark:hover:text-dark-primary/80">
+                        <button 
+                          onClick={() => {
+                            setViewingJobOrder(job)
+                            setShowViewJobOrderModal(true)
+                          }}
+                          className="text-light-primary hover:text-light-primary/80 dark:text-dark-primary dark:hover:text-dark-primary/80"
+                          title="View job order details"
+                        >
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="text-neutral-600 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-200">
+                        <button 
+                          onClick={() => {
+                            setEditingJobOrder(job)
+                            setShowEditJobOrderModal(true)
+                          }}
+                          className="text-neutral-600 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-neutral-200"
+                          title="Edit job order"
+                        >
                           <Edit className="w-4 h-4" />
                         </button>
                       </div>
@@ -654,7 +736,35 @@ const AdminDashboard: React.FC = () => {
                 </div>
                 <div className="flex gap-2">
                   {!alert.resolved && (
-                    <button className="px-3 py-1 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 transition">
+                    <button 
+                      onClick={async () => {
+                        try {
+                          const success = await api.resolveAlert(alert.id)
+                          if (success) {
+                            toast.success('Alert resolved successfully!')
+                            // Reload alerts
+                            const alertsData = await api.getAlerts(false)
+                            setAlerts(alertsData.map((a: any) => ({
+                              id: a.id,
+                              type: a.type,
+                              severity: a.severity as 'Critical' | 'High' | 'Medium' | 'Low',
+                              message: a.message,
+                              timestamp: a.timestamp,
+                              resolved: a.resolved || false
+                            })))
+                            // Reload stats to update alert count
+                            const statsData = await api.getAdminStats()
+                            setStats(statsData as SystemStats)
+                          } else {
+                            toast.error('Failed to resolve alert')
+                          }
+                        } catch (error: any) {
+                          console.error('Resolve alert error:', error)
+                          toast.error(error.message || 'Failed to resolve alert')
+                        }
+                      }}
+                      className="px-3 py-1 bg-green-600 text-white text-sm rounded-lg hover:bg-green-700 transition"
+                    >
                       Resolve
                     </button>
                   )}
@@ -679,7 +789,8 @@ const AdminDashboard: React.FC = () => {
                 </label>
                 <input 
                   type="number" 
-                  defaultValue="8" 
+                  value={settings.standard_work_hours}
+                  onChange={(e) => setSettings({ ...settings, standard_work_hours: e.target.value })}
                   className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
                 />
               </div>
@@ -689,11 +800,27 @@ const AdminDashboard: React.FC = () => {
                 </label>
                 <input 
                   type="number" 
-                  defaultValue="70" 
+                  value={settings.alert_threshold_efficiency}
+                  onChange={(e) => setSettings({ ...settings, alert_threshold_efficiency: e.target.value })}
                   className="w-full px-3 py-2 border border-neutral-300 dark:border-neutral-600 rounded-lg bg-white dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100"
                 />
               </div>
-              <button className="w-full px-4 py-2 bg-light-primary text-white rounded-lg hover:bg-light-primary/90 transition">
+              <button 
+                onClick={async () => {
+                  try {
+                    const success = await api.saveSettings(settings)
+                    if (success) {
+                      toast.success('Settings saved successfully!')
+                    } else {
+                      toast.error('Failed to save settings')
+                    }
+                  } catch (error: any) {
+                    console.error('Save settings error:', error)
+                    toast.error(error.message || 'Failed to save settings')
+                  }
+                }}
+                className="w-full px-4 py-2 bg-light-primary text-white rounded-lg hover:bg-light-primary/90 transition"
+              >
                 Save Settings
               </button>
             </div>
@@ -742,6 +869,132 @@ const AdminDashboard: React.FC = () => {
           loadDashboardData()
         }}
       />
+
+      {editingUser && (
+        <EditUserModal 
+          isOpen={showEditUserModal} 
+          onClose={() => {
+            setShowEditUserModal(false)
+            setEditingUser(null)
+          }}
+          userId={editingUser.id}
+          initialUser={{
+            name: editingUser.name,
+            username: editingUser.username,
+            email: (editingUser as any).email || `${editingUser.username}@company.com`,
+            role: editingUser.role
+          }}
+          onUserUpdated={() => {
+            loadDashboardData()
+          }}
+        />
+      )}
+
+      {viewingUser && (
+        <Modal isOpen={showViewUserModal} onClose={() => {
+          setShowViewUserModal(false)
+          setViewingUser(null)
+        }} title="User Details">
+          <div className="space-y-4">
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+              <p className="mt-1 text-gray-900 dark:text-white">{viewingUser.name}</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
+              <p className="mt-1 text-gray-900 dark:text-white">{viewingUser.username}</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+              <p className="mt-1 text-gray-900 dark:text-white">{(viewingUser as any).email || `${viewingUser.username}@company.com`}</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Role</label>
+              <p className="mt-1 text-gray-900 dark:text-white">{viewingUser.role}</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
+              <p className="mt-1 text-gray-900 dark:text-white">{(viewingUser as any).status || 'Active'}</p>
+            </div>
+          </div>
+        </Modal>
+      )}
+
+      {editingJobOrder && (
+        <EditJobOrderModal 
+          isOpen={showEditJobOrderModal} 
+          onClose={() => {
+            setShowEditJobOrderModal(false)
+            setEditingJobOrder(null)
+          }}
+          jobOrder={editingJobOrder}
+          onJobOrderUpdated={() => {
+            loadDashboardData()
+          }}
+        />
+      )}
+
+      {viewingJobOrder && (
+        <Modal isOpen={showViewJobOrderModal} onClose={() => {
+          setShowViewJobOrderModal(false)
+          setViewingJobOrder(null)
+        }} title={`Job Order Details: ${viewingJobOrder.id}`}>
+          <div className="space-y-4">
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Job Order ID</label>
+              <p className="mt-1 text-gray-900 dark:text-white">{viewingJobOrder.id}</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
+              <p className="mt-1 text-gray-900 dark:text-white">{viewingJobOrder.title}</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
+              <p className="mt-1">
+                <span className={`px-2 py-1 text-xs font-medium rounded-full ${getStatusColor(viewingJobOrder.status)}`}>
+                  {viewingJobOrder.status.replace('_', ' ')}
+                </span>
+              </p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Progress</label>
+              <div className="mt-2 flex items-center gap-2">
+                <div className="flex-1 h-2 bg-neutral-200 dark:bg-neutral-700 rounded-full overflow-hidden">
+                  <div 
+                    className={`h-full transition-all duration-500 ${getProgressColor(viewingJobOrder.progress)}`}
+                    style={{ width: `${viewingJobOrder.progress}%` }}
+                  />
+                </div>
+                <span className="text-sm text-gray-600 dark:text-gray-400">{viewingJobOrder.progress}%</span>
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Total Devices</label>
+              <p className="mt-1 text-gray-900 dark:text-white">{viewingJobOrder.totalDevices || 0}</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Completed Devices</label>
+              <p className="mt-1 text-gray-900 dark:text-white">{viewingJobOrder.completedDevices || 0}</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Due Date</label>
+              <p className="mt-1 text-gray-900 dark:text-white">
+                {viewingJobOrder.dueDate ? new Date(viewingJobOrder.dueDate).toLocaleDateString() : 'Not set'}
+              </p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Assigned Supervisor</label>
+              <p className="mt-1 text-gray-900 dark:text-white">{viewingJobOrder.assignedSupervisor || 'Unassigned'}</p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Created At</label>
+              <p className="mt-1 text-gray-900 dark:text-white">
+                {viewingJobOrder.createdAt ? new Date(viewingJobOrder.createdAt).toLocaleString() : 'Unknown'}
+              </p>
+            </div>
+          </div>
+        </Modal>
+      )}
 
       <BackupDBModal 
         isOpen={showBackupModal} 

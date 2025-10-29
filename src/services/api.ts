@@ -470,6 +470,31 @@ const api = {
     }
   },
 
+  async updateJobOrder(jobOrderId: string, updates: { total_devices?: number; due_date?: string; status?: string }): Promise<boolean> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      const idx = jobOrders.findIndex(j => j.id === jobOrderId)
+      if (idx >= 0) {
+        if (updates.total_devices !== undefined) jobOrders[idx].totalDevices = updates.total_devices
+        if (updates.due_date !== undefined) jobOrders[idx].dueDate = updates.due_date
+        if (updates.status !== undefined) jobOrders[idx].status = updates.status as any
+        return true
+      }
+      return false
+    }
+
+    try {
+      await apiRequest<any>(`/api/joborders.php?id=${jobOrderId}`, {
+        method: 'PUT',
+        body: JSON.stringify(updates)
+      })
+      return true
+    } catch (error: any) {
+      console.error('Update job order error:', error)
+      throw error
+    }
+  },
+
   async getTaskEntries(opts?: { technicianId?: string; last?: number }): Promise<TaskEntry[]> {
     if (USE_MOCK) {
       await ensureGenerated()
@@ -665,47 +690,72 @@ const api = {
 
   // Test Logs (not implemented in backend yet, using mock)
   async getTestLogs(opts?: { testPersonnelId?: string; last?: number }): Promise<TestLog[]> {
-    await ensureGenerated()
-    let logs = testLogs
-    if (opts?.testPersonnelId) logs = logs.filter((l) => l.testPersonnelId === opts.testPersonnelId)
-    if (opts?.last) logs = logs.slice(0, opts.last)
-    return logs
+    if (USE_MOCK) {
+      await ensureGenerated()
+      let logs = testLogs
+      if (opts?.testPersonnelId) logs = logs.filter((l) => l.testPersonnelId === opts.testPersonnelId)
+      if (opts?.last) logs = logs.slice(0, opts.last)
+      return logs
+    }
+
+    // Backend doesn't have test logs endpoint yet, return empty array
+    console.warn('Test logs endpoint not implemented in backend yet')
+    return []
   },
 
   async submitTestLog(log: Omit<TestLog, 'id' | 'createdAt'>): Promise<TestLog> {
-    await ensureGenerated()
-    const newLog: TestLog = {
-      ...log,
-      id: `tl-${testLogs.length + 1}`,
-      createdAt: new Date().toISOString()
+    if (USE_MOCK) {
+      await ensureGenerated()
+      const newLog: TestLog = {
+        ...log,
+        id: `tl-${testLogs.length + 1}`,
+        createdAt: new Date().toISOString()
+      }
+      testLogs.unshift(newLog)
+      return newLog
     }
-    testLogs.unshift(newLog)
-    return newLog
+    
+    // Backend doesn't have test logs endpoint yet
+    throw new Error('Test logs submission not implemented in backend yet')
   },
 
   // Quality Inspections (not implemented in backend yet, using mock)
   async getQualityInspections(opts?: { inspectorId?: string; last?: number }): Promise<QualityInspection[]> {
-    await ensureGenerated()
-    let inspections = qualityInspections
-    if (opts?.inspectorId) inspections = inspections.filter((i) => i.inspectorId === opts.inspectorId)
-    if (opts?.last) inspections = inspections.slice(0, opts.last)
-    return inspections
+    if (USE_MOCK) {
+      await ensureGenerated()
+      let inspections = qualityInspections
+      if (opts?.inspectorId) inspections = inspections.filter((i) => i.inspectorId === opts.inspectorId)
+      if (opts?.last) inspections = inspections.slice(0, opts.last)
+      return inspections
+    }
+
+    // Backend doesn't have quality inspections endpoint yet, return empty array
+    console.warn('Quality inspections endpoint not implemented in backend yet')
+    return []
   },
 
   async getPendingInspections(): Promise<QualityInspection[]> {
-    await ensureGenerated()
-    return qualityInspections.filter((i) => i.result === 'pending')
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return qualityInspections.filter((i) => i.result === 'pending')
+    }
+    return []
   },
 
   async submitQualityInspection(inspection: Omit<QualityInspection, 'id' | 'createdAt'>): Promise<QualityInspection> {
-    await ensureGenerated()
-    const newInspection: QualityInspection = {
-      ...inspection,
-      id: `qi-${qualityInspections.length + 1}`,
-      createdAt: new Date().toISOString()
+    if (USE_MOCK) {
+      await ensureGenerated()
+      const newInspection: QualityInspection = {
+        ...inspection,
+        id: `qi-${qualityInspections.length + 1}`,
+        createdAt: new Date().toISOString()
+      }
+      qualityInspections.unshift(newInspection)
+      return newInspection
     }
-    qualityInspections.unshift(newInspection)
-    return newInspection
+    
+    // Backend doesn't have quality inspections endpoint yet
+    throw new Error('Quality inspections submission not implemented in backend yet')
   },
 
   // Devices
@@ -716,17 +766,62 @@ const api = {
     }
 
     try {
-      const backendDevices = await apiRequest<any[]>('/api/devices.php')
-      return backendDevices.map((d) => ({
-        id: String(d.device_id || d.id),
-        serialNumber: d.serial_number || '',
-        jobOrderId: String(d.job_order_id || ''),
-        currentStage: 'installation' as const,
-        qualityStatus: 'pending' as const,
-        createdAt: d.completion_date || d.created_at || new Date().toISOString(),
-      }))
+      const backendDevices = await apiRequest<any>('/api/devices.php')
+      // Handle both array response and wrapped response
+      const devicesArray = Array.isArray(backendDevices) ? backendDevices : (backendDevices.data || [])
+      
+      return devicesArray.map((d: any) => {
+        // Map operation_name to currentStage based on operation type
+        let currentStage: Device['currentStage'] = 'installation'
+        const operationName = d.operation_name?.toLowerCase() || ''
+        
+        if (operationName.includes('assemblage') || operationName.includes('assembly')) {
+          currentStage = 'sub_assembly'
+        } else if (operationName.includes('test') || operationName.includes('quality test')) {
+          currentStage = 'testing'
+        } else if (operationName.includes('final touch') || operationName.includes('cleaning') || operationName.includes('packing')) {
+          currentStage = 'final_touch'
+        } else if (operationName.includes('packaging')) {
+          currentStage = 'packing'
+        } else if (d.completion_date) {
+          currentStage = 'completed'
+        }
+        
+        return {
+          id: String(d.device_id || d.id),
+          serialNumber: d.serial_number || '',
+          jobOrderId: String(d.job_order_id || ''),
+          currentStage: currentStage,
+          qualityStatus: d.status === 'completed' ? 'pass' : 'pending' as const,
+          createdAt: d.completion_date || d.created_at || new Date().toISOString(),
+          operationName: d.operation_name || '',
+          technicianName: d.technician_name || ''
+        }
+      })
     } catch (error) {
       console.error('Get devices error:', error)
+      return []
+    }
+  },
+
+  async getOperations(): Promise<any[]> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return [
+        { operation_id: 1, operation_name: 'Assemblage I', standard_time: 32, description: 'Primary assembly operation' },
+        { operation_id: 2, operation_name: 'Assemblage II', standard_time: 30, description: 'Secondary assembly operation' },
+        { operation_id: 3, operation_name: 'Quality Test', standard_time: 18, description: 'Quality control testing' },
+        { operation_id: 4, operation_name: 'Final Touch - Cleaning&Packing', standard_time: 10, description: 'Final cleaning and packing' },
+        { operation_id: 5, operation_name: 'Packaging', standard_time: 8, description: 'Final packaging' }
+      ]
+    }
+
+    try {
+      const response = await apiRequest<any>('/api/operations.php')
+      // The response might be the data directly or wrapped in a data property
+      return Array.isArray(response) ? response : (response.data || [])
+    } catch (error) {
+      console.error('Get operations error:', error)
       return []
     }
   },
@@ -760,6 +855,176 @@ const api = {
     // Backend doesn't have device update endpoint yet
     console.warn('Device stage update not implemented in backend')
     return null
+  },
+
+  // Admin Dashboard APIs
+  async getAdminStats(): Promise<any> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return {
+        totalUsers: users.length,
+        activeJobOrders: jobOrders.filter(j => j.status === 'in_progress').length,
+        completedJobOrders: jobOrders.filter(j => j.status === 'completed').length,
+        pendingApprovals: 5,
+        systemAlerts: 3,
+        totalDevices: devices.length,
+        completedDevices: devices.filter(d => d.currentStage === 'completed').length,
+        averageEfficiency: 85
+      }
+    }
+
+    try {
+      return await apiRequest<any>('/api/admin_stats.php')
+    } catch (error) {
+      console.error('Get admin stats error:', error)
+      throw error
+    }
+  },
+
+  async getAlerts(resolved?: boolean): Promise<any[]> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return [
+        {
+          id: '1',
+          type: 'Low Performance',
+          severity: 'High',
+          message: 'Technician efficiency below 70% for 3 consecutive days',
+          timestamp: new Date().toISOString(),
+          resolved: false
+        }
+      ]
+    }
+
+    try {
+      const params = resolved !== undefined ? `?resolved=${resolved}` : ''
+      return await apiRequest<any[]>(`/api/admin_alerts.php${params}`)
+    } catch (error) {
+      console.error('Get alerts error:', error)
+      return []
+    }
+  },
+
+  async resolveAlert(alertId: string): Promise<boolean> {
+    if (USE_MOCK) {
+      return true
+    }
+
+    try {
+      await apiRequest<any>(`/api/admin_alerts.php`, {
+        method: 'PUT',
+        body: JSON.stringify({ alert_id: alertId, resolved: true })
+      })
+      return true
+    } catch (error) {
+      console.error('Resolve alert error:', error)
+      return false
+    }
+  },
+
+  async deleteAlert(alertId: string): Promise<boolean> {
+    if (USE_MOCK) {
+      return true
+    }
+
+    try {
+      await apiRequest<any>(`/api/admin_alerts.php?alert_id=${alertId}`, {
+        method: 'DELETE'
+      })
+      return true
+    } catch (error) {
+      console.error('Delete alert error:', error)
+      return false
+    }
+  },
+
+  async getSettings(): Promise<any> {
+    if (USE_MOCK) {
+      return {
+        standard_work_hours: '8',
+        alert_threshold_efficiency: '70'
+      }
+    }
+
+    try {
+      return await apiRequest<any>('/api/admin_settings.php')
+    } catch (error) {
+      console.error('Get settings error:', error)
+      return {
+        standard_work_hours: '8',
+        alert_threshold_efficiency: '70'
+      }
+    }
+  },
+
+  async saveSettings(settings: Record<string, string>): Promise<boolean> {
+    if (USE_MOCK) {
+      return true
+    }
+
+    try {
+      await apiRequest<any>('/api/admin_settings.php', {
+        method: 'POST',
+        body: JSON.stringify(settings)
+      })
+      return true
+    } catch (error) {
+      console.error('Save settings error:', error)
+      return false
+    }
+  },
+
+  async getRecentActivity(limit: number = 20): Promise<any[]> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return [
+        { action: 'New user created', user: 'John Doe', time: new Date().toISOString(), type: 'user' },
+        { action: 'Job order completed', user: 'JO-00123', time: new Date().toISOString(), type: 'job' }
+      ]
+    }
+
+    try {
+      return await apiRequest<any[]>(`/api/admin_activity.php?limit=${limit}`)
+    } catch (error) {
+      console.error('Get activity error:', error)
+      return []
+    }
+  },
+
+  async exportAllData(): Promise<any> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return {
+        users,
+        jobOrders,
+        taskEntries,
+        devices,
+        export_date: new Date().toISOString()
+      }
+    }
+
+    try {
+      return await apiRequest<any>('/api/admin_export.php')
+    } catch (error) {
+      console.error('Export data error:', error)
+      throw error
+    }
+  },
+
+  async clearOldLogs(days: number = 90): Promise<boolean> {
+    if (USE_MOCK) {
+      return true
+    }
+
+    try {
+      await apiRequest<any>(`/api/admin_activity.php?days=${days}`, {
+        method: 'DELETE'
+      })
+      return true
+    } catch (error) {
+      console.error('Clear logs error:', error)
+      return false
+    }
   }
 }
 
