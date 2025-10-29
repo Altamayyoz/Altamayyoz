@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Nunito+Sans:wght@300;400;600;700&display=swap');
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: #fffefe;
+  color: #1e293b;
+  font-family: 'Inter', 'Poppins', 'Nunito Sans', system-ui, sans-serif;
+  transition: background-color 500ms ease-in-out, color 500ms ease-in-out;
+}
+
+.dark body {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: background-color 500ms ease-in-out, 
+              color 500ms ease-in-out, 
+              border-color 500ms ease-in-out,
+              box-shadow 500ms ease-in-out;
+}
+
+button, input, textarea, select, a {
+  transition: all 500ms ease-in-out;
+}
+
+/* Medical/Tech rounded corners */
+.rounded-medical {
+  border-radius: 1.25rem;
+}
+
+/* Glassmorphism effect */
+.backdrop-glass {
+  backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(255, 254, 254, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .backdrop-glass {
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Smooth focus styles */
+button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid #8ebcca;
+  outline-offset: 2px;
+}
+
+.dark button:focus-visible, 
+.dark input:focus-visible, 
+.dark textarea:focus-visible {
+  outline: 2px solid #8ebcca;
+  outline-offset: 2px;
+}
+
+/* Smooth placeholder transition */
+input::placeholder {
+  transition: opacity 300ms ease-in-out,
+              transform 300ms ease-in-out;
+}
+
+input:focus::placeholder {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+input:not(:focus):not(:placeholder-shown)::placeholder {
+  opacity: 0;
+}
+
+/* Password visibility toggle glow animation */
+@keyframes password-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(142, 188, 202, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(142, 188, 202, 0.8);
+  }
+}
+
+.password-toggle:hover {
+  animation: password-glow 2s ease-in-out infinite;
+}
+
+/* Slide in animation for error messages */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 300ms ease-out;
+}
+
+/* Fade in animation */
+.animate-fade-in {
+  animation: fade-in 500ms ease-in-out;
+}
+
+/* Animation delays */
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  button, input, select, textarea {
+    min-height: 44px;
+  }
+  
+  .overflow-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Medical red accent - only for alerts */
+.medical-alert {
+  color: #cc0000;
+  border-color: #cc0000;
+}
+
+.dark .medical-alert {
+  color: #ff4444;
+  border-color: #ff4444;
+}

@@ -1,0 +1,23 @@
+[
+  { "id": "u0", "name": "System Admin", "username": "admin", "role": "Admin" },
+  { "id": "u1", "name": "Alex Turner", "username": "alex.t", "role": "ProductionWorker" },
+  { "id": "u2", "name": "Bianca Stone", "username": "bianca.s", "role": "ProductionWorker" },
+  { "id": "u3", "name": "Carlos Mendez", "username": "carlos.m", "role": "ProductionWorker" },
+  { "id": "u4", "name": "Diana Kim", "username": "diana.k", "role": "ProductionWorker" },
+  { "id": "u5", "name": "Ethan Cole", "username": "ethan.c", "role": "ProductionWorker" },
+  { "id": "u6", "name": "Fiona Li", "username": "fiona.l", "role": "Supervisor" },
+  { "id": "u7", "name": "George Hall", "username": "george.h", "role": "Supervisor" },
+  { "id": "u8", "name": "Hina Patel", "username": "hina.p", "role": "PlanningEngineer" },
+  { "id": "u9", "name": "Ian Becker", "username": "ian.b", "role": "TestPersonnel" },
+  { "id": "u10", "name": "Jia Chen", "username": "jia.c", "role": "TestPersonnel" },
+  { "id": "u11", "name": "Kyle Reed", "username": "kyle.r", "role": "TestPersonnel" },
+  { "id": "u12", "name": "Laura Gomez", "username": "laura.g", "role": "TestPersonnel" },
+  { "id": "u13", "name": "Marco Rossi", "username": "marco.r", "role": "QualityInspector" },
+  { "id": "u14", "name": "Nina Shah", "username": "nina.s", "role": "QualityInspector" },
+  { "id": "u15", "name": "Oliver King", "username": "oliver.k", "role": "QualityInspector" },
+  { "id": "u16", "name": "Priya Nair", "username": "priya.n", "role": "ProductionWorker" },
+  { "id": "u17", "name": "Quentin Blake", "username": "quentin.b", "role": "ProductionWorker" },
+  { "id": "u18", "name": "Rita Alvarez", "username": "rita.a", "role": "ProductionWorker" },
+  { "id": "u19", "name": "Samir Desai", "username": "samir.d", "role": "ProductionWorker" },
+  { "id": "u20", "name": "Tess O'Neil", "username": "tess.o", "role": "Supervisor" }
+]

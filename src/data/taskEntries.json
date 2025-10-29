@@ -1,0 +1,7002 @@
+[
+  {
+    "id": "te-1",
+    "jobOrderId": "jo-26",
+    "operationId": "op-1",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2000"
+    ],
+    "startTime": "2025-10-14T06:04:00.645Z",
+    "standardTime": 300,
+    "actualTime": 487,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-2",
+    "jobOrderId": "jo-10",
+    "operationId": "op-2",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2001"
+    ],
+    "startTime": "2025-10-12T22:58:07.130Z",
+    "standardTime": 300,
+    "actualTime": 290,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-3",
+    "jobOrderId": "jo-18",
+    "operationId": "op-3",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2002"
+    ],
+    "startTime": "2025-10-16T22:56:41.568Z",
+    "standardTime": 300,
+    "actualTime": 364,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-4",
+    "jobOrderId": "jo-7",
+    "operationId": "op-4",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2003"
+    ],
+    "startTime": "2025-10-12T07:35:41.220Z",
+    "standardTime": 300,
+    "actualTime": 479,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-5",
+    "jobOrderId": "jo-11",
+    "operationId": "op-5",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2004"
+    ],
+    "startTime": "2025-10-06T14:56:29.252Z",
+    "standardTime": 300,
+    "actualTime": 534,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-6",
+    "jobOrderId": "jo-3",
+    "operationId": "op-6",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2005"
+    ],
+    "startTime": "2025-10-21T23:56:38.007Z",
+    "standardTime": 300,
+    "actualTime": 260,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-7",
+    "jobOrderId": "jo-14",
+    "operationId": "op-7",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2006"
+    ],
+    "startTime": "2025-09-29T18:04:24.983Z",
+    "standardTime": 300,
+    "actualTime": 424,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-8",
+    "jobOrderId": "jo-5",
+    "operationId": "op-8",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2007"
+    ],
+    "startTime": "2025-10-08T23:20:36.156Z",
+    "standardTime": 300,
+    "actualTime": 237,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-9",
+    "jobOrderId": "jo-30",
+    "operationId": "op-9",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2008"
+    ],
+    "startTime": "2025-10-16T21:16:12.664Z",
+    "standardTime": 300,
+    "actualTime": 534,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-10",
+    "jobOrderId": "jo-17",
+    "operationId": "op-10",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2009"
+    ],
+    "startTime": "2025-10-11T02:04:35.045Z",
+    "standardTime": 300,
+    "actualTime": 573,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-11",
+    "jobOrderId": "jo-12",
+    "operationId": "op-11",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2010"
+    ],
+    "startTime": "2025-10-11T16:53:21.125Z",
+    "standardTime": 300,
+    "actualTime": 336,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-12",
+    "jobOrderId": "jo-21",
+    "operationId": "op-12",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2011"
+    ],
+    "startTime": "2025-10-04T00:36:24.663Z",
+    "standardTime": 300,
+    "actualTime": 352,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-13",
+    "jobOrderId": "jo-10",
+    "operationId": "op-13",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2012"
+    ],
+    "startTime": "2025-10-25T21:35:04.263Z",
+    "standardTime": 300,
+    "actualTime": 542,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-14",
+    "jobOrderId": "jo-28",
+    "operationId": "op-14",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2013"
+    ],
+    "startTime": "2025-10-19T09:14:42.386Z",
+    "standardTime": 300,
+    "actualTime": 442,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-15",
+    "jobOrderId": "jo-12",
+    "operationId": "op-15",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2014"
+    ],
+    "startTime": "2025-10-02T17:08:02.834Z",
+    "standardTime": 300,
+    "actualTime": 500,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-16",
+    "jobOrderId": "jo-18",
+    "operationId": "op-16",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2015"
+    ],
+    "startTime": "2025-10-02T16:41:15.126Z",
+    "standardTime": 300,
+    "actualTime": 533,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-17",
+    "jobOrderId": "jo-26",
+    "operationId": "op-17",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2016"
+    ],
+    "startTime": "2025-10-17T04:06:40.625Z",
+    "standardTime": 300,
+    "actualTime": 230,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-18",
+    "jobOrderId": "jo-14",
+    "operationId": "op-18",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2017"
+    ],
+    "startTime": "2025-09-29T04:38:57.960Z",
+    "standardTime": 300,
+    "actualTime": 342,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-19",
+    "jobOrderId": "jo-26",
+    "operationId": "op-19",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2018"
+    ],
+    "startTime": "2025-10-17T20:04:11.837Z",
+    "standardTime": 300,
+    "actualTime": 590,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-20",
+    "jobOrderId": "jo-16",
+    "operationId": "op-20",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2019"
+    ],
+    "startTime": "2025-10-17T09:20:14.134Z",
+    "standardTime": 300,
+    "actualTime": 555,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-21",
+    "jobOrderId": "jo-2",
+    "operationId": "op-21",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2020"
+    ],
+    "startTime": "2025-10-22T21:50:18.486Z",
+    "standardTime": 300,
+    "actualTime": 417,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-22",
+    "jobOrderId": "jo-14",
+    "operationId": "op-22",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2021"
+    ],
+    "startTime": "2025-10-04T06:35:07.072Z",
+    "standardTime": 300,
+    "actualTime": 570,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-23",
+    "jobOrderId": "jo-18",
+    "operationId": "op-23",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2022"
+    ],
+    "startTime": "2025-10-12T12:48:56.912Z",
+    "standardTime": 300,
+    "actualTime": 247,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-24",
+    "jobOrderId": "jo-1",
+    "operationId": "op-24",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2023"
+    ],
+    "startTime": "2025-10-20T23:20:28.441Z",
+    "standardTime": 300,
+    "actualTime": 573,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-25",
+    "jobOrderId": "jo-30",
+    "operationId": "op-25",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2024"
+    ],
+    "startTime": "2025-10-25T22:03:21.204Z",
+    "standardTime": 300,
+    "actualTime": 493,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-26",
+    "jobOrderId": "jo-21",
+    "operationId": "op-26",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2025"
+    ],
+    "startTime": "2025-10-23T09:15:12.000Z",
+    "standardTime": 300,
+    "actualTime": 245,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-27",
+    "jobOrderId": "jo-18",
+    "operationId": "op-27",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2026"
+    ],
+    "startTime": "2025-10-15T01:31:52.565Z",
+    "standardTime": 300,
+    "actualTime": 268,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-28",
+    "jobOrderId": "jo-15",
+    "operationId": "op-28",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2027"
+    ],
+    "startTime": "2025-10-24T12:07:54.839Z",
+    "standardTime": 300,
+    "actualTime": 223,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-29",
+    "jobOrderId": "jo-1",
+    "operationId": "op-29",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2028"
+    ],
+    "startTime": "2025-10-01T23:07:48.335Z",
+    "standardTime": 300,
+    "actualTime": 428,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-30",
+    "jobOrderId": "jo-16",
+    "operationId": "op-30",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2029"
+    ],
+    "startTime": "2025-09-29T04:57:01.031Z",
+    "standardTime": 300,
+    "actualTime": 450,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-31",
+    "jobOrderId": "jo-13",
+    "operationId": "op-31",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2030"
+    ],
+    "startTime": "2025-10-04T12:30:26.518Z",
+    "standardTime": 300,
+    "actualTime": 542,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-32",
+    "jobOrderId": "jo-30",
+    "operationId": "op-32",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2031"
+    ],
+    "startTime": "2025-10-05T13:27:33.765Z",
+    "standardTime": 300,
+    "actualTime": 434,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-33",
+    "jobOrderId": "jo-12",
+    "operationId": "op-33",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2032"
+    ],
+    "startTime": "2025-10-06T18:40:22.536Z",
+    "standardTime": 300,
+    "actualTime": 336,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-34",
+    "jobOrderId": "jo-4",
+    "operationId": "op-34",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2033"
+    ],
+    "startTime": "2025-10-24T14:13:38.551Z",
+    "standardTime": 300,
+    "actualTime": 417,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-35",
+    "jobOrderId": "jo-10",
+    "operationId": "op-35",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2034"
+    ],
+    "startTime": "2025-10-02T00:53:00.925Z",
+    "standardTime": 300,
+    "actualTime": 518,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-36",
+    "jobOrderId": "jo-9",
+    "operationId": "op-36",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2035"
+    ],
+    "startTime": "2025-10-12T02:35:02.218Z",
+    "standardTime": 300,
+    "actualTime": 450,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-37",
+    "jobOrderId": "jo-28",
+    "operationId": "op-37",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2036"
+    ],
+    "startTime": "2025-10-04T15:29:31.383Z",
+    "standardTime": 300,
+    "actualTime": 318,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-38",
+    "jobOrderId": "jo-17",
+    "operationId": "op-38",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2037"
+    ],
+    "startTime": "2025-10-04T12:01:55.810Z",
+    "standardTime": 300,
+    "actualTime": 560,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-39",
+    "jobOrderId": "jo-20",
+    "operationId": "op-39",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2038"
+    ],
+    "startTime": "2025-10-03T05:51:06.245Z",
+    "standardTime": 300,
+    "actualTime": 288,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-40",
+    "jobOrderId": "jo-4",
+    "operationId": "op-40",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2039"
+    ],
+    "startTime": "2025-10-17T08:42:31.725Z",
+    "standardTime": 300,
+    "actualTime": 354,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-41",
+    "jobOrderId": "jo-27",
+    "operationId": "op-41",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2040"
+    ],
+    "startTime": "2025-10-06T01:50:54.594Z",
+    "standardTime": 300,
+    "actualTime": 438,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-42",
+    "jobOrderId": "jo-2",
+    "operationId": "op-42",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2041"
+    ],
+    "startTime": "2025-10-26T13:05:17.633Z",
+    "standardTime": 300,
+    "actualTime": 347,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-43",
+    "jobOrderId": "jo-11",
+    "operationId": "op-43",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2042"
+    ],
+    "startTime": "2025-10-16T19:51:59.251Z",
+    "standardTime": 300,
+    "actualTime": 528,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-44",
+    "jobOrderId": "jo-25",
+    "operationId": "op-44",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2043"
+    ],
+    "startTime": "2025-10-02T09:23:26.078Z",
+    "standardTime": 300,
+    "actualTime": 493,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-45",
+    "jobOrderId": "jo-28",
+    "operationId": "op-45",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2044"
+    ],
+    "startTime": "2025-10-07T08:54:27.188Z",
+    "standardTime": 300,
+    "actualTime": 477,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-46",
+    "jobOrderId": "jo-21",
+    "operationId": "op-46",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2045"
+    ],
+    "startTime": "2025-10-01T10:16:08.066Z",
+    "standardTime": 300,
+    "actualTime": 550,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-47",
+    "jobOrderId": "jo-1",
+    "operationId": "op-47",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2046"
+    ],
+    "startTime": "2025-10-06T01:34:39.756Z",
+    "standardTime": 300,
+    "actualTime": 241,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-48",
+    "jobOrderId": "jo-23",
+    "operationId": "op-48",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2047"
+    ],
+    "startTime": "2025-10-24T12:35:45.055Z",
+    "standardTime": 300,
+    "actualTime": 216,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-49",
+    "jobOrderId": "jo-16",
+    "operationId": "op-49",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2048"
+    ],
+    "startTime": "2025-09-30T00:21:03.260Z",
+    "standardTime": 300,
+    "actualTime": 225,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-50",
+    "jobOrderId": "jo-19",
+    "operationId": "op-50",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2049"
+    ],
+    "startTime": "2025-10-11T01:32:07.919Z",
+    "standardTime": 300,
+    "actualTime": 223,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-51",
+    "jobOrderId": "jo-13",
+    "operationId": "op-51",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2050"
+    ],
+    "startTime": "2025-10-09T18:52:18.659Z",
+    "standardTime": 300,
+    "actualTime": 340,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-52",
+    "jobOrderId": "jo-4",
+    "operationId": "op-52",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2051"
+    ],
+    "startTime": "2025-10-05T05:01:36.377Z",
+    "standardTime": 300,
+    "actualTime": 251,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-53",
+    "jobOrderId": "jo-17",
+    "operationId": "op-53",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2052"
+    ],
+    "startTime": "2025-10-01T08:43:30.857Z",
+    "standardTime": 300,
+    "actualTime": 557,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-54",
+    "jobOrderId": "jo-27",
+    "operationId": "op-54",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2053"
+    ],
+    "startTime": "2025-10-19T11:10:04.016Z",
+    "standardTime": 300,
+    "actualTime": 574,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-55",
+    "jobOrderId": "jo-21",
+    "operationId": "op-55",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2054"
+    ],
+    "startTime": "2025-10-11T09:48:38.173Z",
+    "standardTime": 300,
+    "actualTime": 538,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-56",
+    "jobOrderId": "jo-13",
+    "operationId": "op-56",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2055"
+    ],
+    "startTime": "2025-10-24T00:59:52.387Z",
+    "standardTime": 300,
+    "actualTime": 330,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-57",
+    "jobOrderId": "jo-22",
+    "operationId": "op-57",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2056"
+    ],
+    "startTime": "2025-10-02T01:05:54.299Z",
+    "standardTime": 300,
+    "actualTime": 456,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-58",
+    "jobOrderId": "jo-19",
+    "operationId": "op-58",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2057"
+    ],
+    "startTime": "2025-10-13T16:04:13.754Z",
+    "standardTime": 300,
+    "actualTime": 382,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-59",
+    "jobOrderId": "jo-17",
+    "operationId": "op-59",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2058"
+    ],
+    "startTime": "2025-10-05T15:11:08.551Z",
+    "standardTime": 300,
+    "actualTime": 433,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-60",
+    "jobOrderId": "jo-12",
+    "operationId": "op-60",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2059"
+    ],
+    "startTime": "2025-10-23T07:32:30.905Z",
+    "standardTime": 300,
+    "actualTime": 459,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-61",
+    "jobOrderId": "jo-5",
+    "operationId": "op-61",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2060"
+    ],
+    "startTime": "2025-10-26T17:03:19.653Z",
+    "standardTime": 300,
+    "actualTime": 561,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-62",
+    "jobOrderId": "jo-1",
+    "operationId": "op-62",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2061"
+    ],
+    "startTime": "2025-10-09T10:40:38.268Z",
+    "standardTime": 300,
+    "actualTime": 496,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-63",
+    "jobOrderId": "jo-13",
+    "operationId": "op-63",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2062"
+    ],
+    "startTime": "2025-10-02T01:38:43.922Z",
+    "standardTime": 300,
+    "actualTime": 419,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-64",
+    "jobOrderId": "jo-15",
+    "operationId": "op-64",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2063"
+    ],
+    "startTime": "2025-10-15T04:07:46.764Z",
+    "standardTime": 300,
+    "actualTime": 426,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-65",
+    "jobOrderId": "jo-7",
+    "operationId": "op-65",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2064"
+    ],
+    "startTime": "2025-10-14T15:57:02.508Z",
+    "standardTime": 300,
+    "actualTime": 512,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-66",
+    "jobOrderId": "jo-30",
+    "operationId": "op-66",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2065"
+    ],
+    "startTime": "2025-10-24T19:51:52.266Z",
+    "standardTime": 300,
+    "actualTime": 339,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-67",
+    "jobOrderId": "jo-5",
+    "operationId": "op-67",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2066"
+    ],
+    "startTime": "2025-10-11T17:11:44.537Z",
+    "standardTime": 300,
+    "actualTime": 337,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-68",
+    "jobOrderId": "jo-5",
+    "operationId": "op-68",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2067"
+    ],
+    "startTime": "2025-10-15T03:50:48.873Z",
+    "standardTime": 300,
+    "actualTime": 315,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-69",
+    "jobOrderId": "jo-15",
+    "operationId": "op-69",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2068"
+    ],
+    "startTime": "2025-10-04T02:07:13.770Z",
+    "standardTime": 300,
+    "actualTime": 542,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-70",
+    "jobOrderId": "jo-27",
+    "operationId": "op-70",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2069"
+    ],
+    "startTime": "2025-10-25T01:30:04.396Z",
+    "standardTime": 300,
+    "actualTime": 419,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-71",
+    "jobOrderId": "jo-5",
+    "operationId": "op-71",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2070"
+    ],
+    "startTime": "2025-10-03T20:37:22.233Z",
+    "standardTime": 300,
+    "actualTime": 440,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-72",
+    "jobOrderId": "jo-9",
+    "operationId": "op-72",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2071"
+    ],
+    "startTime": "2025-10-24T05:36:27.631Z",
+    "standardTime": 300,
+    "actualTime": 230,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-73",
+    "jobOrderId": "jo-24",
+    "operationId": "op-73",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2072"
+    ],
+    "startTime": "2025-10-11T23:38:57.103Z",
+    "standardTime": 300,
+    "actualTime": 539,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-74",
+    "jobOrderId": "jo-20",
+    "operationId": "op-74",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2073"
+    ],
+    "startTime": "2025-10-08T20:28:27.860Z",
+    "standardTime": 300,
+    "actualTime": 261,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-75",
+    "jobOrderId": "jo-11",
+    "operationId": "op-75",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2074"
+    ],
+    "startTime": "2025-10-22T16:42:31.943Z",
+    "standardTime": 300,
+    "actualTime": 361,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-76",
+    "jobOrderId": "jo-20",
+    "operationId": "op-76",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2075"
+    ],
+    "startTime": "2025-10-15T21:10:27.219Z",
+    "standardTime": 300,
+    "actualTime": 531,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-77",
+    "jobOrderId": "jo-23",
+    "operationId": "op-77",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2076"
+    ],
+    "startTime": "2025-10-07T17:39:11.887Z",
+    "standardTime": 300,
+    "actualTime": 565,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-78",
+    "jobOrderId": "jo-28",
+    "operationId": "op-78",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2077"
+    ],
+    "startTime": "2025-10-20T12:56:05.903Z",
+    "standardTime": 300,
+    "actualTime": 489,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-79",
+    "jobOrderId": "jo-10",
+    "operationId": "op-79",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2078"
+    ],
+    "startTime": "2025-09-30T06:38:39.118Z",
+    "standardTime": 300,
+    "actualTime": 438,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-80",
+    "jobOrderId": "jo-15",
+    "operationId": "op-80",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2079"
+    ],
+    "startTime": "2025-10-14T21:55:17.614Z",
+    "standardTime": 300,
+    "actualTime": 561,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-81",
+    "jobOrderId": "jo-26",
+    "operationId": "op-81",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2080"
+    ],
+    "startTime": "2025-10-24T20:16:17.548Z",
+    "standardTime": 300,
+    "actualTime": 386,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-82",
+    "jobOrderId": "jo-14",
+    "operationId": "op-82",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2081"
+    ],
+    "startTime": "2025-10-24T07:07:41.984Z",
+    "standardTime": 300,
+    "actualTime": 461,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-83",
+    "jobOrderId": "jo-19",
+    "operationId": "op-83",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2082"
+    ],
+    "startTime": "2025-10-20T22:21:38.136Z",
+    "standardTime": 300,
+    "actualTime": 326,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-84",
+    "jobOrderId": "jo-4",
+    "operationId": "op-84",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2083"
+    ],
+    "startTime": "2025-10-27T14:57:57.084Z",
+    "standardTime": 300,
+    "actualTime": 412,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-85",
+    "jobOrderId": "jo-7",
+    "operationId": "op-85",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2084"
+    ],
+    "startTime": "2025-10-25T14:08:08.103Z",
+    "standardTime": 300,
+    "actualTime": 344,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-86",
+    "jobOrderId": "jo-2",
+    "operationId": "op-86",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2085"
+    ],
+    "startTime": "2025-10-14T04:13:47.569Z",
+    "standardTime": 300,
+    "actualTime": 354,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-87",
+    "jobOrderId": "jo-3",
+    "operationId": "op-87",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2086"
+    ],
+    "startTime": "2025-10-09T16:20:22.166Z",
+    "standardTime": 300,
+    "actualTime": 201,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-88",
+    "jobOrderId": "jo-26",
+    "operationId": "op-88",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2087"
+    ],
+    "startTime": "2025-10-05T02:49:42.077Z",
+    "standardTime": 300,
+    "actualTime": 376,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-89",
+    "jobOrderId": "jo-29",
+    "operationId": "op-89",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2088"
+    ],
+    "startTime": "2025-10-25T03:40:32.290Z",
+    "standardTime": 300,
+    "actualTime": 318,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-90",
+    "jobOrderId": "jo-29",
+    "operationId": "op-90",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2089"
+    ],
+    "startTime": "2025-10-08T04:29:53.639Z",
+    "standardTime": 300,
+    "actualTime": 499,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-91",
+    "jobOrderId": "jo-24",
+    "operationId": "op-91",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2090"
+    ],
+    "startTime": "2025-10-18T14:50:30.878Z",
+    "standardTime": 300,
+    "actualTime": 571,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-92",
+    "jobOrderId": "jo-7",
+    "operationId": "op-92",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2091"
+    ],
+    "startTime": "2025-10-23T13:47:00.465Z",
+    "standardTime": 300,
+    "actualTime": 458,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-93",
+    "jobOrderId": "jo-1",
+    "operationId": "op-93",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2092"
+    ],
+    "startTime": "2025-10-15T05:29:22.966Z",
+    "standardTime": 300,
+    "actualTime": 534,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-94",
+    "jobOrderId": "jo-22",
+    "operationId": "op-94",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2093"
+    ],
+    "startTime": "2025-10-15T09:21:54.693Z",
+    "standardTime": 300,
+    "actualTime": 329,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-95",
+    "jobOrderId": "jo-14",
+    "operationId": "op-95",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2094"
+    ],
+    "startTime": "2025-10-22T12:26:32.323Z",
+    "standardTime": 300,
+    "actualTime": 444,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-96",
+    "jobOrderId": "jo-7",
+    "operationId": "op-96",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2095"
+    ],
+    "startTime": "2025-09-30T14:02:16.255Z",
+    "standardTime": 300,
+    "actualTime": 517,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-97",
+    "jobOrderId": "jo-12",
+    "operationId": "op-97",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2096"
+    ],
+    "startTime": "2025-10-06T20:26:01.390Z",
+    "standardTime": 300,
+    "actualTime": 559,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-98",
+    "jobOrderId": "jo-14",
+    "operationId": "op-98",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2097"
+    ],
+    "startTime": "2025-10-20T04:41:30.689Z",
+    "standardTime": 300,
+    "actualTime": 493,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-99",
+    "jobOrderId": "jo-19",
+    "operationId": "op-99",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2098"
+    ],
+    "startTime": "2025-10-09T00:41:04.945Z",
+    "standardTime": 300,
+    "actualTime": 255,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-100",
+    "jobOrderId": "jo-18",
+    "operationId": "op-100",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2099"
+    ],
+    "startTime": "2025-10-04T00:19:54.373Z",
+    "standardTime": 300,
+    "actualTime": 298,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-101",
+    "jobOrderId": "jo-3",
+    "operationId": "op-101",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2100"
+    ],
+    "startTime": "2025-10-05T12:38:32.562Z",
+    "standardTime": 300,
+    "actualTime": 370,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-102",
+    "jobOrderId": "jo-8",
+    "operationId": "op-102",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2101"
+    ],
+    "startTime": "2025-10-18T00:59:01.250Z",
+    "standardTime": 300,
+    "actualTime": 479,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-103",
+    "jobOrderId": "jo-25",
+    "operationId": "op-103",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2102"
+    ],
+    "startTime": "2025-10-14T15:05:45.211Z",
+    "standardTime": 300,
+    "actualTime": 435,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-104",
+    "jobOrderId": "jo-1",
+    "operationId": "op-104",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2103"
+    ],
+    "startTime": "2025-10-24T05:30:08.941Z",
+    "standardTime": 300,
+    "actualTime": 401,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-105",
+    "jobOrderId": "jo-13",
+    "operationId": "op-105",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2104"
+    ],
+    "startTime": "2025-10-26T13:09:08.138Z",
+    "standardTime": 300,
+    "actualTime": 306,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-106",
+    "jobOrderId": "jo-2",
+    "operationId": "op-106",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2105"
+    ],
+    "startTime": "2025-10-13T04:30:31.947Z",
+    "standardTime": 300,
+    "actualTime": 361,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-107",
+    "jobOrderId": "jo-15",
+    "operationId": "op-107",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2106"
+    ],
+    "startTime": "2025-10-01T12:23:12.674Z",
+    "standardTime": 300,
+    "actualTime": 560,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-108",
+    "jobOrderId": "jo-29",
+    "operationId": "op-108",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2107"
+    ],
+    "startTime": "2025-10-12T14:11:53.191Z",
+    "standardTime": 300,
+    "actualTime": 540,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-109",
+    "jobOrderId": "jo-29",
+    "operationId": "op-109",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2108"
+    ],
+    "startTime": "2025-10-07T17:23:16.063Z",
+    "standardTime": 300,
+    "actualTime": 399,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-110",
+    "jobOrderId": "jo-4",
+    "operationId": "op-110",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2109"
+    ],
+    "startTime": "2025-10-22T15:44:17.073Z",
+    "standardTime": 300,
+    "actualTime": 206,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-111",
+    "jobOrderId": "jo-11",
+    "operationId": "op-111",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2110"
+    ],
+    "startTime": "2025-10-09T21:34:18.463Z",
+    "standardTime": 300,
+    "actualTime": 365,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-112",
+    "jobOrderId": "jo-28",
+    "operationId": "op-112",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2111"
+    ],
+    "startTime": "2025-10-15T17:16:47.212Z",
+    "standardTime": 300,
+    "actualTime": 251,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-113",
+    "jobOrderId": "jo-18",
+    "operationId": "op-113",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2112"
+    ],
+    "startTime": "2025-10-11T11:11:05.440Z",
+    "standardTime": 300,
+    "actualTime": 453,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-114",
+    "jobOrderId": "jo-29",
+    "operationId": "op-114",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2113"
+    ],
+    "startTime": "2025-10-17T04:55:37.387Z",
+    "standardTime": 300,
+    "actualTime": 273,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-115",
+    "jobOrderId": "jo-15",
+    "operationId": "op-115",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2114"
+    ],
+    "startTime": "2025-10-27T14:40:05.350Z",
+    "standardTime": 300,
+    "actualTime": 518,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-116",
+    "jobOrderId": "jo-9",
+    "operationId": "op-116",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2115"
+    ],
+    "startTime": "2025-10-13T06:46:51.749Z",
+    "standardTime": 300,
+    "actualTime": 522,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-117",
+    "jobOrderId": "jo-13",
+    "operationId": "op-117",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2116"
+    ],
+    "startTime": "2025-10-13T06:02:42.837Z",
+    "standardTime": 300,
+    "actualTime": 248,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-118",
+    "jobOrderId": "jo-21",
+    "operationId": "op-118",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2117"
+    ],
+    "startTime": "2025-10-02T02:21:47.076Z",
+    "standardTime": 300,
+    "actualTime": 580,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-119",
+    "jobOrderId": "jo-14",
+    "operationId": "op-119",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2118"
+    ],
+    "startTime": "2025-10-10T14:54:02.492Z",
+    "standardTime": 300,
+    "actualTime": 549,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-120",
+    "jobOrderId": "jo-14",
+    "operationId": "op-120",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2119"
+    ],
+    "startTime": "2025-10-18T15:49:38.964Z",
+    "standardTime": 300,
+    "actualTime": 217,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-121",
+    "jobOrderId": "jo-19",
+    "operationId": "op-1",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2120"
+    ],
+    "startTime": "2025-10-10T17:22:44.468Z",
+    "standardTime": 300,
+    "actualTime": 388,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-122",
+    "jobOrderId": "jo-30",
+    "operationId": "op-2",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2121"
+    ],
+    "startTime": "2025-10-26T19:52:33.122Z",
+    "standardTime": 300,
+    "actualTime": 439,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-123",
+    "jobOrderId": "jo-27",
+    "operationId": "op-3",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2122"
+    ],
+    "startTime": "2025-10-26T18:24:13.964Z",
+    "standardTime": 300,
+    "actualTime": 438,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-124",
+    "jobOrderId": "jo-3",
+    "operationId": "op-4",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2123"
+    ],
+    "startTime": "2025-10-24T01:38:16.171Z",
+    "standardTime": 300,
+    "actualTime": 247,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-125",
+    "jobOrderId": "jo-6",
+    "operationId": "op-5",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2124"
+    ],
+    "startTime": "2025-10-09T09:36:32.520Z",
+    "standardTime": 300,
+    "actualTime": 597,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-126",
+    "jobOrderId": "jo-14",
+    "operationId": "op-6",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2125"
+    ],
+    "startTime": "2025-10-27T15:57:31.286Z",
+    "standardTime": 300,
+    "actualTime": 517,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-127",
+    "jobOrderId": "jo-28",
+    "operationId": "op-7",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2126"
+    ],
+    "startTime": "2025-10-03T17:27:18.951Z",
+    "standardTime": 300,
+    "actualTime": 484,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-128",
+    "jobOrderId": "jo-2",
+    "operationId": "op-8",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2127"
+    ],
+    "startTime": "2025-10-12T23:08:16.241Z",
+    "standardTime": 300,
+    "actualTime": 367,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-129",
+    "jobOrderId": "jo-20",
+    "operationId": "op-9",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2128"
+    ],
+    "startTime": "2025-10-27T13:23:41.579Z",
+    "standardTime": 300,
+    "actualTime": 281,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-130",
+    "jobOrderId": "jo-3",
+    "operationId": "op-10",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2129"
+    ],
+    "startTime": "2025-10-13T14:09:56.650Z",
+    "standardTime": 300,
+    "actualTime": 561,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-131",
+    "jobOrderId": "jo-1",
+    "operationId": "op-11",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2130"
+    ],
+    "startTime": "2025-10-03T03:52:54.964Z",
+    "standardTime": 300,
+    "actualTime": 309,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-132",
+    "jobOrderId": "jo-19",
+    "operationId": "op-12",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2131"
+    ],
+    "startTime": "2025-10-19T03:18:27.436Z",
+    "standardTime": 300,
+    "actualTime": 402,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-133",
+    "jobOrderId": "jo-12",
+    "operationId": "op-13",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2132"
+    ],
+    "startTime": "2025-09-29T21:17:30.947Z",
+    "standardTime": 300,
+    "actualTime": 276,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-134",
+    "jobOrderId": "jo-13",
+    "operationId": "op-14",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2133"
+    ],
+    "startTime": "2025-10-16T16:48:48.982Z",
+    "standardTime": 300,
+    "actualTime": 315,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-135",
+    "jobOrderId": "jo-9",
+    "operationId": "op-15",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2134"
+    ],
+    "startTime": "2025-10-05T11:34:21.056Z",
+    "standardTime": 300,
+    "actualTime": 237,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-136",
+    "jobOrderId": "jo-8",
+    "operationId": "op-16",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2135"
+    ],
+    "startTime": "2025-10-15T11:04:39.366Z",
+    "standardTime": 300,
+    "actualTime": 431,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-137",
+    "jobOrderId": "jo-24",
+    "operationId": "op-17",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2136"
+    ],
+    "startTime": "2025-10-09T12:44:44.071Z",
+    "standardTime": 300,
+    "actualTime": 509,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-138",
+    "jobOrderId": "jo-14",
+    "operationId": "op-18",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2137"
+    ],
+    "startTime": "2025-10-26T16:05:23.031Z",
+    "standardTime": 300,
+    "actualTime": 561,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-139",
+    "jobOrderId": "jo-28",
+    "operationId": "op-19",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2138"
+    ],
+    "startTime": "2025-10-14T08:43:46.213Z",
+    "standardTime": 300,
+    "actualTime": 482,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-140",
+    "jobOrderId": "jo-12",
+    "operationId": "op-20",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2139"
+    ],
+    "startTime": "2025-10-27T12:54:14.409Z",
+    "standardTime": 300,
+    "actualTime": 512,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-141",
+    "jobOrderId": "jo-13",
+    "operationId": "op-21",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2140"
+    ],
+    "startTime": "2025-10-25T17:36:04.665Z",
+    "standardTime": 300,
+    "actualTime": 579,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-142",
+    "jobOrderId": "jo-20",
+    "operationId": "op-22",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2141"
+    ],
+    "startTime": "2025-10-24T13:22:48.177Z",
+    "standardTime": 300,
+    "actualTime": 350,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-143",
+    "jobOrderId": "jo-25",
+    "operationId": "op-23",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2142"
+    ],
+    "startTime": "2025-10-21T11:31:06.022Z",
+    "standardTime": 300,
+    "actualTime": 544,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-144",
+    "jobOrderId": "jo-7",
+    "operationId": "op-24",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2143"
+    ],
+    "startTime": "2025-10-11T02:34:48.454Z",
+    "standardTime": 300,
+    "actualTime": 421,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-145",
+    "jobOrderId": "jo-17",
+    "operationId": "op-25",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2144"
+    ],
+    "startTime": "2025-10-27T02:52:57.615Z",
+    "standardTime": 300,
+    "actualTime": 390,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-146",
+    "jobOrderId": "jo-29",
+    "operationId": "op-26",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2145"
+    ],
+    "startTime": "2025-10-04T15:45:51.864Z",
+    "standardTime": 300,
+    "actualTime": 288,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-147",
+    "jobOrderId": "jo-3",
+    "operationId": "op-27",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2146"
+    ],
+    "startTime": "2025-10-03T02:22:34.998Z",
+    "standardTime": 300,
+    "actualTime": 205,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-148",
+    "jobOrderId": "jo-4",
+    "operationId": "op-28",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2147"
+    ],
+    "startTime": "2025-10-20T03:19:07.629Z",
+    "standardTime": 300,
+    "actualTime": 255,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-149",
+    "jobOrderId": "jo-25",
+    "operationId": "op-29",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2148"
+    ],
+    "startTime": "2025-10-11T19:22:31.661Z",
+    "standardTime": 300,
+    "actualTime": 310,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-150",
+    "jobOrderId": "jo-4",
+    "operationId": "op-30",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2149"
+    ],
+    "startTime": "2025-09-29T20:37:07.230Z",
+    "standardTime": 300,
+    "actualTime": 304,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-151",
+    "jobOrderId": "jo-27",
+    "operationId": "op-31",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2150"
+    ],
+    "startTime": "2025-09-29T07:36:54.079Z",
+    "standardTime": 300,
+    "actualTime": 246,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-152",
+    "jobOrderId": "jo-11",
+    "operationId": "op-32",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2151"
+    ],
+    "startTime": "2025-10-21T05:53:24.335Z",
+    "standardTime": 300,
+    "actualTime": 398,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-153",
+    "jobOrderId": "jo-28",
+    "operationId": "op-33",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2152"
+    ],
+    "startTime": "2025-10-23T07:48:33.271Z",
+    "standardTime": 300,
+    "actualTime": 238,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-154",
+    "jobOrderId": "jo-9",
+    "operationId": "op-34",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2153"
+    ],
+    "startTime": "2025-10-12T02:47:11.907Z",
+    "standardTime": 300,
+    "actualTime": 279,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-155",
+    "jobOrderId": "jo-19",
+    "operationId": "op-35",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2154"
+    ],
+    "startTime": "2025-10-19T00:10:27.650Z",
+    "standardTime": 300,
+    "actualTime": 572,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-156",
+    "jobOrderId": "jo-2",
+    "operationId": "op-36",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2155"
+    ],
+    "startTime": "2025-10-04T10:57:11.507Z",
+    "standardTime": 300,
+    "actualTime": 228,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-157",
+    "jobOrderId": "jo-14",
+    "operationId": "op-37",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2156"
+    ],
+    "startTime": "2025-10-17T12:26:06.813Z",
+    "standardTime": 300,
+    "actualTime": 429,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-158",
+    "jobOrderId": "jo-13",
+    "operationId": "op-38",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2157"
+    ],
+    "startTime": "2025-10-24T00:50:30.949Z",
+    "standardTime": 300,
+    "actualTime": 532,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-159",
+    "jobOrderId": "jo-22",
+    "operationId": "op-39",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2158"
+    ],
+    "startTime": "2025-10-14T04:43:08.956Z",
+    "standardTime": 300,
+    "actualTime": 439,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-160",
+    "jobOrderId": "jo-17",
+    "operationId": "op-40",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2159"
+    ],
+    "startTime": "2025-10-15T17:51:47.723Z",
+    "standardTime": 300,
+    "actualTime": 547,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-161",
+    "jobOrderId": "jo-15",
+    "operationId": "op-41",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2160"
+    ],
+    "startTime": "2025-10-17T22:52:23.190Z",
+    "standardTime": 300,
+    "actualTime": 222,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-162",
+    "jobOrderId": "jo-6",
+    "operationId": "op-42",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2161"
+    ],
+    "startTime": "2025-10-05T00:09:01.835Z",
+    "standardTime": 300,
+    "actualTime": 227,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-163",
+    "jobOrderId": "jo-5",
+    "operationId": "op-43",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2162"
+    ],
+    "startTime": "2025-10-09T08:58:05.195Z",
+    "standardTime": 300,
+    "actualTime": 313,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-164",
+    "jobOrderId": "jo-8",
+    "operationId": "op-44",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2163"
+    ],
+    "startTime": "2025-10-19T20:24:23.779Z",
+    "standardTime": 300,
+    "actualTime": 420,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-165",
+    "jobOrderId": "jo-2",
+    "operationId": "op-45",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2164"
+    ],
+    "startTime": "2025-10-05T19:06:23.911Z",
+    "standardTime": 300,
+    "actualTime": 535,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-166",
+    "jobOrderId": "jo-15",
+    "operationId": "op-46",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2165"
+    ],
+    "startTime": "2025-10-25T07:39:22.694Z",
+    "standardTime": 300,
+    "actualTime": 329,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-167",
+    "jobOrderId": "jo-2",
+    "operationId": "op-47",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2166"
+    ],
+    "startTime": "2025-10-06T04:47:49.277Z",
+    "standardTime": 300,
+    "actualTime": 498,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-168",
+    "jobOrderId": "jo-19",
+    "operationId": "op-48",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2167"
+    ],
+    "startTime": "2025-10-04T17:21:17.958Z",
+    "standardTime": 300,
+    "actualTime": 434,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-169",
+    "jobOrderId": "jo-28",
+    "operationId": "op-49",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2168"
+    ],
+    "startTime": "2025-10-01T13:41:39.186Z",
+    "standardTime": 300,
+    "actualTime": 453,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-170",
+    "jobOrderId": "jo-16",
+    "operationId": "op-50",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2169"
+    ],
+    "startTime": "2025-10-18T04:06:32.345Z",
+    "standardTime": 300,
+    "actualTime": 471,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-171",
+    "jobOrderId": "jo-14",
+    "operationId": "op-51",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2170"
+    ],
+    "startTime": "2025-10-18T09:38:17.332Z",
+    "standardTime": 300,
+    "actualTime": 209,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-172",
+    "jobOrderId": "jo-15",
+    "operationId": "op-52",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2171"
+    ],
+    "startTime": "2025-10-03T23:24:04.119Z",
+    "standardTime": 300,
+    "actualTime": 275,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-173",
+    "jobOrderId": "jo-21",
+    "operationId": "op-53",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2172"
+    ],
+    "startTime": "2025-10-01T03:56:28.704Z",
+    "standardTime": 300,
+    "actualTime": 478,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-174",
+    "jobOrderId": "jo-1",
+    "operationId": "op-54",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2173"
+    ],
+    "startTime": "2025-10-11T04:24:55.031Z",
+    "standardTime": 300,
+    "actualTime": 243,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-175",
+    "jobOrderId": "jo-3",
+    "operationId": "op-55",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2174"
+    ],
+    "startTime": "2025-10-01T18:52:36.911Z",
+    "standardTime": 300,
+    "actualTime": 334,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-176",
+    "jobOrderId": "jo-17",
+    "operationId": "op-56",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2175"
+    ],
+    "startTime": "2025-10-19T22:42:21.466Z",
+    "standardTime": 300,
+    "actualTime": 301,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-177",
+    "jobOrderId": "jo-12",
+    "operationId": "op-57",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2176"
+    ],
+    "startTime": "2025-09-30T23:24:50.963Z",
+    "standardTime": 300,
+    "actualTime": 335,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-178",
+    "jobOrderId": "jo-6",
+    "operationId": "op-58",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2177"
+    ],
+    "startTime": "2025-10-01T03:29:30.854Z",
+    "standardTime": 300,
+    "actualTime": 335,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-179",
+    "jobOrderId": "jo-25",
+    "operationId": "op-59",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2178"
+    ],
+    "startTime": "2025-10-02T21:29:50.204Z",
+    "standardTime": 300,
+    "actualTime": 224,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-180",
+    "jobOrderId": "jo-17",
+    "operationId": "op-60",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2179"
+    ],
+    "startTime": "2025-09-30T03:58:01.042Z",
+    "standardTime": 300,
+    "actualTime": 288,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-181",
+    "jobOrderId": "jo-18",
+    "operationId": "op-61",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2180"
+    ],
+    "startTime": "2025-10-25T00:58:15.149Z",
+    "standardTime": 300,
+    "actualTime": 379,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-182",
+    "jobOrderId": "jo-1",
+    "operationId": "op-62",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2181"
+    ],
+    "startTime": "2025-10-25T18:37:58.319Z",
+    "standardTime": 300,
+    "actualTime": 570,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-183",
+    "jobOrderId": "jo-29",
+    "operationId": "op-63",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2182"
+    ],
+    "startTime": "2025-10-01T20:42:01.686Z",
+    "standardTime": 300,
+    "actualTime": 219,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-184",
+    "jobOrderId": "jo-9",
+    "operationId": "op-64",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2183"
+    ],
+    "startTime": "2025-10-15T04:01:31.038Z",
+    "standardTime": 300,
+    "actualTime": 227,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-185",
+    "jobOrderId": "jo-10",
+    "operationId": "op-65",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2184"
+    ],
+    "startTime": "2025-10-15T12:53:41.545Z",
+    "standardTime": 300,
+    "actualTime": 399,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-186",
+    "jobOrderId": "jo-17",
+    "operationId": "op-66",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2185"
+    ],
+    "startTime": "2025-10-15T08:23:07.487Z",
+    "standardTime": 300,
+    "actualTime": 518,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-187",
+    "jobOrderId": "jo-11",
+    "operationId": "op-67",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2186"
+    ],
+    "startTime": "2025-10-28T14:57:21.376Z",
+    "standardTime": 300,
+    "actualTime": 299,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-188",
+    "jobOrderId": "jo-14",
+    "operationId": "op-68",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2187"
+    ],
+    "startTime": "2025-10-27T15:34:26.624Z",
+    "standardTime": 300,
+    "actualTime": 433,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-189",
+    "jobOrderId": "jo-9",
+    "operationId": "op-69",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2188"
+    ],
+    "startTime": "2025-10-13T13:52:50.882Z",
+    "standardTime": 300,
+    "actualTime": 381,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-190",
+    "jobOrderId": "jo-26",
+    "operationId": "op-70",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2189"
+    ],
+    "startTime": "2025-10-20T22:35:05.934Z",
+    "standardTime": 300,
+    "actualTime": 458,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-191",
+    "jobOrderId": "jo-30",
+    "operationId": "op-71",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2190"
+    ],
+    "startTime": "2025-10-26T04:07:01.701Z",
+    "standardTime": 300,
+    "actualTime": 355,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-192",
+    "jobOrderId": "jo-8",
+    "operationId": "op-72",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2191"
+    ],
+    "startTime": "2025-09-30T21:36:09.305Z",
+    "standardTime": 300,
+    "actualTime": 407,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-193",
+    "jobOrderId": "jo-1",
+    "operationId": "op-73",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2192"
+    ],
+    "startTime": "2025-10-03T05:20:34.102Z",
+    "standardTime": 300,
+    "actualTime": 559,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-194",
+    "jobOrderId": "jo-30",
+    "operationId": "op-74",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2193"
+    ],
+    "startTime": "2025-10-10T18:24:34.016Z",
+    "standardTime": 300,
+    "actualTime": 349,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-195",
+    "jobOrderId": "jo-7",
+    "operationId": "op-75",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2194"
+    ],
+    "startTime": "2025-10-04T06:56:19.839Z",
+    "standardTime": 300,
+    "actualTime": 573,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-196",
+    "jobOrderId": "jo-1",
+    "operationId": "op-76",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2195"
+    ],
+    "startTime": "2025-10-28T15:32:37.227Z",
+    "standardTime": 300,
+    "actualTime": 406,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-197",
+    "jobOrderId": "jo-19",
+    "operationId": "op-77",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2196"
+    ],
+    "startTime": "2025-10-27T15:18:33.866Z",
+    "standardTime": 300,
+    "actualTime": 261,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-198",
+    "jobOrderId": "jo-4",
+    "operationId": "op-78",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2197"
+    ],
+    "startTime": "2025-10-06T04:08:35.794Z",
+    "standardTime": 300,
+    "actualTime": 351,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-199",
+    "jobOrderId": "jo-8",
+    "operationId": "op-79",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2198"
+    ],
+    "startTime": "2025-09-29T06:08:51.166Z",
+    "standardTime": 300,
+    "actualTime": 274,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-200",
+    "jobOrderId": "jo-20",
+    "operationId": "op-80",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2199"
+    ],
+    "startTime": "2025-10-08T02:04:07.971Z",
+    "standardTime": 300,
+    "actualTime": 459,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-201",
+    "jobOrderId": "jo-3",
+    "operationId": "op-81",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2200"
+    ],
+    "startTime": "2025-10-14T06:21:32.838Z",
+    "standardTime": 300,
+    "actualTime": 203,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-202",
+    "jobOrderId": "jo-3",
+    "operationId": "op-82",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2201"
+    ],
+    "startTime": "2025-10-27T08:06:40.039Z",
+    "standardTime": 300,
+    "actualTime": 400,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-203",
+    "jobOrderId": "jo-20",
+    "operationId": "op-83",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2202"
+    ],
+    "startTime": "2025-10-01T04:06:10.229Z",
+    "standardTime": 300,
+    "actualTime": 488,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-204",
+    "jobOrderId": "jo-4",
+    "operationId": "op-84",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2203"
+    ],
+    "startTime": "2025-10-14T11:27:58.639Z",
+    "standardTime": 300,
+    "actualTime": 331,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-205",
+    "jobOrderId": "jo-16",
+    "operationId": "op-85",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2204"
+    ],
+    "startTime": "2025-10-08T09:11:37.961Z",
+    "standardTime": 300,
+    "actualTime": 306,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-206",
+    "jobOrderId": "jo-26",
+    "operationId": "op-86",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2205"
+    ],
+    "startTime": "2025-10-02T18:55:39.002Z",
+    "standardTime": 300,
+    "actualTime": 517,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-207",
+    "jobOrderId": "jo-23",
+    "operationId": "op-87",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2206"
+    ],
+    "startTime": "2025-10-25T00:14:53.121Z",
+    "standardTime": 300,
+    "actualTime": 375,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-208",
+    "jobOrderId": "jo-9",
+    "operationId": "op-88",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2207"
+    ],
+    "startTime": "2025-10-07T15:03:39.237Z",
+    "standardTime": 300,
+    "actualTime": 407,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-209",
+    "jobOrderId": "jo-5",
+    "operationId": "op-89",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2208"
+    ],
+    "startTime": "2025-10-22T23:27:00.864Z",
+    "standardTime": 300,
+    "actualTime": 520,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-210",
+    "jobOrderId": "jo-13",
+    "operationId": "op-90",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2209"
+    ],
+    "startTime": "2025-10-19T11:01:35.749Z",
+    "standardTime": 300,
+    "actualTime": 447,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-211",
+    "jobOrderId": "jo-14",
+    "operationId": "op-91",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2210"
+    ],
+    "startTime": "2025-10-16T07:37:52.303Z",
+    "standardTime": 300,
+    "actualTime": 546,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-212",
+    "jobOrderId": "jo-13",
+    "operationId": "op-92",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2211"
+    ],
+    "startTime": "2025-10-06T00:54:16.426Z",
+    "standardTime": 300,
+    "actualTime": 214,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-213",
+    "jobOrderId": "jo-18",
+    "operationId": "op-93",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2212"
+    ],
+    "startTime": "2025-10-19T00:44:31.357Z",
+    "standardTime": 300,
+    "actualTime": 407,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-214",
+    "jobOrderId": "jo-29",
+    "operationId": "op-94",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2213"
+    ],
+    "startTime": "2025-10-01T08:44:44.637Z",
+    "standardTime": 300,
+    "actualTime": 443,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-215",
+    "jobOrderId": "jo-11",
+    "operationId": "op-95",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2214"
+    ],
+    "startTime": "2025-10-19T06:17:22.825Z",
+    "standardTime": 300,
+    "actualTime": 429,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-216",
+    "jobOrderId": "jo-4",
+    "operationId": "op-96",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2215"
+    ],
+    "startTime": "2025-10-20T09:10:14.907Z",
+    "standardTime": 300,
+    "actualTime": 391,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-217",
+    "jobOrderId": "jo-5",
+    "operationId": "op-97",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2216"
+    ],
+    "startTime": "2025-10-09T09:56:16.987Z",
+    "standardTime": 300,
+    "actualTime": 584,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-218",
+    "jobOrderId": "jo-2",
+    "operationId": "op-98",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2217"
+    ],
+    "startTime": "2025-10-12T14:01:35.086Z",
+    "standardTime": 300,
+    "actualTime": 559,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-219",
+    "jobOrderId": "jo-3",
+    "operationId": "op-99",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2218"
+    ],
+    "startTime": "2025-10-16T17:25:19.435Z",
+    "standardTime": 300,
+    "actualTime": 557,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-220",
+    "jobOrderId": "jo-4",
+    "operationId": "op-100",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2219"
+    ],
+    "startTime": "2025-10-20T19:05:32.395Z",
+    "standardTime": 300,
+    "actualTime": 526,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-221",
+    "jobOrderId": "jo-29",
+    "operationId": "op-101",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2220"
+    ],
+    "startTime": "2025-10-22T00:57:43.810Z",
+    "standardTime": 300,
+    "actualTime": 580,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-222",
+    "jobOrderId": "jo-10",
+    "operationId": "op-102",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2221"
+    ],
+    "startTime": "2025-10-05T06:32:12.782Z",
+    "standardTime": 300,
+    "actualTime": 335,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-223",
+    "jobOrderId": "jo-5",
+    "operationId": "op-103",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2222"
+    ],
+    "startTime": "2025-10-15T15:55:00.280Z",
+    "standardTime": 300,
+    "actualTime": 274,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-224",
+    "jobOrderId": "jo-2",
+    "operationId": "op-104",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2223"
+    ],
+    "startTime": "2025-10-07T21:09:50.250Z",
+    "standardTime": 300,
+    "actualTime": 521,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-225",
+    "jobOrderId": "jo-19",
+    "operationId": "op-105",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2224"
+    ],
+    "startTime": "2025-10-22T05:13:36.806Z",
+    "standardTime": 300,
+    "actualTime": 368,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-226",
+    "jobOrderId": "jo-20",
+    "operationId": "op-106",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2225"
+    ],
+    "startTime": "2025-10-15T10:28:31.736Z",
+    "standardTime": 300,
+    "actualTime": 322,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-227",
+    "jobOrderId": "jo-3",
+    "operationId": "op-107",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2226"
+    ],
+    "startTime": "2025-10-11T11:16:24.970Z",
+    "standardTime": 300,
+    "actualTime": 462,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-228",
+    "jobOrderId": "jo-11",
+    "operationId": "op-108",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2227"
+    ],
+    "startTime": "2025-10-24T02:37:32.440Z",
+    "standardTime": 300,
+    "actualTime": 247,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-229",
+    "jobOrderId": "jo-15",
+    "operationId": "op-109",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2228"
+    ],
+    "startTime": "2025-10-03T05:19:14.065Z",
+    "standardTime": 300,
+    "actualTime": 293,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-230",
+    "jobOrderId": "jo-10",
+    "operationId": "op-110",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2229"
+    ],
+    "startTime": "2025-10-23T07:45:15.340Z",
+    "standardTime": 300,
+    "actualTime": 203,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-231",
+    "jobOrderId": "jo-6",
+    "operationId": "op-111",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2230"
+    ],
+    "startTime": "2025-10-21T04:21:11.638Z",
+    "standardTime": 300,
+    "actualTime": 216,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-232",
+    "jobOrderId": "jo-1",
+    "operationId": "op-112",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2231"
+    ],
+    "startTime": "2025-10-01T03:02:54.251Z",
+    "standardTime": 300,
+    "actualTime": 385,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-233",
+    "jobOrderId": "jo-18",
+    "operationId": "op-113",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2232"
+    ],
+    "startTime": "2025-10-26T22:13:46.794Z",
+    "standardTime": 300,
+    "actualTime": 459,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-234",
+    "jobOrderId": "jo-10",
+    "operationId": "op-114",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2233"
+    ],
+    "startTime": "2025-10-20T21:51:05.155Z",
+    "standardTime": 300,
+    "actualTime": 262,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-235",
+    "jobOrderId": "jo-21",
+    "operationId": "op-115",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2234"
+    ],
+    "startTime": "2025-10-18T21:59:39.948Z",
+    "standardTime": 300,
+    "actualTime": 210,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-236",
+    "jobOrderId": "jo-19",
+    "operationId": "op-116",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2235"
+    ],
+    "startTime": "2025-10-05T00:42:15.809Z",
+    "standardTime": 300,
+    "actualTime": 481,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-237",
+    "jobOrderId": "jo-5",
+    "operationId": "op-117",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2236"
+    ],
+    "startTime": "2025-10-19T02:41:33.890Z",
+    "standardTime": 300,
+    "actualTime": 467,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-238",
+    "jobOrderId": "jo-9",
+    "operationId": "op-118",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2237"
+    ],
+    "startTime": "2025-10-09T01:39:47.069Z",
+    "standardTime": 300,
+    "actualTime": 454,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-239",
+    "jobOrderId": "jo-21",
+    "operationId": "op-119",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2238"
+    ],
+    "startTime": "2025-10-24T16:57:28.454Z",
+    "standardTime": 300,
+    "actualTime": 577,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-240",
+    "jobOrderId": "jo-20",
+    "operationId": "op-120",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2239"
+    ],
+    "startTime": "2025-10-14T22:42:31.354Z",
+    "standardTime": 300,
+    "actualTime": 309,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-241",
+    "jobOrderId": "jo-30",
+    "operationId": "op-1",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2240"
+    ],
+    "startTime": "2025-10-25T03:03:09.321Z",
+    "standardTime": 300,
+    "actualTime": 297,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-242",
+    "jobOrderId": "jo-22",
+    "operationId": "op-2",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2241"
+    ],
+    "startTime": "2025-10-03T07:01:23.092Z",
+    "standardTime": 300,
+    "actualTime": 278,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-243",
+    "jobOrderId": "jo-13",
+    "operationId": "op-3",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2242"
+    ],
+    "startTime": "2025-10-15T08:38:49.490Z",
+    "standardTime": 300,
+    "actualTime": 483,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-244",
+    "jobOrderId": "jo-7",
+    "operationId": "op-4",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2243"
+    ],
+    "startTime": "2025-10-05T02:26:42.364Z",
+    "standardTime": 300,
+    "actualTime": 551,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-245",
+    "jobOrderId": "jo-24",
+    "operationId": "op-5",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2244"
+    ],
+    "startTime": "2025-10-01T14:12:23.657Z",
+    "standardTime": 300,
+    "actualTime": 505,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-246",
+    "jobOrderId": "jo-17",
+    "operationId": "op-6",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2245"
+    ],
+    "startTime": "2025-10-03T21:24:22.398Z",
+    "standardTime": 300,
+    "actualTime": 505,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-247",
+    "jobOrderId": "jo-21",
+    "operationId": "op-7",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2246"
+    ],
+    "startTime": "2025-10-07T12:48:42.348Z",
+    "standardTime": 300,
+    "actualTime": 532,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-248",
+    "jobOrderId": "jo-9",
+    "operationId": "op-8",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2247"
+    ],
+    "startTime": "2025-10-11T17:32:14.640Z",
+    "standardTime": 300,
+    "actualTime": 497,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-249",
+    "jobOrderId": "jo-9",
+    "operationId": "op-9",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2248"
+    ],
+    "startTime": "2025-10-04T14:52:39.863Z",
+    "standardTime": 300,
+    "actualTime": 412,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-250",
+    "jobOrderId": "jo-21",
+    "operationId": "op-10",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2249"
+    ],
+    "startTime": "2025-09-29T21:08:18.119Z",
+    "standardTime": 300,
+    "actualTime": 233,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-251",
+    "jobOrderId": "jo-2",
+    "operationId": "op-11",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2250"
+    ],
+    "startTime": "2025-10-23T17:49:06.320Z",
+    "standardTime": 300,
+    "actualTime": 594,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-252",
+    "jobOrderId": "jo-15",
+    "operationId": "op-12",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2251"
+    ],
+    "startTime": "2025-10-11T21:14:57.396Z",
+    "standardTime": 300,
+    "actualTime": 347,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-253",
+    "jobOrderId": "jo-9",
+    "operationId": "op-13",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2252"
+    ],
+    "startTime": "2025-10-10T08:11:42.778Z",
+    "standardTime": 300,
+    "actualTime": 498,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-254",
+    "jobOrderId": "jo-3",
+    "operationId": "op-14",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2253"
+    ],
+    "startTime": "2025-10-17T05:18:18.676Z",
+    "standardTime": 300,
+    "actualTime": 359,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-255",
+    "jobOrderId": "jo-11",
+    "operationId": "op-15",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2254"
+    ],
+    "startTime": "2025-10-22T03:04:37.713Z",
+    "standardTime": 300,
+    "actualTime": 560,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-256",
+    "jobOrderId": "jo-24",
+    "operationId": "op-16",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2255"
+    ],
+    "startTime": "2025-10-17T06:25:44.013Z",
+    "standardTime": 300,
+    "actualTime": 457,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-257",
+    "jobOrderId": "jo-9",
+    "operationId": "op-17",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2256"
+    ],
+    "startTime": "2025-10-26T13:01:02.088Z",
+    "standardTime": 300,
+    "actualTime": 461,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-258",
+    "jobOrderId": "jo-22",
+    "operationId": "op-18",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2257"
+    ],
+    "startTime": "2025-10-07T00:31:02.632Z",
+    "standardTime": 300,
+    "actualTime": 220,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-259",
+    "jobOrderId": "jo-20",
+    "operationId": "op-19",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2258"
+    ],
+    "startTime": "2025-10-18T20:19:28.923Z",
+    "standardTime": 300,
+    "actualTime": 561,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-260",
+    "jobOrderId": "jo-22",
+    "operationId": "op-20",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2259"
+    ],
+    "startTime": "2025-10-15T15:06:48.609Z",
+    "standardTime": 300,
+    "actualTime": 575,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-261",
+    "jobOrderId": "jo-4",
+    "operationId": "op-21",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2260"
+    ],
+    "startTime": "2025-10-19T10:42:40.374Z",
+    "standardTime": 300,
+    "actualTime": 403,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-262",
+    "jobOrderId": "jo-10",
+    "operationId": "op-22",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2261"
+    ],
+    "startTime": "2025-10-06T10:00:27.939Z",
+    "standardTime": 300,
+    "actualTime": 452,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-263",
+    "jobOrderId": "jo-2",
+    "operationId": "op-23",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2262"
+    ],
+    "startTime": "2025-10-16T16:06:44.049Z",
+    "standardTime": 300,
+    "actualTime": 473,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-264",
+    "jobOrderId": "jo-3",
+    "operationId": "op-24",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2263"
+    ],
+    "startTime": "2025-10-11T17:13:56.189Z",
+    "standardTime": 300,
+    "actualTime": 252,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-265",
+    "jobOrderId": "jo-23",
+    "operationId": "op-25",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2264"
+    ],
+    "startTime": "2025-10-13T08:43:02.179Z",
+    "standardTime": 300,
+    "actualTime": 541,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-266",
+    "jobOrderId": "jo-23",
+    "operationId": "op-26",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2265"
+    ],
+    "startTime": "2025-10-09T22:20:46.460Z",
+    "standardTime": 300,
+    "actualTime": 586,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-267",
+    "jobOrderId": "jo-15",
+    "operationId": "op-27",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2266"
+    ],
+    "startTime": "2025-10-23T13:57:42.111Z",
+    "standardTime": 300,
+    "actualTime": 264,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-268",
+    "jobOrderId": "jo-12",
+    "operationId": "op-28",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2267"
+    ],
+    "startTime": "2025-10-27T19:12:49.400Z",
+    "standardTime": 300,
+    "actualTime": 515,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-269",
+    "jobOrderId": "jo-23",
+    "operationId": "op-29",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2268"
+    ],
+    "startTime": "2025-10-16T07:28:12.037Z",
+    "standardTime": 300,
+    "actualTime": 485,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-270",
+    "jobOrderId": "jo-9",
+    "operationId": "op-30",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2269"
+    ],
+    "startTime": "2025-10-07T01:59:27.121Z",
+    "standardTime": 300,
+    "actualTime": 285,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-271",
+    "jobOrderId": "jo-25",
+    "operationId": "op-31",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2270"
+    ],
+    "startTime": "2025-10-19T10:19:52.875Z",
+    "standardTime": 300,
+    "actualTime": 549,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-272",
+    "jobOrderId": "jo-15",
+    "operationId": "op-32",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2271"
+    ],
+    "startTime": "2025-10-21T13:03:44.441Z",
+    "standardTime": 300,
+    "actualTime": 275,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-273",
+    "jobOrderId": "jo-29",
+    "operationId": "op-33",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2272"
+    ],
+    "startTime": "2025-09-30T01:57:21.136Z",
+    "standardTime": 300,
+    "actualTime": 295,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-274",
+    "jobOrderId": "jo-15",
+    "operationId": "op-34",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2273"
+    ],
+    "startTime": "2025-10-12T04:08:53.574Z",
+    "standardTime": 300,
+    "actualTime": 323,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-275",
+    "jobOrderId": "jo-9",
+    "operationId": "op-35",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2274"
+    ],
+    "startTime": "2025-10-26T04:06:37.274Z",
+    "standardTime": 300,
+    "actualTime": 509,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-276",
+    "jobOrderId": "jo-18",
+    "operationId": "op-36",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2275"
+    ],
+    "startTime": "2025-10-23T15:34:22.327Z",
+    "standardTime": 300,
+    "actualTime": 490,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-277",
+    "jobOrderId": "jo-15",
+    "operationId": "op-37",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2276"
+    ],
+    "startTime": "2025-10-23T19:09:04.853Z",
+    "standardTime": 300,
+    "actualTime": 276,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-278",
+    "jobOrderId": "jo-17",
+    "operationId": "op-38",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2277"
+    ],
+    "startTime": "2025-10-10T20:51:48.809Z",
+    "standardTime": 300,
+    "actualTime": 284,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-279",
+    "jobOrderId": "jo-15",
+    "operationId": "op-39",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2278"
+    ],
+    "startTime": "2025-10-14T06:32:36.483Z",
+    "standardTime": 300,
+    "actualTime": 507,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-280",
+    "jobOrderId": "jo-10",
+    "operationId": "op-40",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2279"
+    ],
+    "startTime": "2025-10-26T14:36:05.741Z",
+    "standardTime": 300,
+    "actualTime": 344,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-281",
+    "jobOrderId": "jo-28",
+    "operationId": "op-41",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2280"
+    ],
+    "startTime": "2025-10-19T05:53:45.229Z",
+    "standardTime": 300,
+    "actualTime": 353,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-282",
+    "jobOrderId": "jo-7",
+    "operationId": "op-42",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2281"
+    ],
+    "startTime": "2025-10-12T08:40:05.653Z",
+    "standardTime": 300,
+    "actualTime": 544,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-283",
+    "jobOrderId": "jo-21",
+    "operationId": "op-43",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2282"
+    ],
+    "startTime": "2025-09-29T19:59:52.179Z",
+    "standardTime": 300,
+    "actualTime": 496,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-284",
+    "jobOrderId": "jo-20",
+    "operationId": "op-44",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2283"
+    ],
+    "startTime": "2025-10-14T11:14:18.291Z",
+    "standardTime": 300,
+    "actualTime": 470,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-285",
+    "jobOrderId": "jo-19",
+    "operationId": "op-45",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2284"
+    ],
+    "startTime": "2025-10-24T09:27:04.426Z",
+    "standardTime": 300,
+    "actualTime": 421,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-286",
+    "jobOrderId": "jo-11",
+    "operationId": "op-46",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2285"
+    ],
+    "startTime": "2025-10-11T04:07:01.559Z",
+    "standardTime": 300,
+    "actualTime": 452,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-287",
+    "jobOrderId": "jo-11",
+    "operationId": "op-47",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2286"
+    ],
+    "startTime": "2025-10-26T12:24:08.055Z",
+    "standardTime": 300,
+    "actualTime": 271,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-288",
+    "jobOrderId": "jo-10",
+    "operationId": "op-48",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2287"
+    ],
+    "startTime": "2025-10-23T07:15:33.332Z",
+    "standardTime": 300,
+    "actualTime": 331,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-289",
+    "jobOrderId": "jo-28",
+    "operationId": "op-49",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2288"
+    ],
+    "startTime": "2025-10-22T06:47:51.899Z",
+    "standardTime": 300,
+    "actualTime": 345,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-290",
+    "jobOrderId": "jo-24",
+    "operationId": "op-50",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2289"
+    ],
+    "startTime": "2025-09-30T09:08:44.342Z",
+    "standardTime": 300,
+    "actualTime": 441,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-291",
+    "jobOrderId": "jo-26",
+    "operationId": "op-51",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2290"
+    ],
+    "startTime": "2025-10-01T13:09:15.604Z",
+    "standardTime": 300,
+    "actualTime": 354,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-292",
+    "jobOrderId": "jo-24",
+    "operationId": "op-52",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2291"
+    ],
+    "startTime": "2025-10-14T10:07:46.880Z",
+    "standardTime": 300,
+    "actualTime": 413,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-293",
+    "jobOrderId": "jo-15",
+    "operationId": "op-53",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2292"
+    ],
+    "startTime": "2025-10-25T08:05:49.299Z",
+    "standardTime": 300,
+    "actualTime": 364,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-294",
+    "jobOrderId": "jo-18",
+    "operationId": "op-54",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2293"
+    ],
+    "startTime": "2025-10-20T23:31:54.257Z",
+    "standardTime": 300,
+    "actualTime": 250,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-295",
+    "jobOrderId": "jo-30",
+    "operationId": "op-55",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2294"
+    ],
+    "startTime": "2025-10-28T08:36:19.668Z",
+    "standardTime": 300,
+    "actualTime": 599,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-296",
+    "jobOrderId": "jo-9",
+    "operationId": "op-56",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2295"
+    ],
+    "startTime": "2025-10-25T04:34:16.344Z",
+    "standardTime": 300,
+    "actualTime": 304,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-297",
+    "jobOrderId": "jo-10",
+    "operationId": "op-57",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2296"
+    ],
+    "startTime": "2025-10-07T22:02:38.135Z",
+    "standardTime": 300,
+    "actualTime": 294,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-298",
+    "jobOrderId": "jo-29",
+    "operationId": "op-58",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2297"
+    ],
+    "startTime": "2025-10-24T12:14:21.134Z",
+    "standardTime": 300,
+    "actualTime": 347,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-299",
+    "jobOrderId": "jo-12",
+    "operationId": "op-59",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2298"
+    ],
+    "startTime": "2025-09-29T12:12:44.586Z",
+    "standardTime": 300,
+    "actualTime": 394,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-300",
+    "jobOrderId": "jo-6",
+    "operationId": "op-60",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2299"
+    ],
+    "startTime": "2025-10-02T18:18:44.163Z",
+    "standardTime": 300,
+    "actualTime": 588,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-301",
+    "jobOrderId": "jo-17",
+    "operationId": "op-61",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2300"
+    ],
+    "startTime": "2025-10-17T11:52:08.853Z",
+    "standardTime": 300,
+    "actualTime": 420,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-302",
+    "jobOrderId": "jo-1",
+    "operationId": "op-62",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2301"
+    ],
+    "startTime": "2025-10-12T19:49:10.588Z",
+    "standardTime": 300,
+    "actualTime": 380,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-303",
+    "jobOrderId": "jo-2",
+    "operationId": "op-63",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2302"
+    ],
+    "startTime": "2025-10-21T06:34:23.916Z",
+    "standardTime": 300,
+    "actualTime": 335,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-304",
+    "jobOrderId": "jo-18",
+    "operationId": "op-64",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2303"
+    ],
+    "startTime": "2025-10-23T16:58:02.597Z",
+    "standardTime": 300,
+    "actualTime": 553,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-305",
+    "jobOrderId": "jo-2",
+    "operationId": "op-65",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2304"
+    ],
+    "startTime": "2025-10-21T21:56:08.575Z",
+    "standardTime": 300,
+    "actualTime": 594,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-306",
+    "jobOrderId": "jo-17",
+    "operationId": "op-66",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2305"
+    ],
+    "startTime": "2025-10-24T03:30:48.020Z",
+    "standardTime": 300,
+    "actualTime": 595,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-307",
+    "jobOrderId": "jo-30",
+    "operationId": "op-67",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2306"
+    ],
+    "startTime": "2025-10-18T15:00:46.589Z",
+    "standardTime": 300,
+    "actualTime": 212,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-308",
+    "jobOrderId": "jo-6",
+    "operationId": "op-68",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2307"
+    ],
+    "startTime": "2025-10-21T09:37:12.117Z",
+    "standardTime": 300,
+    "actualTime": 393,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-309",
+    "jobOrderId": "jo-8",
+    "operationId": "op-69",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2308"
+    ],
+    "startTime": "2025-10-13T11:59:13.959Z",
+    "standardTime": 300,
+    "actualTime": 448,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-310",
+    "jobOrderId": "jo-14",
+    "operationId": "op-70",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2309"
+    ],
+    "startTime": "2025-10-09T09:48:33.612Z",
+    "standardTime": 300,
+    "actualTime": 276,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-311",
+    "jobOrderId": "jo-8",
+    "operationId": "op-71",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2310"
+    ],
+    "startTime": "2025-10-09T16:55:45.978Z",
+    "standardTime": 300,
+    "actualTime": 534,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-312",
+    "jobOrderId": "jo-22",
+    "operationId": "op-72",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2311"
+    ],
+    "startTime": "2025-10-04T18:26:13.262Z",
+    "standardTime": 300,
+    "actualTime": 205,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-313",
+    "jobOrderId": "jo-27",
+    "operationId": "op-73",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2312"
+    ],
+    "startTime": "2025-10-12T11:38:27.814Z",
+    "standardTime": 300,
+    "actualTime": 309,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-314",
+    "jobOrderId": "jo-21",
+    "operationId": "op-74",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2313"
+    ],
+    "startTime": "2025-10-28T04:44:26.312Z",
+    "standardTime": 300,
+    "actualTime": 208,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-315",
+    "jobOrderId": "jo-30",
+    "operationId": "op-75",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2314"
+    ],
+    "startTime": "2025-10-20T11:25:45.498Z",
+    "standardTime": 300,
+    "actualTime": 328,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-316",
+    "jobOrderId": "jo-6",
+    "operationId": "op-76",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2315"
+    ],
+    "startTime": "2025-10-20T23:44:27.379Z",
+    "standardTime": 300,
+    "actualTime": 533,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-317",
+    "jobOrderId": "jo-22",
+    "operationId": "op-77",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2316"
+    ],
+    "startTime": "2025-10-13T16:53:50.248Z",
+    "standardTime": 300,
+    "actualTime": 367,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-318",
+    "jobOrderId": "jo-20",
+    "operationId": "op-78",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2317"
+    ],
+    "startTime": "2025-10-11T09:10:56.678Z",
+    "standardTime": 300,
+    "actualTime": 329,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-319",
+    "jobOrderId": "jo-6",
+    "operationId": "op-79",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2318"
+    ],
+    "startTime": "2025-10-16T09:07:32.353Z",
+    "standardTime": 300,
+    "actualTime": 488,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-320",
+    "jobOrderId": "jo-29",
+    "operationId": "op-80",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2319"
+    ],
+    "startTime": "2025-10-23T12:40:42.684Z",
+    "standardTime": 300,
+    "actualTime": 293,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-321",
+    "jobOrderId": "jo-3",
+    "operationId": "op-81",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2320"
+    ],
+    "startTime": "2025-10-05T13:45:47.801Z",
+    "standardTime": 300,
+    "actualTime": 455,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-322",
+    "jobOrderId": "jo-18",
+    "operationId": "op-82",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2321"
+    ],
+    "startTime": "2025-10-24T15:32:35.378Z",
+    "standardTime": 300,
+    "actualTime": 577,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-323",
+    "jobOrderId": "jo-23",
+    "operationId": "op-83",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2322"
+    ],
+    "startTime": "2025-10-23T21:32:45.656Z",
+    "standardTime": 300,
+    "actualTime": 277,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-324",
+    "jobOrderId": "jo-12",
+    "operationId": "op-84",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2323"
+    ],
+    "startTime": "2025-10-24T07:47:47.303Z",
+    "standardTime": 300,
+    "actualTime": 514,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-325",
+    "jobOrderId": "jo-27",
+    "operationId": "op-85",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2324"
+    ],
+    "startTime": "2025-10-10T19:55:35.574Z",
+    "standardTime": 300,
+    "actualTime": 429,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-326",
+    "jobOrderId": "jo-8",
+    "operationId": "op-86",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2325"
+    ],
+    "startTime": "2025-10-03T18:14:55.645Z",
+    "standardTime": 300,
+    "actualTime": 346,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-327",
+    "jobOrderId": "jo-23",
+    "operationId": "op-87",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2326"
+    ],
+    "startTime": "2025-10-20T11:09:40.312Z",
+    "standardTime": 300,
+    "actualTime": 571,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-328",
+    "jobOrderId": "jo-11",
+    "operationId": "op-88",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2327"
+    ],
+    "startTime": "2025-10-25T03:49:42.007Z",
+    "standardTime": 300,
+    "actualTime": 377,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-329",
+    "jobOrderId": "jo-30",
+    "operationId": "op-89",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2328"
+    ],
+    "startTime": "2025-10-20T03:50:53.031Z",
+    "standardTime": 300,
+    "actualTime": 321,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-330",
+    "jobOrderId": "jo-1",
+    "operationId": "op-90",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2329"
+    ],
+    "startTime": "2025-09-30T16:39:54.394Z",
+    "standardTime": 300,
+    "actualTime": 312,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-331",
+    "jobOrderId": "jo-24",
+    "operationId": "op-91",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2330"
+    ],
+    "startTime": "2025-10-13T15:20:41.806Z",
+    "standardTime": 300,
+    "actualTime": 490,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-332",
+    "jobOrderId": "jo-10",
+    "operationId": "op-92",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2331"
+    ],
+    "startTime": "2025-10-13T20:42:07.278Z",
+    "standardTime": 300,
+    "actualTime": 330,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-333",
+    "jobOrderId": "jo-1",
+    "operationId": "op-93",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2332"
+    ],
+    "startTime": "2025-10-23T21:35:58.760Z",
+    "standardTime": 300,
+    "actualTime": 563,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-334",
+    "jobOrderId": "jo-15",
+    "operationId": "op-94",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2333"
+    ],
+    "startTime": "2025-10-10T02:23:15.225Z",
+    "standardTime": 300,
+    "actualTime": 301,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-335",
+    "jobOrderId": "jo-24",
+    "operationId": "op-95",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2334"
+    ],
+    "startTime": "2025-10-16T16:10:16.057Z",
+    "standardTime": 300,
+    "actualTime": 557,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-336",
+    "jobOrderId": "jo-9",
+    "operationId": "op-96",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2335"
+    ],
+    "startTime": "2025-10-17T16:52:30.475Z",
+    "standardTime": 300,
+    "actualTime": 283,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-337",
+    "jobOrderId": "jo-10",
+    "operationId": "op-97",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2336"
+    ],
+    "startTime": "2025-10-09T03:38:55.566Z",
+    "standardTime": 300,
+    "actualTime": 298,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-338",
+    "jobOrderId": "jo-22",
+    "operationId": "op-98",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2337"
+    ],
+    "startTime": "2025-10-23T00:52:20.677Z",
+    "standardTime": 300,
+    "actualTime": 296,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-339",
+    "jobOrderId": "jo-30",
+    "operationId": "op-99",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2338"
+    ],
+    "startTime": "2025-10-08T18:03:08.749Z",
+    "standardTime": 300,
+    "actualTime": 442,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-340",
+    "jobOrderId": "jo-5",
+    "operationId": "op-100",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2339"
+    ],
+    "startTime": "2025-10-09T02:07:35.212Z",
+    "standardTime": 300,
+    "actualTime": 417,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-341",
+    "jobOrderId": "jo-30",
+    "operationId": "op-101",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2340"
+    ],
+    "startTime": "2025-10-03T09:44:26.909Z",
+    "standardTime": 300,
+    "actualTime": 316,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-342",
+    "jobOrderId": "jo-28",
+    "operationId": "op-102",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2341"
+    ],
+    "startTime": "2025-10-21T01:24:38.542Z",
+    "standardTime": 300,
+    "actualTime": 579,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-343",
+    "jobOrderId": "jo-19",
+    "operationId": "op-103",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2342"
+    ],
+    "startTime": "2025-10-04T00:52:56.512Z",
+    "standardTime": 300,
+    "actualTime": 306,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-344",
+    "jobOrderId": "jo-23",
+    "operationId": "op-104",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2343"
+    ],
+    "startTime": "2025-09-30T13:49:26.805Z",
+    "standardTime": 300,
+    "actualTime": 548,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-345",
+    "jobOrderId": "jo-20",
+    "operationId": "op-105",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2344"
+    ],
+    "startTime": "2025-09-29T21:40:30.113Z",
+    "standardTime": 300,
+    "actualTime": 528,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-346",
+    "jobOrderId": "jo-2",
+    "operationId": "op-106",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2345"
+    ],
+    "startTime": "2025-10-16T21:47:41.312Z",
+    "standardTime": 300,
+    "actualTime": 528,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-347",
+    "jobOrderId": "jo-13",
+    "operationId": "op-107",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2346"
+    ],
+    "startTime": "2025-10-09T14:01:34.041Z",
+    "standardTime": 300,
+    "actualTime": 325,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-348",
+    "jobOrderId": "jo-25",
+    "operationId": "op-108",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2347"
+    ],
+    "startTime": "2025-10-09T05:24:32.950Z",
+    "standardTime": 300,
+    "actualTime": 319,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-349",
+    "jobOrderId": "jo-6",
+    "operationId": "op-109",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2348"
+    ],
+    "startTime": "2025-10-05T05:06:32.551Z",
+    "standardTime": 300,
+    "actualTime": 561,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-350",
+    "jobOrderId": "jo-8",
+    "operationId": "op-110",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2349"
+    ],
+    "startTime": "2025-10-11T18:40:55.896Z",
+    "standardTime": 300,
+    "actualTime": 475,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-351",
+    "jobOrderId": "jo-15",
+    "operationId": "op-111",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2350"
+    ],
+    "startTime": "2025-10-27T11:12:57.577Z",
+    "standardTime": 300,
+    "actualTime": 262,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-352",
+    "jobOrderId": "jo-22",
+    "operationId": "op-112",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2351"
+    ],
+    "startTime": "2025-10-02T14:17:19.976Z",
+    "standardTime": 300,
+    "actualTime": 346,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-353",
+    "jobOrderId": "jo-11",
+    "operationId": "op-113",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2352"
+    ],
+    "startTime": "2025-10-27T12:28:17.677Z",
+    "standardTime": 300,
+    "actualTime": 275,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-354",
+    "jobOrderId": "jo-19",
+    "operationId": "op-114",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2353"
+    ],
+    "startTime": "2025-10-13T04:01:24.118Z",
+    "standardTime": 300,
+    "actualTime": 337,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-355",
+    "jobOrderId": "jo-5",
+    "operationId": "op-115",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2354"
+    ],
+    "startTime": "2025-10-10T10:18:54.627Z",
+    "standardTime": 300,
+    "actualTime": 566,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-356",
+    "jobOrderId": "jo-21",
+    "operationId": "op-116",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2355"
+    ],
+    "startTime": "2025-10-10T22:39:47.318Z",
+    "standardTime": 300,
+    "actualTime": 538,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-357",
+    "jobOrderId": "jo-11",
+    "operationId": "op-117",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2356"
+    ],
+    "startTime": "2025-09-29T05:42:41.301Z",
+    "standardTime": 300,
+    "actualTime": 443,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-358",
+    "jobOrderId": "jo-26",
+    "operationId": "op-118",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2357"
+    ],
+    "startTime": "2025-10-09T15:51:15.709Z",
+    "standardTime": 300,
+    "actualTime": 527,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-359",
+    "jobOrderId": "jo-18",
+    "operationId": "op-119",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2358"
+    ],
+    "startTime": "2025-10-08T12:20:11.384Z",
+    "standardTime": 300,
+    "actualTime": 414,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-360",
+    "jobOrderId": "jo-8",
+    "operationId": "op-120",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2359"
+    ],
+    "startTime": "2025-10-09T05:23:36.644Z",
+    "standardTime": 300,
+    "actualTime": 332,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-361",
+    "jobOrderId": "jo-22",
+    "operationId": "op-1",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2360"
+    ],
+    "startTime": "2025-10-12T16:42:20.365Z",
+    "standardTime": 300,
+    "actualTime": 380,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-362",
+    "jobOrderId": "jo-12",
+    "operationId": "op-2",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2361"
+    ],
+    "startTime": "2025-09-29T07:01:37.456Z",
+    "standardTime": 300,
+    "actualTime": 551,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-363",
+    "jobOrderId": "jo-1",
+    "operationId": "op-3",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2362"
+    ],
+    "startTime": "2025-10-10T13:41:56.875Z",
+    "standardTime": 300,
+    "actualTime": 397,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-364",
+    "jobOrderId": "jo-16",
+    "operationId": "op-4",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2363"
+    ],
+    "startTime": "2025-10-18T16:06:52.507Z",
+    "standardTime": 300,
+    "actualTime": 233,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-365",
+    "jobOrderId": "jo-10",
+    "operationId": "op-5",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2364"
+    ],
+    "startTime": "2025-10-18T04:39:58.169Z",
+    "standardTime": 300,
+    "actualTime": 297,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-366",
+    "jobOrderId": "jo-26",
+    "operationId": "op-6",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2365"
+    ],
+    "startTime": "2025-10-28T15:54:26.709Z",
+    "standardTime": 300,
+    "actualTime": 342,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-367",
+    "jobOrderId": "jo-8",
+    "operationId": "op-7",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2366"
+    ],
+    "startTime": "2025-10-12T05:33:10.993Z",
+    "standardTime": 300,
+    "actualTime": 402,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-368",
+    "jobOrderId": "jo-12",
+    "operationId": "op-8",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2367"
+    ],
+    "startTime": "2025-10-10T09:59:21.082Z",
+    "standardTime": 300,
+    "actualTime": 266,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-369",
+    "jobOrderId": "jo-10",
+    "operationId": "op-9",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2368"
+    ],
+    "startTime": "2025-10-04T13:45:15.386Z",
+    "standardTime": 300,
+    "actualTime": 536,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-370",
+    "jobOrderId": "jo-8",
+    "operationId": "op-10",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2369"
+    ],
+    "startTime": "2025-10-15T20:20:47.201Z",
+    "standardTime": 300,
+    "actualTime": 377,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-371",
+    "jobOrderId": "jo-28",
+    "operationId": "op-11",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2370"
+    ],
+    "startTime": "2025-10-03T07:28:43.982Z",
+    "standardTime": 300,
+    "actualTime": 397,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-372",
+    "jobOrderId": "jo-19",
+    "operationId": "op-12",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2371"
+    ],
+    "startTime": "2025-10-04T17:46:38.870Z",
+    "standardTime": 300,
+    "actualTime": 416,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-373",
+    "jobOrderId": "jo-25",
+    "operationId": "op-13",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2372"
+    ],
+    "startTime": "2025-10-03T15:36:32.343Z",
+    "standardTime": 300,
+    "actualTime": 490,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-374",
+    "jobOrderId": "jo-26",
+    "operationId": "op-14",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2373"
+    ],
+    "startTime": "2025-10-01T19:25:36.634Z",
+    "standardTime": 300,
+    "actualTime": 465,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-375",
+    "jobOrderId": "jo-29",
+    "operationId": "op-15",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2374"
+    ],
+    "startTime": "2025-10-16T05:49:31.927Z",
+    "standardTime": 300,
+    "actualTime": 395,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-376",
+    "jobOrderId": "jo-23",
+    "operationId": "op-16",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2375"
+    ],
+    "startTime": "2025-10-08T02:38:49.334Z",
+    "standardTime": 300,
+    "actualTime": 313,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-377",
+    "jobOrderId": "jo-3",
+    "operationId": "op-17",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2376"
+    ],
+    "startTime": "2025-10-02T05:12:25.619Z",
+    "standardTime": 300,
+    "actualTime": 531,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-378",
+    "jobOrderId": "jo-23",
+    "operationId": "op-18",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2377"
+    ],
+    "startTime": "2025-10-01T16:29:10.037Z",
+    "standardTime": 300,
+    "actualTime": 543,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-379",
+    "jobOrderId": "jo-18",
+    "operationId": "op-19",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2378"
+    ],
+    "startTime": "2025-10-01T19:54:29.629Z",
+    "standardTime": 300,
+    "actualTime": 577,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-380",
+    "jobOrderId": "jo-1",
+    "operationId": "op-20",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2379"
+    ],
+    "startTime": "2025-10-16T10:01:30.308Z",
+    "standardTime": 300,
+    "actualTime": 235,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-381",
+    "jobOrderId": "jo-6",
+    "operationId": "op-21",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2380"
+    ],
+    "startTime": "2025-10-22T21:01:13.565Z",
+    "standardTime": 300,
+    "actualTime": 563,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-382",
+    "jobOrderId": "jo-26",
+    "operationId": "op-22",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2381"
+    ],
+    "startTime": "2025-10-01T01:56:58.882Z",
+    "standardTime": 300,
+    "actualTime": 464,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-383",
+    "jobOrderId": "jo-20",
+    "operationId": "op-23",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2382"
+    ],
+    "startTime": "2025-10-04T00:09:10.366Z",
+    "standardTime": 300,
+    "actualTime": 486,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-384",
+    "jobOrderId": "jo-26",
+    "operationId": "op-24",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2383"
+    ],
+    "startTime": "2025-10-20T19:41:29.996Z",
+    "standardTime": 300,
+    "actualTime": 420,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-385",
+    "jobOrderId": "jo-15",
+    "operationId": "op-25",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2384"
+    ],
+    "startTime": "2025-10-25T05:11:15.691Z",
+    "standardTime": 300,
+    "actualTime": 550,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-386",
+    "jobOrderId": "jo-2",
+    "operationId": "op-26",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2385"
+    ],
+    "startTime": "2025-10-10T05:59:01.383Z",
+    "standardTime": 300,
+    "actualTime": 312,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-387",
+    "jobOrderId": "jo-15",
+    "operationId": "op-27",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2386"
+    ],
+    "startTime": "2025-10-21T13:06:20.843Z",
+    "standardTime": 300,
+    "actualTime": 510,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-388",
+    "jobOrderId": "jo-25",
+    "operationId": "op-28",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2387"
+    ],
+    "startTime": "2025-10-05T14:38:39.856Z",
+    "standardTime": 300,
+    "actualTime": 519,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-389",
+    "jobOrderId": "jo-7",
+    "operationId": "op-29",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2388"
+    ],
+    "startTime": "2025-10-03T22:21:33.913Z",
+    "standardTime": 300,
+    "actualTime": 463,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-390",
+    "jobOrderId": "jo-21",
+    "operationId": "op-30",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2389"
+    ],
+    "startTime": "2025-10-12T17:08:40.883Z",
+    "standardTime": 300,
+    "actualTime": 208,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-391",
+    "jobOrderId": "jo-5",
+    "operationId": "op-31",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2390"
+    ],
+    "startTime": "2025-10-23T15:45:08.105Z",
+    "standardTime": 300,
+    "actualTime": 418,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-392",
+    "jobOrderId": "jo-19",
+    "operationId": "op-32",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2391"
+    ],
+    "startTime": "2025-10-07T07:37:14.747Z",
+    "standardTime": 300,
+    "actualTime": 554,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-393",
+    "jobOrderId": "jo-27",
+    "operationId": "op-33",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2392"
+    ],
+    "startTime": "2025-10-04T10:24:55.833Z",
+    "standardTime": 300,
+    "actualTime": 567,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-394",
+    "jobOrderId": "jo-9",
+    "operationId": "op-34",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2393"
+    ],
+    "startTime": "2025-10-14T17:35:10.219Z",
+    "standardTime": 300,
+    "actualTime": 231,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-395",
+    "jobOrderId": "jo-15",
+    "operationId": "op-35",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2394"
+    ],
+    "startTime": "2025-10-15T05:13:43.578Z",
+    "standardTime": 300,
+    "actualTime": 447,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-396",
+    "jobOrderId": "jo-6",
+    "operationId": "op-36",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2395"
+    ],
+    "startTime": "2025-10-26T06:25:33.671Z",
+    "standardTime": 300,
+    "actualTime": 326,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-397",
+    "jobOrderId": "jo-24",
+    "operationId": "op-37",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2396"
+    ],
+    "startTime": "2025-10-20T03:00:02.279Z",
+    "standardTime": 300,
+    "actualTime": 396,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-398",
+    "jobOrderId": "jo-5",
+    "operationId": "op-38",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2397"
+    ],
+    "startTime": "2025-10-17T19:50:15.835Z",
+    "standardTime": 300,
+    "actualTime": 588,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-399",
+    "jobOrderId": "jo-10",
+    "operationId": "op-39",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2398"
+    ],
+    "startTime": "2025-10-23T21:29:59.319Z",
+    "standardTime": 300,
+    "actualTime": 311,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-400",
+    "jobOrderId": "jo-3",
+    "operationId": "op-40",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2399"
+    ],
+    "startTime": "2025-10-16T16:22:41.295Z",
+    "standardTime": 300,
+    "actualTime": 323,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-401",
+    "jobOrderId": "jo-13",
+    "operationId": "op-41",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2400"
+    ],
+    "startTime": "2025-10-18T05:17:34.747Z",
+    "standardTime": 300,
+    "actualTime": 479,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-402",
+    "jobOrderId": "jo-3",
+    "operationId": "op-42",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2401"
+    ],
+    "startTime": "2025-10-03T13:59:22.522Z",
+    "standardTime": 300,
+    "actualTime": 408,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-403",
+    "jobOrderId": "jo-1",
+    "operationId": "op-43",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2402"
+    ],
+    "startTime": "2025-10-03T00:41:11.711Z",
+    "standardTime": 300,
+    "actualTime": 513,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-404",
+    "jobOrderId": "jo-25",
+    "operationId": "op-44",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2403"
+    ],
+    "startTime": "2025-09-30T08:10:42.668Z",
+    "standardTime": 300,
+    "actualTime": 466,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-405",
+    "jobOrderId": "jo-4",
+    "operationId": "op-45",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2404"
+    ],
+    "startTime": "2025-10-24T11:28:08.215Z",
+    "standardTime": 300,
+    "actualTime": 583,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-406",
+    "jobOrderId": "jo-30",
+    "operationId": "op-46",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2405"
+    ],
+    "startTime": "2025-10-02T18:17:08.915Z",
+    "standardTime": 300,
+    "actualTime": 210,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-407",
+    "jobOrderId": "jo-18",
+    "operationId": "op-47",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2406"
+    ],
+    "startTime": "2025-10-19T04:20:51.499Z",
+    "standardTime": 300,
+    "actualTime": 409,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-408",
+    "jobOrderId": "jo-23",
+    "operationId": "op-48",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2407"
+    ],
+    "startTime": "2025-10-11T22:38:25.443Z",
+    "standardTime": 300,
+    "actualTime": 404,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-409",
+    "jobOrderId": "jo-14",
+    "operationId": "op-49",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2408"
+    ],
+    "startTime": "2025-10-08T12:20:25.996Z",
+    "standardTime": 300,
+    "actualTime": 498,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-410",
+    "jobOrderId": "jo-15",
+    "operationId": "op-50",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2409"
+    ],
+    "startTime": "2025-10-27T10:18:39.394Z",
+    "standardTime": 300,
+    "actualTime": 342,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-411",
+    "jobOrderId": "jo-13",
+    "operationId": "op-51",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2410"
+    ],
+    "startTime": "2025-10-14T10:32:49.878Z",
+    "standardTime": 300,
+    "actualTime": 208,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-412",
+    "jobOrderId": "jo-30",
+    "operationId": "op-52",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2411"
+    ],
+    "startTime": "2025-10-01T03:06:40.381Z",
+    "standardTime": 300,
+    "actualTime": 385,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-413",
+    "jobOrderId": "jo-22",
+    "operationId": "op-53",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2412"
+    ],
+    "startTime": "2025-10-15T02:21:36.186Z",
+    "standardTime": 300,
+    "actualTime": 279,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-414",
+    "jobOrderId": "jo-10",
+    "operationId": "op-54",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2413"
+    ],
+    "startTime": "2025-10-27T07:24:17.662Z",
+    "standardTime": 300,
+    "actualTime": 245,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-415",
+    "jobOrderId": "jo-10",
+    "operationId": "op-55",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2414"
+    ],
+    "startTime": "2025-10-10T05:18:27.321Z",
+    "standardTime": 300,
+    "actualTime": 453,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-416",
+    "jobOrderId": "jo-25",
+    "operationId": "op-56",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2415"
+    ],
+    "startTime": "2025-09-29T06:07:13.783Z",
+    "standardTime": 300,
+    "actualTime": 319,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-417",
+    "jobOrderId": "jo-6",
+    "operationId": "op-57",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2416"
+    ],
+    "startTime": "2025-10-18T10:35:26.680Z",
+    "standardTime": 300,
+    "actualTime": 527,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-418",
+    "jobOrderId": "jo-25",
+    "operationId": "op-58",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2417"
+    ],
+    "startTime": "2025-10-13T20:25:27.405Z",
+    "standardTime": 300,
+    "actualTime": 262,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-419",
+    "jobOrderId": "jo-14",
+    "operationId": "op-59",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2418"
+    ],
+    "startTime": "2025-10-04T22:08:11.670Z",
+    "standardTime": 300,
+    "actualTime": 452,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-420",
+    "jobOrderId": "jo-9",
+    "operationId": "op-60",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2419"
+    ],
+    "startTime": "2025-10-16T18:52:33.982Z",
+    "standardTime": 300,
+    "actualTime": 337,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-421",
+    "jobOrderId": "jo-19",
+    "operationId": "op-61",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2420"
+    ],
+    "startTime": "2025-10-21T05:08:48.780Z",
+    "standardTime": 300,
+    "actualTime": 304,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-422",
+    "jobOrderId": "jo-5",
+    "operationId": "op-62",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2421"
+    ],
+    "startTime": "2025-10-10T01:56:11.793Z",
+    "standardTime": 300,
+    "actualTime": 221,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-423",
+    "jobOrderId": "jo-11",
+    "operationId": "op-63",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2422"
+    ],
+    "startTime": "2025-10-02T02:17:24.369Z",
+    "standardTime": 300,
+    "actualTime": 561,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-424",
+    "jobOrderId": "jo-11",
+    "operationId": "op-64",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2423"
+    ],
+    "startTime": "2025-10-19T05:10:44.329Z",
+    "standardTime": 300,
+    "actualTime": 410,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-425",
+    "jobOrderId": "jo-15",
+    "operationId": "op-65",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2424"
+    ],
+    "startTime": "2025-10-17T04:16:59.701Z",
+    "standardTime": 300,
+    "actualTime": 389,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-426",
+    "jobOrderId": "jo-7",
+    "operationId": "op-66",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2425"
+    ],
+    "startTime": "2025-10-11T01:09:21.055Z",
+    "standardTime": 300,
+    "actualTime": 357,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-427",
+    "jobOrderId": "jo-6",
+    "operationId": "op-67",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2426"
+    ],
+    "startTime": "2025-10-05T08:59:28.838Z",
+    "standardTime": 300,
+    "actualTime": 522,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-428",
+    "jobOrderId": "jo-18",
+    "operationId": "op-68",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2427"
+    ],
+    "startTime": "2025-10-25T12:56:13.905Z",
+    "standardTime": 300,
+    "actualTime": 294,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-429",
+    "jobOrderId": "jo-5",
+    "operationId": "op-69",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2428"
+    ],
+    "startTime": "2025-10-21T00:59:47.128Z",
+    "standardTime": 300,
+    "actualTime": 329,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-430",
+    "jobOrderId": "jo-7",
+    "operationId": "op-70",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2429"
+    ],
+    "startTime": "2025-10-07T04:15:19.301Z",
+    "standardTime": 300,
+    "actualTime": 397,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-431",
+    "jobOrderId": "jo-21",
+    "operationId": "op-71",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2430"
+    ],
+    "startTime": "2025-10-04T08:44:12.672Z",
+    "standardTime": 300,
+    "actualTime": 205,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-432",
+    "jobOrderId": "jo-4",
+    "operationId": "op-72",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2431"
+    ],
+    "startTime": "2025-10-03T07:00:05.511Z",
+    "standardTime": 300,
+    "actualTime": 231,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-433",
+    "jobOrderId": "jo-27",
+    "operationId": "op-73",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2432"
+    ],
+    "startTime": "2025-10-22T07:45:05.008Z",
+    "standardTime": 300,
+    "actualTime": 307,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-434",
+    "jobOrderId": "jo-14",
+    "operationId": "op-74",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2433"
+    ],
+    "startTime": "2025-10-04T15:15:21.375Z",
+    "standardTime": 300,
+    "actualTime": 479,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-435",
+    "jobOrderId": "jo-3",
+    "operationId": "op-75",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2434"
+    ],
+    "startTime": "2025-10-26T12:46:46.934Z",
+    "standardTime": 300,
+    "actualTime": 361,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-436",
+    "jobOrderId": "jo-7",
+    "operationId": "op-76",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2435"
+    ],
+    "startTime": "2025-10-01T22:58:27.146Z",
+    "standardTime": 300,
+    "actualTime": 467,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-437",
+    "jobOrderId": "jo-19",
+    "operationId": "op-77",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2436"
+    ],
+    "startTime": "2025-10-14T12:43:17.001Z",
+    "standardTime": 300,
+    "actualTime": 322,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-438",
+    "jobOrderId": "jo-21",
+    "operationId": "op-78",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2437"
+    ],
+    "startTime": "2025-10-10T01:10:45.580Z",
+    "standardTime": 300,
+    "actualTime": 575,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-439",
+    "jobOrderId": "jo-22",
+    "operationId": "op-79",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2438"
+    ],
+    "startTime": "2025-10-20T19:34:17.133Z",
+    "standardTime": 300,
+    "actualTime": 479,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-440",
+    "jobOrderId": "jo-18",
+    "operationId": "op-80",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2439"
+    ],
+    "startTime": "2025-10-01T00:25:50.148Z",
+    "standardTime": 300,
+    "actualTime": 574,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-441",
+    "jobOrderId": "jo-10",
+    "operationId": "op-81",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2440"
+    ],
+    "startTime": "2025-10-21T12:17:12.460Z",
+    "standardTime": 300,
+    "actualTime": 492,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-442",
+    "jobOrderId": "jo-30",
+    "operationId": "op-82",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2441"
+    ],
+    "startTime": "2025-10-15T17:24:06.589Z",
+    "standardTime": 300,
+    "actualTime": 276,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-443",
+    "jobOrderId": "jo-17",
+    "operationId": "op-83",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2442"
+    ],
+    "startTime": "2025-10-24T18:54:03.526Z",
+    "standardTime": 300,
+    "actualTime": 468,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-444",
+    "jobOrderId": "jo-16",
+    "operationId": "op-84",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2443"
+    ],
+    "startTime": "2025-10-19T07:43:34.300Z",
+    "standardTime": 300,
+    "actualTime": 489,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-445",
+    "jobOrderId": "jo-16",
+    "operationId": "op-85",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2444"
+    ],
+    "startTime": "2025-10-03T21:55:57.917Z",
+    "standardTime": 300,
+    "actualTime": 304,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-446",
+    "jobOrderId": "jo-8",
+    "operationId": "op-86",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2445"
+    ],
+    "startTime": "2025-10-08T16:34:09.173Z",
+    "standardTime": 300,
+    "actualTime": 224,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-447",
+    "jobOrderId": "jo-2",
+    "operationId": "op-87",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2446"
+    ],
+    "startTime": "2025-10-04T20:20:31.205Z",
+    "standardTime": 300,
+    "actualTime": 204,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-448",
+    "jobOrderId": "jo-26",
+    "operationId": "op-88",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2447"
+    ],
+    "startTime": "2025-10-17T17:53:50.408Z",
+    "standardTime": 300,
+    "actualTime": 307,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-449",
+    "jobOrderId": "jo-4",
+    "operationId": "op-89",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2448"
+    ],
+    "startTime": "2025-10-01T22:44:41.816Z",
+    "standardTime": 300,
+    "actualTime": 584,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-450",
+    "jobOrderId": "jo-22",
+    "operationId": "op-90",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2449"
+    ],
+    "startTime": "2025-10-06T23:17:36.708Z",
+    "standardTime": 300,
+    "actualTime": 516,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-451",
+    "jobOrderId": "jo-22",
+    "operationId": "op-91",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2450"
+    ],
+    "startTime": "2025-09-30T11:48:24.751Z",
+    "standardTime": 300,
+    "actualTime": 413,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-452",
+    "jobOrderId": "jo-11",
+    "operationId": "op-92",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2451"
+    ],
+    "startTime": "2025-10-22T05:05:46.461Z",
+    "standardTime": 300,
+    "actualTime": 357,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-453",
+    "jobOrderId": "jo-2",
+    "operationId": "op-93",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2452"
+    ],
+    "startTime": "2025-10-08T17:28:57.707Z",
+    "standardTime": 300,
+    "actualTime": 554,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-454",
+    "jobOrderId": "jo-30",
+    "operationId": "op-94",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2453"
+    ],
+    "startTime": "2025-10-18T03:56:22.427Z",
+    "standardTime": 300,
+    "actualTime": 354,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-455",
+    "jobOrderId": "jo-13",
+    "operationId": "op-95",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2454"
+    ],
+    "startTime": "2025-10-28T06:54:55.692Z",
+    "standardTime": 300,
+    "actualTime": 365,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-456",
+    "jobOrderId": "jo-23",
+    "operationId": "op-96",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2455"
+    ],
+    "startTime": "2025-10-28T14:08:40.245Z",
+    "standardTime": 300,
+    "actualTime": 200,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-457",
+    "jobOrderId": "jo-29",
+    "operationId": "op-97",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2456"
+    ],
+    "startTime": "2025-10-06T04:29:13.329Z",
+    "standardTime": 300,
+    "actualTime": 404,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-458",
+    "jobOrderId": "jo-22",
+    "operationId": "op-98",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2457"
+    ],
+    "startTime": "2025-10-28T07:10:27.437Z",
+    "standardTime": 300,
+    "actualTime": 250,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-459",
+    "jobOrderId": "jo-21",
+    "operationId": "op-99",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2458"
+    ],
+    "startTime": "2025-10-14T19:02:03.114Z",
+    "standardTime": 300,
+    "actualTime": 468,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-460",
+    "jobOrderId": "jo-3",
+    "operationId": "op-100",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2459"
+    ],
+    "startTime": "2025-10-18T17:21:45.351Z",
+    "standardTime": 300,
+    "actualTime": 516,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-461",
+    "jobOrderId": "jo-6",
+    "operationId": "op-101",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2460"
+    ],
+    "startTime": "2025-10-03T03:10:10.222Z",
+    "standardTime": 300,
+    "actualTime": 563,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-462",
+    "jobOrderId": "jo-11",
+    "operationId": "op-102",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2461"
+    ],
+    "startTime": "2025-10-26T12:19:02.406Z",
+    "standardTime": 300,
+    "actualTime": 592,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-463",
+    "jobOrderId": "jo-3",
+    "operationId": "op-103",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2462"
+    ],
+    "startTime": "2025-10-02T13:47:21.491Z",
+    "standardTime": 300,
+    "actualTime": 594,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-464",
+    "jobOrderId": "jo-26",
+    "operationId": "op-104",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2463"
+    ],
+    "startTime": "2025-10-06T22:46:22.192Z",
+    "standardTime": 300,
+    "actualTime": 582,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-465",
+    "jobOrderId": "jo-25",
+    "operationId": "op-105",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2464"
+    ],
+    "startTime": "2025-10-04T05:42:20.185Z",
+    "standardTime": 300,
+    "actualTime": 514,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-466",
+    "jobOrderId": "jo-11",
+    "operationId": "op-106",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2465"
+    ],
+    "startTime": "2025-10-16T18:26:05.174Z",
+    "standardTime": 300,
+    "actualTime": 321,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-467",
+    "jobOrderId": "jo-8",
+    "operationId": "op-107",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2466"
+    ],
+    "startTime": "2025-10-20T04:47:44.245Z",
+    "standardTime": 300,
+    "actualTime": 366,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-468",
+    "jobOrderId": "jo-22",
+    "operationId": "op-108",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2467"
+    ],
+    "startTime": "2025-10-26T21:56:15.272Z",
+    "standardTime": 300,
+    "actualTime": 350,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-469",
+    "jobOrderId": "jo-9",
+    "operationId": "op-109",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2468"
+    ],
+    "startTime": "2025-10-15T21:34:46.581Z",
+    "standardTime": 300,
+    "actualTime": 563,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-470",
+    "jobOrderId": "jo-2",
+    "operationId": "op-110",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2469"
+    ],
+    "startTime": "2025-10-15T09:31:00.571Z",
+    "standardTime": 300,
+    "actualTime": 458,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-471",
+    "jobOrderId": "jo-22",
+    "operationId": "op-111",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2470"
+    ],
+    "startTime": "2025-10-07T03:03:27.455Z",
+    "standardTime": 300,
+    "actualTime": 450,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-472",
+    "jobOrderId": "jo-18",
+    "operationId": "op-112",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2471"
+    ],
+    "startTime": "2025-10-21T05:12:49.968Z",
+    "standardTime": 300,
+    "actualTime": 459,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-473",
+    "jobOrderId": "jo-10",
+    "operationId": "op-113",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2472"
+    ],
+    "startTime": "2025-10-03T02:13:29.080Z",
+    "standardTime": 300,
+    "actualTime": 300,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-474",
+    "jobOrderId": "jo-22",
+    "operationId": "op-114",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2473"
+    ],
+    "startTime": "2025-10-01T19:40:40.445Z",
+    "standardTime": 300,
+    "actualTime": 221,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-475",
+    "jobOrderId": "jo-25",
+    "operationId": "op-115",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2474"
+    ],
+    "startTime": "2025-10-21T15:36:52.873Z",
+    "standardTime": 300,
+    "actualTime": 313,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-476",
+    "jobOrderId": "jo-29",
+    "operationId": "op-116",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2475"
+    ],
+    "startTime": "2025-09-29T22:36:52.442Z",
+    "standardTime": 300,
+    "actualTime": 306,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-477",
+    "jobOrderId": "jo-9",
+    "operationId": "op-117",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2476"
+    ],
+    "startTime": "2025-09-30T19:06:04.876Z",
+    "standardTime": 300,
+    "actualTime": 350,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-478",
+    "jobOrderId": "jo-19",
+    "operationId": "op-118",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2477"
+    ],
+    "startTime": "2025-09-29T04:09:54.173Z",
+    "standardTime": 300,
+    "actualTime": 393,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-479",
+    "jobOrderId": "jo-15",
+    "operationId": "op-119",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2478"
+    ],
+    "startTime": "2025-10-19T18:54:06.054Z",
+    "standardTime": 300,
+    "actualTime": 446,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-480",
+    "jobOrderId": "jo-22",
+    "operationId": "op-120",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2479"
+    ],
+    "startTime": "2025-10-23T19:16:53.459Z",
+    "standardTime": 300,
+    "actualTime": 518,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-481",
+    "jobOrderId": "jo-19",
+    "operationId": "op-1",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2480"
+    ],
+    "startTime": "2025-10-15T17:25:04.264Z",
+    "standardTime": 300,
+    "actualTime": 219,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-482",
+    "jobOrderId": "jo-13",
+    "operationId": "op-2",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2481"
+    ],
+    "startTime": "2025-10-02T19:23:22.905Z",
+    "standardTime": 300,
+    "actualTime": 400,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-483",
+    "jobOrderId": "jo-28",
+    "operationId": "op-3",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2482"
+    ],
+    "startTime": "2025-10-26T05:52:59.702Z",
+    "standardTime": 300,
+    "actualTime": 247,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-484",
+    "jobOrderId": "jo-8",
+    "operationId": "op-4",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2483"
+    ],
+    "startTime": "2025-10-25T04:56:10.617Z",
+    "standardTime": 300,
+    "actualTime": 428,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-485",
+    "jobOrderId": "jo-9",
+    "operationId": "op-5",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2484"
+    ],
+    "startTime": "2025-10-01T01:16:27.685Z",
+    "standardTime": 300,
+    "actualTime": 244,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-486",
+    "jobOrderId": "jo-28",
+    "operationId": "op-6",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2485"
+    ],
+    "startTime": "2025-10-19T16:30:54.216Z",
+    "standardTime": 300,
+    "actualTime": 265,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-487",
+    "jobOrderId": "jo-28",
+    "operationId": "op-7",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2486"
+    ],
+    "startTime": "2025-10-18T11:23:19.219Z",
+    "standardTime": 300,
+    "actualTime": 454,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-488",
+    "jobOrderId": "jo-23",
+    "operationId": "op-8",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2487"
+    ],
+    "startTime": "2025-10-19T01:56:32.148Z",
+    "standardTime": 300,
+    "actualTime": 261,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-489",
+    "jobOrderId": "jo-15",
+    "operationId": "op-9",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2488"
+    ],
+    "startTime": "2025-10-17T15:03:51.280Z",
+    "standardTime": 300,
+    "actualTime": 291,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-490",
+    "jobOrderId": "jo-22",
+    "operationId": "op-10",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2489"
+    ],
+    "startTime": "2025-10-05T12:37:55.301Z",
+    "standardTime": 300,
+    "actualTime": 420,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-491",
+    "jobOrderId": "jo-8",
+    "operationId": "op-11",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2490"
+    ],
+    "startTime": "2025-10-12T06:10:44.524Z",
+    "standardTime": 300,
+    "actualTime": 366,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-492",
+    "jobOrderId": "jo-28",
+    "operationId": "op-12",
+    "technicianId": "u16",
+    "serialNumbers": [
+      "SN-2491"
+    ],
+    "startTime": "2025-10-24T08:31:07.347Z",
+    "standardTime": 300,
+    "actualTime": 388,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-493",
+    "jobOrderId": "jo-20",
+    "operationId": "op-13",
+    "technicianId": "u17",
+    "serialNumbers": [
+      "SN-2492"
+    ],
+    "startTime": "2025-10-26T15:43:03.010Z",
+    "standardTime": 300,
+    "actualTime": 331,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-494",
+    "jobOrderId": "jo-24",
+    "operationId": "op-14",
+    "technicianId": "u18",
+    "serialNumbers": [
+      "SN-2493"
+    ],
+    "startTime": "2025-10-02T07:00:45.542Z",
+    "standardTime": 300,
+    "actualTime": 253,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-495",
+    "jobOrderId": "jo-10",
+    "operationId": "op-15",
+    "technicianId": "u19",
+    "serialNumbers": [
+      "SN-2494"
+    ],
+    "startTime": "2025-10-23T13:57:38.233Z",
+    "standardTime": 300,
+    "actualTime": 314,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-496",
+    "jobOrderId": "jo-8",
+    "operationId": "op-16",
+    "technicianId": "u1",
+    "serialNumbers": [
+      "SN-2495"
+    ],
+    "startTime": "2025-09-30T06:18:19.367Z",
+    "standardTime": 300,
+    "actualTime": 274,
+    "notes": "generated",
+    "status": "draft"
+  },
+  {
+    "id": "te-497",
+    "jobOrderId": "jo-12",
+    "operationId": "op-17",
+    "technicianId": "u2",
+    "serialNumbers": [
+      "SN-2496"
+    ],
+    "startTime": "2025-10-21T17:13:50.470Z",
+    "standardTime": 300,
+    "actualTime": 454,
+    "notes": "generated",
+    "status": "approved"
+  },
+  {
+    "id": "te-498",
+    "jobOrderId": "jo-11",
+    "operationId": "op-18",
+    "technicianId": "u3",
+    "serialNumbers": [
+      "SN-2497"
+    ],
+    "startTime": "2025-10-22T11:03:03.257Z",
+    "standardTime": 300,
+    "actualTime": 599,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-499",
+    "jobOrderId": "jo-8",
+    "operationId": "op-19",
+    "technicianId": "u4",
+    "serialNumbers": [
+      "SN-2498"
+    ],
+    "startTime": "2025-10-04T01:18:38.479Z",
+    "standardTime": 300,
+    "actualTime": 553,
+    "notes": "generated",
+    "status": "submitted"
+  },
+  {
+    "id": "te-500",
+    "jobOrderId": "jo-26",
+    "operationId": "op-20",
+    "technicianId": "u5",
+    "serialNumbers": [
+      "SN-2499"
+    ],
+    "startTime": "2025-10-03T10:48:56.077Z",
+    "standardTime": 300,
+    "actualTime": 493,
+    "notes": "generated",
+    "status": "draft"
+  }
+]

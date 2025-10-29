@@ -1,0 +1,602 @@
+[
+  {
+    "id": "op-1",
+    "code": "OP-1001",
+    "description": "Operation 1"
+  },
+  {
+    "id": "op-2",
+    "code": "OP-1002",
+    "description": "Operation 2"
+  },
+  {
+    "id": "op-3",
+    "code": "OP-1003",
+    "description": "Operation 3"
+  },
+  {
+    "id": "op-4",
+    "code": "OP-1004",
+    "description": "Operation 4"
+  },
+  {
+    "id": "op-5",
+    "code": "OP-1005",
+    "description": "Operation 5"
+  },
+  {
+    "id": "op-6",
+    "code": "OP-1006",
+    "description": "Operation 6"
+  },
+  {
+    "id": "op-7",
+    "code": "OP-1007",
+    "description": "Operation 7"
+  },
+  {
+    "id": "op-8",
+    "code": "OP-1008",
+    "description": "Operation 8"
+  },
+  {
+    "id": "op-9",
+    "code": "OP-1009",
+    "description": "Operation 9"
+  },
+  {
+    "id": "op-10",
+    "code": "OP-1010",
+    "description": "Operation 10"
+  },
+  {
+    "id": "op-11",
+    "code": "OP-1011",
+    "description": "Operation 11"
+  },
+  {
+    "id": "op-12",
+    "code": "OP-1012",
+    "description": "Operation 12"
+  },
+  {
+    "id": "op-13",
+    "code": "OP-1013",
+    "description": "Operation 13"
+  },
+  {
+    "id": "op-14",
+    "code": "OP-1014",
+    "description": "Operation 14"
+  },
+  {
+    "id": "op-15",
+    "code": "OP-1015",
+    "description": "Operation 15"
+  },
+  {
+    "id": "op-16",
+    "code": "OP-1016",
+    "description": "Operation 16"
+  },
+  {
+    "id": "op-17",
+    "code": "OP-1017",
+    "description": "Operation 17"
+  },
+  {
+    "id": "op-18",
+    "code": "OP-1018",
+    "description": "Operation 18"
+  },
+  {
+    "id": "op-19",
+    "code": "OP-1019",
+    "description": "Operation 19"
+  },
+  {
+    "id": "op-20",
+    "code": "OP-1020",
+    "description": "Operation 20"
+  },
+  {
+    "id": "op-21",
+    "code": "OP-1021",
+    "description": "Operation 21"
+  },
+  {
+    "id": "op-22",
+    "code": "OP-1022",
+    "description": "Operation 22"
+  },
+  {
+    "id": "op-23",
+    "code": "OP-1023",
+    "description": "Operation 23"
+  },
+  {
+    "id": "op-24",
+    "code": "OP-1024",
+    "description": "Operation 24"
+  },
+  {
+    "id": "op-25",
+    "code": "OP-1025",
+    "description": "Operation 25"
+  },
+  {
+    "id": "op-26",
+    "code": "OP-1026",
+    "description": "Operation 26"
+  },
+  {
+    "id": "op-27",
+    "code": "OP-1027",
+    "description": "Operation 27"
+  },
+  {
+    "id": "op-28",
+    "code": "OP-1028",
+    "description": "Operation 28"
+  },
+  {
+    "id": "op-29",
+    "code": "OP-1029",
+    "description": "Operation 29"
+  },
+  {
+    "id": "op-30",
+    "code": "OP-1030",
+    "description": "Operation 30"
+  },
+  {
+    "id": "op-31",
+    "code": "OP-1031",
+    "description": "Operation 31"
+  },
+  {
+    "id": "op-32",
+    "code": "OP-1032",
+    "description": "Operation 32"
+  },
+  {
+    "id": "op-33",
+    "code": "OP-1033",
+    "description": "Operation 33"
+  },
+  {
+    "id": "op-34",
+    "code": "OP-1034",
+    "description": "Operation 34"
+  },
+  {
+    "id": "op-35",
+    "code": "OP-1035",
+    "description": "Operation 35"
+  },
+  {
+    "id": "op-36",
+    "code": "OP-1036",
+    "description": "Operation 36"
+  },
+  {
+    "id": "op-37",
+    "code": "OP-1037",
+    "description": "Operation 37"
+  },
+  {
+    "id": "op-38",
+    "code": "OP-1038",
+    "description": "Operation 38"
+  },
+  {
+    "id": "op-39",
+    "code": "OP-1039",
+    "description": "Operation 39"
+  },
+  {
+    "id": "op-40",
+    "code": "OP-1040",
+    "description": "Operation 40"
+  },
+  {
+    "id": "op-41",
+    "code": "OP-1041",
+    "description": "Operation 41"
+  },
+  {
+    "id": "op-42",
+    "code": "OP-1042",
+    "description": "Operation 42"
+  },
+  {
+    "id": "op-43",
+    "code": "OP-1043",
+    "description": "Operation 43"
+  },
+  {
+    "id": "op-44",
+    "code": "OP-1044",
+    "description": "Operation 44"
+  },
+  {
+    "id": "op-45",
+    "code": "OP-1045",
+    "description": "Operation 45"
+  },
+  {
+    "id": "op-46",
+    "code": "OP-1046",
+    "description": "Operation 46"
+  },
+  {
+    "id": "op-47",
+    "code": "OP-1047",
+    "description": "Operation 47"
+  },
+  {
+    "id": "op-48",
+    "code": "OP-1048",
+    "description": "Operation 48"
+  },
+  {
+    "id": "op-49",
+    "code": "OP-1049",
+    "description": "Operation 49"
+  },
+  {
+    "id": "op-50",
+    "code": "OP-1050",
+    "description": "Operation 50"
+  },
+  {
+    "id": "op-51",
+    "code": "OP-1051",
+    "description": "Operation 51"
+  },
+  {
+    "id": "op-52",
+    "code": "OP-1052",
+    "description": "Operation 52"
+  },
+  {
+    "id": "op-53",
+    "code": "OP-1053",
+    "description": "Operation 53"
+  },
+  {
+    "id": "op-54",
+    "code": "OP-1054",
+    "description": "Operation 54"
+  },
+  {
+    "id": "op-55",
+    "code": "OP-1055",
+    "description": "Operation 55"
+  },
+  {
+    "id": "op-56",
+    "code": "OP-1056",
+    "description": "Operation 56"
+  },
+  {
+    "id": "op-57",
+    "code": "OP-1057",
+    "description": "Operation 57"
+  },
+  {
+    "id": "op-58",
+    "code": "OP-1058",
+    "description": "Operation 58"
+  },
+  {
+    "id": "op-59",
+    "code": "OP-1059",
+    "description": "Operation 59"
+  },
+  {
+    "id": "op-60",
+    "code": "OP-1060",
+    "description": "Operation 60"
+  },
+  {
+    "id": "op-61",
+    "code": "OP-1061",
+    "description": "Operation 61"
+  },
+  {
+    "id": "op-62",
+    "code": "OP-1062",
+    "description": "Operation 62"
+  },
+  {
+    "id": "op-63",
+    "code": "OP-1063",
+    "description": "Operation 63"
+  },
+  {
+    "id": "op-64",
+    "code": "OP-1064",
+    "description": "Operation 64"
+  },
+  {
+    "id": "op-65",
+    "code": "OP-1065",
+    "description": "Operation 65"
+  },
+  {
+    "id": "op-66",
+    "code": "OP-1066",
+    "description": "Operation 66"
+  },
+  {
+    "id": "op-67",
+    "code": "OP-1067",
+    "description": "Operation 67"
+  },
+  {
+    "id": "op-68",
+    "code": "OP-1068",
+    "description": "Operation 68"
+  },
+  {
+    "id": "op-69",
+    "code": "OP-1069",
+    "description": "Operation 69"
+  },
+  {
+    "id": "op-70",
+    "code": "OP-1070",
+    "description": "Operation 70"
+  },
+  {
+    "id": "op-71",
+    "code": "OP-1071",
+    "description": "Operation 71"
+  },
+  {
+    "id": "op-72",
+    "code": "OP-1072",
+    "description": "Operation 72"
+  },
+  {
+    "id": "op-73",
+    "code": "OP-1073",
+    "description": "Operation 73"
+  },
+  {
+    "id": "op-74",
+    "code": "OP-1074",
+    "description": "Operation 74"
+  },
+  {
+    "id": "op-75",
+    "code": "OP-1075",
+    "description": "Operation 75"
+  },
+  {
+    "id": "op-76",
+    "code": "OP-1076",
+    "description": "Operation 76"
+  },
+  {
+    "id": "op-77",
+    "code": "OP-1077",
+    "description": "Operation 77"
+  },
+  {
+    "id": "op-78",
+    "code": "OP-1078",
+    "description": "Operation 78"
+  },
+  {
+    "id": "op-79",
+    "code": "OP-1079",
+    "description": "Operation 79"
+  },
+  {
+    "id": "op-80",
+    "code": "OP-1080",
+    "description": "Operation 80"
+  },
+  {
+    "id": "op-81",
+    "code": "OP-1081",
+    "description": "Operation 81"
+  },
+  {
+    "id": "op-82",
+    "code": "OP-1082",
+    "description": "Operation 82"
+  },
+  {
+    "id": "op-83",
+    "code": "OP-1083",
+    "description": "Operation 83"
+  },
+  {
+    "id": "op-84",
+    "code": "OP-1084",
+    "description": "Operation 84"
+  },
+  {
+    "id": "op-85",
+    "code": "OP-1085",
+    "description": "Operation 85"
+  },
+  {
+    "id": "op-86",
+    "code": "OP-1086",
+    "description": "Operation 86"
+  },
+  {
+    "id": "op-87",
+    "code": "OP-1087",
+    "description": "Operation 87"
+  },
+  {
+    "id": "op-88",
+    "code": "OP-1088",
+    "description": "Operation 88"
+  },
+  {
+    "id": "op-89",
+    "code": "OP-1089",
+    "description": "Operation 89"
+  },
+  {
+    "id": "op-90",
+    "code": "OP-1090",
+    "description": "Operation 90"
+  },
+  {
+    "id": "op-91",
+    "code": "OP-1091",
+    "description": "Operation 91"
+  },
+  {
+    "id": "op-92",
+    "code": "OP-1092",
+    "description": "Operation 92"
+  },
+  {
+    "id": "op-93",
+    "code": "OP-1093",
+    "description": "Operation 93"
+  },
+  {
+    "id": "op-94",
+    "code": "OP-1094",
+    "description": "Operation 94"
+  },
+  {
+    "id": "op-95",
+    "code": "OP-1095",
+    "description": "Operation 95"
+  },
+  {
+    "id": "op-96",
+    "code": "OP-1096",
+    "description": "Operation 96"
+  },
+  {
+    "id": "op-97",
+    "code": "OP-1097",
+    "description": "Operation 97"
+  },
+  {
+    "id": "op-98",
+    "code": "OP-1098",
+    "description": "Operation 98"
+  },
+  {
+    "id": "op-99",
+    "code": "OP-1099",
+    "description": "Operation 99"
+  },
+  {
+    "id": "op-100",
+    "code": "OP-1100",
+    "description": "Operation 100"
+  },
+  {
+    "id": "op-101",
+    "code": "OP-1101",
+    "description": "Operation 101"
+  },
+  {
+    "id": "op-102",
+    "code": "OP-1102",
+    "description": "Operation 102"
+  },
+  {
+    "id": "op-103",
+    "code": "OP-1103",
+    "description": "Operation 103"
+  },
+  {
+    "id": "op-104",
+    "code": "OP-1104",
+    "description": "Operation 104"
+  },
+  {
+    "id": "op-105",
+    "code": "OP-1105",
+    "description": "Operation 105"
+  },
+  {
+    "id": "op-106",
+    "code": "OP-1106",
+    "description": "Operation 106"
+  },
+  {
+    "id": "op-107",
+    "code": "OP-1107",
+    "description": "Operation 107"
+  },
+  {
+    "id": "op-108",
+    "code": "OP-1108",
+    "description": "Operation 108"
+  },
+  {
+    "id": "op-109",
+    "code": "OP-1109",
+    "description": "Operation 109"
+  },
+  {
+    "id": "op-110",
+    "code": "OP-1110",
+    "description": "Operation 110"
+  },
+  {
+    "id": "op-111",
+    "code": "OP-1111",
+    "description": "Operation 111"
+  },
+  {
+    "id": "op-112",
+    "code": "OP-1112",
+    "description": "Operation 112"
+  },
+  {
+    "id": "op-113",
+    "code": "OP-1113",
+    "description": "Operation 113"
+  },
+  {
+    "id": "op-114",
+    "code": "OP-1114",
+    "description": "Operation 114"
+  },
+  {
+    "id": "op-115",
+    "code": "OP-1115",
+    "description": "Operation 115"
+  },
+  {
+    "id": "op-116",
+    "code": "OP-1116",
+    "description": "Operation 116"
+  },
+  {
+    "id": "op-117",
+    "code": "OP-1117",
+    "description": "Operation 117"
+  },
+  {
+    "id": "op-118",
+    "code": "OP-1118",
+    "description": "Operation 118"
+  },
+  {
+    "id": "op-119",
+    "code": "OP-1119",
+    "description": "Operation 119"
+  },
+  {
+    "id": "op-120",
+    "code": "OP-1120",
+    "description": "Operation 120"
+  }
+]

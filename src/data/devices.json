@@ -1,0 +1,1202 @@
+[
+  {
+    "id": "dev-1",
+    "serial": "SN-1001",
+    "name": "Device 1",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-2",
+    "serial": "SN-1002",
+    "name": "Device 2",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-3",
+    "serial": "SN-1003",
+    "name": "Device 3",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-4",
+    "serial": "SN-1004",
+    "name": "Device 4",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-5",
+    "serial": "SN-1005",
+    "name": "Device 5",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-6",
+    "serial": "SN-1006",
+    "name": "Device 6",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-7",
+    "serial": "SN-1007",
+    "name": "Device 7",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-8",
+    "serial": "SN-1008",
+    "name": "Device 8",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-9",
+    "serial": "SN-1009",
+    "name": "Device 9",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-10",
+    "serial": "SN-1010",
+    "name": "Device 10",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-11",
+    "serial": "SN-1011",
+    "name": "Device 11",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-12",
+    "serial": "SN-1012",
+    "name": "Device 12",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-13",
+    "serial": "SN-1013",
+    "name": "Device 13",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-14",
+    "serial": "SN-1014",
+    "name": "Device 14",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-15",
+    "serial": "SN-1015",
+    "name": "Device 15",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-16",
+    "serial": "SN-1016",
+    "name": "Device 16",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-17",
+    "serial": "SN-1017",
+    "name": "Device 17",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-18",
+    "serial": "SN-1018",
+    "name": "Device 18",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-19",
+    "serial": "SN-1019",
+    "name": "Device 19",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-20",
+    "serial": "SN-1020",
+    "name": "Device 20",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-21",
+    "serial": "SN-1021",
+    "name": "Device 21",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-22",
+    "serial": "SN-1022",
+    "name": "Device 22",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-23",
+    "serial": "SN-1023",
+    "name": "Device 23",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-24",
+    "serial": "SN-1024",
+    "name": "Device 24",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-25",
+    "serial": "SN-1025",
+    "name": "Device 25",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-26",
+    "serial": "SN-1026",
+    "name": "Device 26",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-27",
+    "serial": "SN-1027",
+    "name": "Device 27",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-28",
+    "serial": "SN-1028",
+    "name": "Device 28",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-29",
+    "serial": "SN-1029",
+    "name": "Device 29",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-30",
+    "serial": "SN-1030",
+    "name": "Device 30",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-31",
+    "serial": "SN-1031",
+    "name": "Device 31",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-32",
+    "serial": "SN-1032",
+    "name": "Device 32",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-33",
+    "serial": "SN-1033",
+    "name": "Device 33",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-34",
+    "serial": "SN-1034",
+    "name": "Device 34",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-35",
+    "serial": "SN-1035",
+    "name": "Device 35",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-36",
+    "serial": "SN-1036",
+    "name": "Device 36",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-37",
+    "serial": "SN-1037",
+    "name": "Device 37",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-38",
+    "serial": "SN-1038",
+    "name": "Device 38",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-39",
+    "serial": "SN-1039",
+    "name": "Device 39",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-40",
+    "serial": "SN-1040",
+    "name": "Device 40",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-41",
+    "serial": "SN-1041",
+    "name": "Device 41",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-42",
+    "serial": "SN-1042",
+    "name": "Device 42",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-43",
+    "serial": "SN-1043",
+    "name": "Device 43",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-44",
+    "serial": "SN-1044",
+    "name": "Device 44",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-45",
+    "serial": "SN-1045",
+    "name": "Device 45",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-46",
+    "serial": "SN-1046",
+    "name": "Device 46",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-47",
+    "serial": "SN-1047",
+    "name": "Device 47",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-48",
+    "serial": "SN-1048",
+    "name": "Device 48",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-49",
+    "serial": "SN-1049",
+    "name": "Device 49",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-50",
+    "serial": "SN-1050",
+    "name": "Device 50",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-51",
+    "serial": "SN-1051",
+    "name": "Device 51",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-52",
+    "serial": "SN-1052",
+    "name": "Device 52",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-53",
+    "serial": "SN-1053",
+    "name": "Device 53",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-54",
+    "serial": "SN-1054",
+    "name": "Device 54",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-55",
+    "serial": "SN-1055",
+    "name": "Device 55",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-56",
+    "serial": "SN-1056",
+    "name": "Device 56",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-57",
+    "serial": "SN-1057",
+    "name": "Device 57",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-58",
+    "serial": "SN-1058",
+    "name": "Device 58",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-59",
+    "serial": "SN-1059",
+    "name": "Device 59",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-60",
+    "serial": "SN-1060",
+    "name": "Device 60",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-61",
+    "serial": "SN-1061",
+    "name": "Device 61",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-62",
+    "serial": "SN-1062",
+    "name": "Device 62",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-63",
+    "serial": "SN-1063",
+    "name": "Device 63",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-64",
+    "serial": "SN-1064",
+    "name": "Device 64",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-65",
+    "serial": "SN-1065",
+    "name": "Device 65",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-66",
+    "serial": "SN-1066",
+    "name": "Device 66",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-67",
+    "serial": "SN-1067",
+    "name": "Device 67",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-68",
+    "serial": "SN-1068",
+    "name": "Device 68",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-69",
+    "serial": "SN-1069",
+    "name": "Device 69",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-70",
+    "serial": "SN-1070",
+    "name": "Device 70",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-71",
+    "serial": "SN-1071",
+    "name": "Device 71",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-72",
+    "serial": "SN-1072",
+    "name": "Device 72",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-73",
+    "serial": "SN-1073",
+    "name": "Device 73",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-74",
+    "serial": "SN-1074",
+    "name": "Device 74",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-75",
+    "serial": "SN-1075",
+    "name": "Device 75",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-76",
+    "serial": "SN-1076",
+    "name": "Device 76",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-77",
+    "serial": "SN-1077",
+    "name": "Device 77",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-78",
+    "serial": "SN-1078",
+    "name": "Device 78",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-79",
+    "serial": "SN-1079",
+    "name": "Device 79",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-80",
+    "serial": "SN-1080",
+    "name": "Device 80",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-81",
+    "serial": "SN-1081",
+    "name": "Device 81",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-82",
+    "serial": "SN-1082",
+    "name": "Device 82",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-83",
+    "serial": "SN-1083",
+    "name": "Device 83",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-84",
+    "serial": "SN-1084",
+    "name": "Device 84",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-85",
+    "serial": "SN-1085",
+    "name": "Device 85",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-86",
+    "serial": "SN-1086",
+    "name": "Device 86",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-87",
+    "serial": "SN-1087",
+    "name": "Device 87",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-88",
+    "serial": "SN-1088",
+    "name": "Device 88",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-89",
+    "serial": "SN-1089",
+    "name": "Device 89",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-90",
+    "serial": "SN-1090",
+    "name": "Device 90",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-91",
+    "serial": "SN-1091",
+    "name": "Device 91",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-92",
+    "serial": "SN-1092",
+    "name": "Device 92",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-93",
+    "serial": "SN-1093",
+    "name": "Device 93",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-94",
+    "serial": "SN-1094",
+    "name": "Device 94",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-95",
+    "serial": "SN-1095",
+    "name": "Device 95",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-96",
+    "serial": "SN-1096",
+    "name": "Device 96",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-97",
+    "serial": "SN-1097",
+    "name": "Device 97",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-98",
+    "serial": "SN-1098",
+    "name": "Device 98",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-99",
+    "serial": "SN-1099",
+    "name": "Device 99",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-100",
+    "serial": "SN-1100",
+    "name": "Device 100",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-101",
+    "serial": "SN-1101",
+    "name": "Device 101",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-102",
+    "serial": "SN-1102",
+    "name": "Device 102",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-103",
+    "serial": "SN-1103",
+    "name": "Device 103",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-104",
+    "serial": "SN-1104",
+    "name": "Device 104",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-105",
+    "serial": "SN-1105",
+    "name": "Device 105",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-106",
+    "serial": "SN-1106",
+    "name": "Device 106",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-107",
+    "serial": "SN-1107",
+    "name": "Device 107",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-108",
+    "serial": "SN-1108",
+    "name": "Device 108",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-109",
+    "serial": "SN-1109",
+    "name": "Device 109",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-110",
+    "serial": "SN-1110",
+    "name": "Device 110",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-111",
+    "serial": "SN-1111",
+    "name": "Device 111",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-112",
+    "serial": "SN-1112",
+    "name": "Device 112",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-113",
+    "serial": "SN-1113",
+    "name": "Device 113",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-114",
+    "serial": "SN-1114",
+    "name": "Device 114",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-115",
+    "serial": "SN-1115",
+    "name": "Device 115",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-116",
+    "serial": "SN-1116",
+    "name": "Device 116",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-117",
+    "serial": "SN-1117",
+    "name": "Device 117",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-118",
+    "serial": "SN-1118",
+    "name": "Device 118",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-119",
+    "serial": "SN-1119",
+    "name": "Device 119",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-120",
+    "serial": "SN-1120",
+    "name": "Device 120",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-121",
+    "serial": "SN-1121",
+    "name": "Device 121",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-122",
+    "serial": "SN-1122",
+    "name": "Device 122",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-123",
+    "serial": "SN-1123",
+    "name": "Device 123",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-124",
+    "serial": "SN-1124",
+    "name": "Device 124",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-125",
+    "serial": "SN-1125",
+    "name": "Device 125",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-126",
+    "serial": "SN-1126",
+    "name": "Device 126",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-127",
+    "serial": "SN-1127",
+    "name": "Device 127",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-128",
+    "serial": "SN-1128",
+    "name": "Device 128",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-129",
+    "serial": "SN-1129",
+    "name": "Device 129",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-130",
+    "serial": "SN-1130",
+    "name": "Device 130",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-131",
+    "serial": "SN-1131",
+    "name": "Device 131",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-132",
+    "serial": "SN-1132",
+    "name": "Device 132",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-133",
+    "serial": "SN-1133",
+    "name": "Device 133",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-134",
+    "serial": "SN-1134",
+    "name": "Device 134",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-135",
+    "serial": "SN-1135",
+    "name": "Device 135",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-136",
+    "serial": "SN-1136",
+    "name": "Device 136",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-137",
+    "serial": "SN-1137",
+    "name": "Device 137",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-138",
+    "serial": "SN-1138",
+    "name": "Device 138",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-139",
+    "serial": "SN-1139",
+    "name": "Device 139",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-140",
+    "serial": "SN-1140",
+    "name": "Device 140",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-141",
+    "serial": "SN-1141",
+    "name": "Device 141",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-142",
+    "serial": "SN-1142",
+    "name": "Device 142",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-143",
+    "serial": "SN-1143",
+    "name": "Device 143",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-144",
+    "serial": "SN-1144",
+    "name": "Device 144",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-145",
+    "serial": "SN-1145",
+    "name": "Device 145",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-146",
+    "serial": "SN-1146",
+    "name": "Device 146",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-147",
+    "serial": "SN-1147",
+    "name": "Device 147",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-148",
+    "serial": "SN-1148",
+    "name": "Device 148",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-149",
+    "serial": "SN-1149",
+    "name": "Device 149",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-150",
+    "serial": "SN-1150",
+    "name": "Device 150",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-151",
+    "serial": "SN-1151",
+    "name": "Device 151",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-152",
+    "serial": "SN-1152",
+    "name": "Device 152",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-153",
+    "serial": "SN-1153",
+    "name": "Device 153",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-154",
+    "serial": "SN-1154",
+    "name": "Device 154",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-155",
+    "serial": "SN-1155",
+    "name": "Device 155",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-156",
+    "serial": "SN-1156",
+    "name": "Device 156",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-157",
+    "serial": "SN-1157",
+    "name": "Device 157",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-158",
+    "serial": "SN-1158",
+    "name": "Device 158",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-159",
+    "serial": "SN-1159",
+    "name": "Device 159",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-160",
+    "serial": "SN-1160",
+    "name": "Device 160",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-161",
+    "serial": "SN-1161",
+    "name": "Device 161",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-162",
+    "serial": "SN-1162",
+    "name": "Device 162",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-163",
+    "serial": "SN-1163",
+    "name": "Device 163",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-164",
+    "serial": "SN-1164",
+    "name": "Device 164",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-165",
+    "serial": "SN-1165",
+    "name": "Device 165",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-166",
+    "serial": "SN-1166",
+    "name": "Device 166",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-167",
+    "serial": "SN-1167",
+    "name": "Device 167",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-168",
+    "serial": "SN-1168",
+    "name": "Device 168",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-169",
+    "serial": "SN-1169",
+    "name": "Device 169",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-170",
+    "serial": "SN-1170",
+    "name": "Device 170",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-171",
+    "serial": "SN-1171",
+    "name": "Device 171",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-172",
+    "serial": "SN-1172",
+    "name": "Device 172",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-173",
+    "serial": "SN-1173",
+    "name": "Device 173",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-174",
+    "serial": "SN-1174",
+    "name": "Device 174",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-175",
+    "serial": "SN-1175",
+    "name": "Device 175",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-176",
+    "serial": "SN-1176",
+    "name": "Device 176",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-177",
+    "serial": "SN-1177",
+    "name": "Device 177",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-178",
+    "serial": "SN-1178",
+    "name": "Device 178",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-179",
+    "serial": "SN-1179",
+    "name": "Device 179",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-180",
+    "serial": "SN-1180",
+    "name": "Device 180",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-181",
+    "serial": "SN-1181",
+    "name": "Device 181",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-182",
+    "serial": "SN-1182",
+    "name": "Device 182",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-183",
+    "serial": "SN-1183",
+    "name": "Device 183",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-184",
+    "serial": "SN-1184",
+    "name": "Device 184",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-185",
+    "serial": "SN-1185",
+    "name": "Device 185",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-186",
+    "serial": "SN-1186",
+    "name": "Device 186",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-187",
+    "serial": "SN-1187",
+    "name": "Device 187",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-188",
+    "serial": "SN-1188",
+    "name": "Device 188",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-189",
+    "serial": "SN-1189",
+    "name": "Device 189",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-190",
+    "serial": "SN-1190",
+    "name": "Device 190",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-191",
+    "serial": "SN-1191",
+    "name": "Device 191",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-192",
+    "serial": "SN-1192",
+    "name": "Device 192",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-193",
+    "serial": "SN-1193",
+    "name": "Device 193",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-194",
+    "serial": "SN-1194",
+    "name": "Device 194",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-195",
+    "serial": "SN-1195",
+    "name": "Device 195",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-196",
+    "serial": "SN-1196",
+    "name": "Device 196",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-197",
+    "serial": "SN-1197",
+    "name": "Device 197",
+    "location": "Line A"
+  },
+  {
+    "id": "dev-198",
+    "serial": "SN-1198",
+    "name": "Device 198",
+    "location": "Warehouse"
+  },
+  {
+    "id": "dev-199",
+    "serial": "SN-1199",
+    "name": "Device 199",
+    "location": "Line B"
+  },
+  {
+    "id": "dev-200",
+    "serial": "SN-1200",
+    "name": "Device 200",
+    "location": "Warehouse"
+  }
+]
