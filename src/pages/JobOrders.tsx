@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CheckCircle, Eye, Download } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 import api from '../services/api'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ConfirmationDialog from '../components/common/ConfirmationDialog'
 import TaskCompletionModal from '../components/modals/TaskCompletionModal'
+import { useAuth } from '../contexts/AuthContext'
 
 const JobOrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([])
@@ -15,12 +17,17 @@ const JobOrdersPage: React.FC = () => {
   const [showTaskCompletionModal, setShowTaskCompletionModal] = useState(false)
   const [selectedOrder, setSelectedOrder] = useState<any | null>(null)
   const [downloadingId, setDownloadingId] = useState<string | null>(null)
+  const navigate = useNavigate()
+  const { user } = useAuth()
 
   useEffect(() => {
     let mounted = true
     ;(async () => {
       try {
-        const j = await api.getJobOrders()
+        // If Technician role, load only assigned job orders
+        const j = (user?.role === 'Technician')
+          ? await api.getAssignedJobOrders()
+          : await api.getJobOrders()
         if (mounted) {
           setOrders(j)
           setLoading(false)
@@ -54,16 +61,23 @@ const JobOrdersPage: React.FC = () => {
     setShowTaskCompletionModal(true)
   }
 
-  const handleTaskCompletionSuccess = async () => {
+  const handleTaskCompletionSuccess = async (jobOrderId: string) => {
+    // Optimistically remove the submitted job order from the list
+    setOrders(prev => prev.filter(o => o.id !== jobOrderId))
+    setShowTaskCompletionModal(false)
+    setSelectedOrder(null)
+
+    // Optionally refresh from backend in background to keep in sync
     try {
-      // Reload orders to reflect any changes
       const updatedOrders = await api.getJobOrders()
       setOrders(updatedOrders)
-      setShowTaskCompletionModal(false)
-      setSelectedOrder(null)
     } catch (error) {
-      console.error('Error reloading orders:', error)
+      // Non-blocking
+      console.error('Error reloading job orders after submission:', error)
     }
+
+    // Redirect to My Work Logs so the user can track supervisor decision
+    navigate('/production-work-logs')
   }
 
   const handleDownload = async (order: any) => {

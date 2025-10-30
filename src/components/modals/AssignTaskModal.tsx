@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Calendar, User, Clock, AlertCircle, CheckSquare } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 import Modal from '../common/Modal'
+import api from '../../services/api'
 
 interface AssignTaskModalProps {
   isOpen: boolean
@@ -11,8 +12,9 @@ interface AssignTaskModalProps {
 const AssignTaskModal: React.FC<AssignTaskModalProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
     task: '',
-    assignTo: '',
-    jobOrder: '',
+    assignTo: '', // user_id
+    jobOrder: '', // job_order_id
+    role: 'Technician',
     deadline: '',
     priority: 'Medium',
     instructions: '',
@@ -33,21 +35,36 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({ isOpen, onClose }) =>
     'Equipment maintenance'
   ]
 
-  const availableWorkers = [
-    { id: 'john.smith', name: 'John Smith', role: 'Production Worker' },
-    { id: 'sarah.johnson', name: 'Sarah Johnson', role: 'Quality Inspector' },
-    { id: 'mike.wilson', name: 'Mike Wilson', role: 'Test Personnel' },
-    { id: 'lisa.brown', name: 'Lisa Brown', role: 'Production Worker' },
-    { id: 'david.garcia', name: 'David Garcia', role: 'Test Personnel' }
-  ]
+  const [availableWorkers, setAvailableWorkers] = useState<{ id: string; name: string }[]>([])
 
-  const availableJobOrders = [
-    'JO-001234 - A300 Assembly (50 devices)',
-    'JO-001235 - A340 Quality Check (30 devices)',
-    'JO-001236 - SKGB Testing (25 devices)',
-    'JO-001237 - A100 Packaging (40 devices)',
-    'JO-001238 - A300 Final Inspection (35 devices)'
-  ]
+  const [availableJobOrders, setAvailableJobOrders] = useState<string[]>([])
+
+  useEffect(() => {
+    if (!isOpen) return
+    ;(async () => {
+      try {
+        const workers = await api.getUsersByRole('Technician')
+        if (!workers.length) {
+          // Seed defaults if no workers exist for this role
+          await api.seedDefaultWorkers()
+          const seeded = await api.getUsersByRole('Technician')
+          setAvailableWorkers(seeded.map(w => ({ id: w.id, name: w.name })))
+        } else {
+          setAvailableWorkers(workers.map(w => ({ id: w.id, name: w.name })))
+        }
+      } catch (e) {}
+      try {
+        const jos = await api.getJobOrders()
+        setAvailableJobOrders(jos.map(j => j.id))
+      } catch (e) {}
+    })()
+  }, [isOpen])
+
+  // Ensure workers present on open
+  useEffect(() => {
+    if (!isOpen) return
+    setFormData(prev => ({ ...prev, role: 'Technician' }))
+  }, [isOpen])
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
@@ -55,6 +72,8 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({ isOpen, onClose }) =>
     if (!formData.task.trim()) {
       newErrors.task = 'Task is required'
     }
+
+    // role is fixed to Technician
 
     if (!formData.assignTo) {
       newErrors.assignTo = 'Please select a worker to assign the task to'
@@ -93,25 +112,37 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({ isOpen, onClose }) =>
     }
 
     setIsLoading(true)
-    
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
-      const assigneeName = availableWorkers.find(w => w.id === formData.assignTo)?.name || 'Unknown'
-      toast.success(`Task assigned to ${assigneeName} successfully!`)
-      onClose()
-      setFormData({
-        task: '',
-        assignTo: '',
-        jobOrder: '',
-        deadline: '',
-        priority: 'Medium',
-        instructions: '',
-        estimatedHours: '',
-        notifyAssignee: true
+    try {
+      const ok = await api.createAssignment({
+        jobOrderId: formData.jobOrder,
+        assignedToUserId: formData.assignTo,
+        assignedRole: 'Technician',
+        notes: formData.instructions
       })
-      setErrors({})
-    }, 2000)
+      if (ok) {
+        const assigneeName = availableWorkers.find(w => w.id === formData.assignTo)?.name || 'Unknown'
+        toast.success(`Task assigned to ${assigneeName} successfully!`)
+        onClose()
+        setFormData({
+          task: '',
+          assignTo: '',
+          jobOrder: '',
+          role: 'Technician',
+          deadline: '',
+          priority: 'Medium',
+          instructions: '',
+          estimatedHours: '',
+          notifyAssignee: true
+        })
+        setErrors({})
+      } else {
+        toast.error('Failed to assign task')
+      }
+    } catch (error) {
+      toast.error('Failed to assign task')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleInputChange = (field: string, value: any) => {
@@ -149,26 +180,34 @@ const AssignTaskModal: React.FC<AssignTaskModalProps> = ({ isOpen, onClose }) =>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Assign To *
+              Role
             </label>
-            <div className="relative">
-              <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <select
-                value={formData.assignTo}
-                onChange={(e) => handleInputChange('assignTo', e.target.value)}
-                className={`w-full pl-10 pr-3 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                  errors.assignTo ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
-                }`}
-              >
-                <option value="">Select worker</option>
-                {availableWorkers.map((worker) => (
-                  <option key={worker.id} value={worker.id}>
-                    {worker.name} ({worker.role})
-                  </option>
-                ))}
-              </select>
+            <div className="w-full px-3 py-2 border rounded-lg bg-gray-50 dark:bg-gray-700/60 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600">
+              Technician
             </div>
-            {errors.assignTo && <p className="mt-1 text-sm text-red-600">{errors.assignTo}</p>}
+            <div className="mt-3">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Worker *
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <select
+                  value={formData.assignTo}
+                  onChange={(e) => handleInputChange('assignTo', e.target.value)}
+                  className={`w-full pl-10 pr-3 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
+                    errors.assignTo ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+                  }`}
+                >
+                  <option value="">Select worker</option>
+                  {availableWorkers.map((worker) => (
+                    <option key={worker.id} value={worker.id}>
+                      {worker.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {errors.assignTo && <p className="mt-1 text-sm text-red-600">{errors.assignTo}</p>}
+            </div>
           </div>
 
           <div>

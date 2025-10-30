@@ -26,6 +26,7 @@ import BulkApproveModal from '../../components/modals/BulkApproveModal'
 import AssignTaskModal from '../../components/modals/AssignTaskModal'
 import FilterModal from '../../components/modals/FilterModal'
 import TaskCompletionNotification from '../../components/modals/TaskCompletionNotification'
+import TaskApprovalModal from '../../components/modals/TaskApprovalModal'
 import { toast } from 'react-hot-toast'
 import type { JobOrder } from '../../types'
 
@@ -120,6 +121,11 @@ const SupervisorDashboard: React.FC = () => {
   
   // Enhanced filter state
   const [filters, setFilters] = useState<Record<string, any>>({})
+  
+  // Task approval states
+  const [pendingTasks, setPendingTasks] = useState<any[]>([])
+  const [showTaskApprovalModal, setShowTaskApprovalModal] = useState(false)
+  const [selectedTask, setSelectedTask] = useState<any>(null)
 
   const loadDashboardData = async () => {
     setLoading(true)
@@ -250,12 +256,21 @@ const SupervisorDashboard: React.FC = () => {
       console.error('Error loading task completion notifications:', error)
     }
     
+    // Load pending tasks
+    let tasks: any[] = []
+    try {
+      tasks = await api.getSupervisorTasks()
+    } catch (error) {
+      console.error('Error loading pending tasks:', error)
+    }
+    
     // Set all state at once
     setPendingApprovals(approvals)
     setTechnicians(techs)
     setJobOrders(orders)
     setApprovalHistory(history)
     setTaskCompletionNotifications(notifications)
+    setPendingTasks(tasks)
     setLoading(false)
   }
 
@@ -399,6 +414,17 @@ const SupervisorDashboard: React.FC = () => {
     loadDashboardData() // Reload data after action
   }
 
+  const handleTaskApproval = (task: any) => {
+    setSelectedTask(task)
+    setShowTaskApprovalModal(true)
+  }
+
+  const handleTaskApprovalComplete = () => {
+    setShowTaskApprovalModal(false)
+    setSelectedTask(null)
+    loadDashboardData() // Reload data to get updated tasks
+  }
+
   const openTaskCompletionModal = (notification: TaskCompletionNotification) => {
     setSelectedTaskCompletion(notification)
     setShowTaskCompletionModal(true)
@@ -491,6 +517,7 @@ const SupervisorDashboard: React.FC = () => {
           {[
             { id: 'overview', label: 'Overview', icon: BarChart3 },
             { id: 'approvals', label: 'Pending Approvals', icon: Clock },
+            { id: 'pendingtasks', label: 'Pending Tasks', icon: CheckCircle },
             { id: 'taskcompletions', label: 'Task Completions', icon: MessageSquare },
             { id: 'technicians', label: 'Team Performance', icon: Users },
             { id: 'joborders', label: 'Job Orders', icon: FileText },
@@ -683,6 +710,140 @@ const SupervisorDashboard: React.FC = () => {
               <p className="text-neutral-600 dark:text-neutral-400">No pending approvals at this time.</p>
             </div>
           )}
+        </div>
+      )}
+
+      {activeTab === 'pendingtasks' && (
+        <div className="space-y-4">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">
+                Pending Task Completions
+              </h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Review and approve task completions from technicians
+              </p>
+            </div>
+            <div className="text-sm text-gray-500 dark:text-gray-400">
+              {pendingTasks.length} pending tasks
+            </div>
+          </div>
+
+          {/* Pending Tasks List */}
+          <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700">
+            {pendingTasks.length === 0 ? (
+              <div className="p-8 text-center text-gray-500 dark:text-gray-400">
+                <CheckCircle className="w-12 h-12 mx-auto mb-4 text-gray-300 dark:text-gray-600" />
+                <p className="text-lg font-medium">No pending tasks</p>
+                <p className="text-sm">All task completions have been reviewed</p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                  <thead className="bg-gray-50 dark:bg-gray-800">
+                    <tr>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Technician
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Job Order
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Operation
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Time
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Efficiency
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Devices
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Submitted
+                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white dark:bg-[#1e293b] divide-y divide-gray-200 dark:divide-gray-700">
+                    {pendingTasks.map((task) => (
+                      <tr key={task.task_id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="flex-shrink-0 h-8 w-8">
+                              <div className="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900/20 flex items-center justify-center">
+                                <User className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                              </div>
+                            </div>
+                            <div className="ml-4">
+                              <div className="text-sm font-medium text-gray-900 dark:text-white">
+                                {task.technician_name}
+                              </div>
+                              <div className="text-sm text-gray-500 dark:text-gray-400">
+                                @{task.technician_username}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm font-medium text-gray-900 dark:text-white">
+                            {task.job_order_id}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900 dark:text-white">
+                            {task.operation_name}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900 dark:text-white">
+                            {task.actual_time_minutes} min
+                          </div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                            (Std: {task.standard_time_minutes} min)
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                            task.efficiency_percentage >= 100 
+                              ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
+                              : task.efficiency_percentage >= 80
+                              ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400'
+                              : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'
+                          }`}>
+                            {task.efficiency_percentage.toFixed(1)}%
+                          </span>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          <div className="text-sm text-gray-900 dark:text-white">
+                            {task.devices_completed}
+                          </div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">
+                            of {task.total_devices}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                          {new Date(task.created_at).toLocaleDateString()}
+                        </td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          <button
+                            onClick={() => handleTaskApproval(task)}
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-300"
+                          >
+                            Review
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
         </div>
       )}
 
@@ -1148,6 +1309,17 @@ const SupervisorDashboard: React.FC = () => {
         }}
         notification={selectedTaskCompletion}
         onAction={handleTaskCompletionAction}
+      />
+
+      {/* Task Approval Modal */}
+      <TaskApprovalModal
+        isOpen={showTaskApprovalModal}
+        onClose={() => {
+          setShowTaskApprovalModal(false)
+          setSelectedTask(null)
+        }}
+        task={selectedTask}
+        onApproval={handleTaskApprovalComplete}
       />
     </div>
   )

@@ -45,7 +45,8 @@ CREATE TABLE job_orders (
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     status ENUM('active', 'completed', 'cancelled') DEFAULT 'active',
     priority ENUM('low', 'medium', 'high') DEFAULT 'medium',
-    description TEXT
+    description TEXT,
+    progress_percentage DECIMAL(5,2) DEFAULT 0.0
 );
 
 -- Tasks table
@@ -282,6 +283,21 @@ CREATE TABLE supervisor_notifications (
     FOREIGN KEY (job_order_id) REFERENCES job_orders(job_order_id) ON DELETE CASCADE,
     FOREIGN KEY (technician_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (task_id) REFERENCES tasks(task_id) ON DELETE CASCADE
+);
+
+-- Supervisor notifications table
+CREATE TABLE supervisor_notifications (
+    notification_id INT AUTO_INCREMENT PRIMARY KEY,
+    job_order_id VARCHAR(50) NOT NULL,
+    technician_id INT NOT NULL,
+    task_id INT NOT NULL,
+    notification_type VARCHAR(50) NOT NULL,
+    message TEXT NOT NULL,
+    status ENUM('pending', 'read', 'dismissed') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (job_order_id) REFERENCES job_orders(job_order_id),
+    FOREIGN KEY (technician_id) REFERENCES technicians(technician_id),
+    FOREIGN KEY (task_id) REFERENCES tasks(task_id)
 );
 
 -- Insert sample activity log entries

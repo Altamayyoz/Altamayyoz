@@ -139,7 +139,6 @@ function handlePostRequest() {
             standard_time_minutes, 
             efficiency_percentage, 
             devices_completed, 
-            serial_numbers, 
             notes, 
             status, 
             date, 
@@ -152,9 +151,8 @@ function handlePostRequest() {
             :standard_time_minutes, 
             :efficiency_percentage, 
             :devices_completed, 
-            :serial_numbers, 
             :notes, 
-            'submitted', 
+            'pending', 
             CURDATE(), 
             NOW()
         )";
@@ -167,7 +165,6 @@ function handlePostRequest() {
         $task_stmt->bindValue(':standard_time_minutes', $standard_time);
         $task_stmt->bindValue(':efficiency_percentage', $efficiency_percentage);
         $task_stmt->bindValue(':devices_completed', count($serial_numbers));
-        $task_stmt->bindValue(':serial_numbers', json_encode($serial_numbers));
         $task_stmt->bindValue(':notes', $notes);
         
         if (!$task_stmt->execute()) {
@@ -175,6 +172,20 @@ function handlePostRequest() {
         }
         
         $task_id = $conn->lastInsertId();
+        
+        // Insert serial numbers into device_serial_numbers table
+        if (!empty($serial_numbers)) {
+            $serial_query = "INSERT INTO device_serial_numbers (task_id, serial_number, completion_date, completion_time) VALUES (:task_id, :serial_number, CURDATE(), CURTIME())";
+            $serial_stmt = $conn->prepare($serial_query);
+            
+            foreach ($serial_numbers as $serial) {
+                if (!empty(trim($serial))) {
+                    $serial_stmt->bindValue(':task_id', $task_id);
+                    $serial_stmt->bindValue(':serial_number', trim($serial));
+                    $serial_stmt->execute();
+                }
+            }
+        }
         
         // Handle file uploads if any
         $uploaded_files = [];
@@ -211,7 +222,7 @@ function handlePostRequest() {
                               ) 
                               FROM tasks 
                               WHERE job_order_id = :job_order_id 
-                              AND status = 'approved'
+                              AND status IN ('pending', 'approved')
                           )
                           WHERE job_order_id = :job_order_id";
         
@@ -264,14 +275,5 @@ function handlePostRequest() {
         error_log("Stack trace: " . $e->getTraceAsString());
         sendResponse(false, 'Error processing task completion: ' . $e->getMessage());
     }
-}
-
-function sendResponse($success, $message, $data = null) {
-    $response = ['success' => $success, 'message' => $message];
-    if ($data !== null) {
-        $response['data'] = $data;
-    }
-    echo json_encode($response);
-    exit;
 }
 ?>

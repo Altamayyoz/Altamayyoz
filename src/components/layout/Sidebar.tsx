@@ -10,7 +10,6 @@ const NAV_BY_ROLE: Record<Role, Array<{ to: string; label: string }>> = {
   ],
   ProductionWorker: [
     { to: '/production-dashboard', label: '🔧 Production Dashboard' },
-    { to: '/production-work-logs', label: '📝 My Work Logs' },
     { to: '/job-orders', label: '📋 Job Orders' }
   ],
   Supervisor: [

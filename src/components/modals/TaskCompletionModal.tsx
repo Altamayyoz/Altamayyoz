@@ -7,7 +7,7 @@ interface TaskCompletionModalProps {
   isOpen: boolean
   onClose: () => void
   jobOrder: any
-  onSuccess: () => void
+  onSuccess: (jobOrderId: string) => void
 }
 
 interface TaskCompletionData {
@@ -134,7 +134,7 @@ const TaskCompletionModal: React.FC<TaskCompletionModalProps> = ({
 
       if (result.success) {
         toast.success('Task completion submitted successfully! Data sent to supervisor.')
-        onSuccess()
+        onSuccess(formData.jobOrderId)
         onClose()
       } else {
         toast.error(result.message || 'Failed to submit task completion')

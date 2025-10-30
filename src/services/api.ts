@@ -470,6 +470,87 @@ const api = {
     }
   },
 
+  async getAssignedJobOrders(): Promise<JobOrder[]> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      // For mock: return a subset of existing jobOrders
+      return jobOrders.slice(0, 4)
+    }
+
+    try {
+      const rows = await apiRequest<any[]>('/api/assignments.php?mine=1')
+      // rows are raw assignment+job order fields
+      return rows.map((r) => ({
+        id: String(r.job_order_id),
+        title: String(r.job_order_id),
+        status: 'in_progress' as any,
+        progress: Number(r.progress_percentage ?? 0),
+        assignedTo: ['me'],
+        devices: Array.from({ length: Number(r.total_devices || 0) }).map((_, i) => `${r.job_order_id}-${i+1}`),
+        createdAt: r.created_at || new Date().toISOString(),
+        totalDevices: Number(r.total_devices || 0),
+      }))
+    } catch (error) {
+      console.error('Get assigned job orders error:', error)
+      return []
+    }
+  },
+
+  async getUsersByRole(role: string): Promise<User[]> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return users.filter(u => u.role === role)
+    }
+
+    try {
+      const all = await apiRequest<any[]>('/api/users.php')
+      const desired = role.toLowerCase()
+      const mapMatch = (r: string) => {
+        const v = (r || '').toLowerCase()
+        if (desired === 'productionworker') return v === 'productionworker' || v === 'technician' || v.includes('production')
+        if (desired === 'testpersonnel') return v === 'testpersonnel' || v.includes('test')
+        if (desired === 'qualityinspector') return v === 'qualityinspector' || v.includes('quality') || v.includes('inspector')
+        return v === desired
+      }
+      return all.filter(u => mapMatch(u.role || '')).map(mapUser)
+    } catch (error) {
+      console.error('Get users by role error:', error)
+      return []
+    }
+  },
+
+  async seedDefaultWorkers(): Promise<boolean> {
+    try {
+      await apiRequest<any>('/api/seed_workers.php', { method: 'POST' })
+      return true
+    } catch (e) {
+      console.error('Seed default workers error:', e)
+      return false
+    }
+  },
+
+  async createAssignment(params: { jobOrderId: string; assignedToUserId: string; assignedRole: string; notes?: string }): Promise<boolean> {
+    if (USE_MOCK) {
+      return true
+    }
+
+    try {
+      await apiRequest<any>('/api/assignments.php', {
+        method: 'POST',
+        body: JSON.stringify({
+          job_order_id: params.jobOrderId,
+          assigned_to_user_id: Number(params.assignedToUserId),
+          assigned_role: params.assignedRole,
+          notes: params.notes || ''
+        })
+      })
+      return true
+    } catch (error) {
+      console.error('Create assignment error:', error)
+      return false
+    }
+  },
+
   async updateJobOrder(jobOrderId: string, updates: { total_devices?: number; due_date?: string; status?: string }): Promise<boolean> {
     if (USE_MOCK) {
       await ensureGenerated()
@@ -1337,6 +1418,82 @@ const api = {
       return true
     } catch (error) {
       console.error('Update supervisor notification error:', error)
+      return false
+    }
+  },
+
+  async getSupervisorTasks(): Promise<any[]> {
+    if (USE_MOCK) {
+      return [
+        {
+          task_id: 1,
+          job_order_id: 'JO-743393-791',
+          operation_name: 'Calibration',
+          actual_time_minutes: 15,
+          standard_time_minutes: 20,
+          efficiency_percentage: 133.3,
+          devices_completed: 2,
+          notes: 'dsadas',
+          status: 'pending',
+          date: '2025-10-30',
+          created_at: '2025-10-30 10:30:00',
+          technician_name: 'Admin User',
+          technician_username: 'admin',
+          total_devices: 10,
+          due_date: '2025-11-05',
+          priority: 'medium',
+          job_description: 'Calibration task for production batch',
+          serial_numbers: ['cdasdas', 'dasdas']
+        }
+      ]
+    }
+
+    try {
+      return await apiRequest<any[]>('/api/supervisor_tasks.php')
+    } catch (error) {
+      console.error('Get supervisor tasks error:', error)
+      return []
+    }
+  },
+
+  async approveTask(taskId: string, comments?: string): Promise<boolean> {
+    if (USE_MOCK) {
+      return true
+    }
+
+    try {
+      await apiRequest<any>('/api/task_approval.php', {
+        method: 'POST',
+        body: JSON.stringify({
+          task_id: taskId,
+          action: 'approve',
+          comments: comments || ''
+        })
+      })
+      return true
+    } catch (error) {
+      console.error('Approve task error:', error)
+      return false
+    }
+  },
+
+  async rejectTask(taskId: string, comments?: string): Promise<boolean> {
+    if (USE_MOCK) {
+      return true
+    }
+
+    try {
+      await apiRequest<any>('/api/task_approval.php', {
+        method: 'POST',
+        body: JSON.stringify({
+          task_id: taskId,
+          action: 'reject',
+          comments: comments || ''
+        })
+      })
+      return true
+    } catch (error) {
+      console.error('Reject task error:', error)
       return false
     }
   }
