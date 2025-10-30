@@ -50,9 +50,9 @@ const Sidebar: React.FC<{ onClose?: () => void }> = ({ onClose }) => {
         <div className="flex items-center justify-between">
           <div>
             <div className="text-2xl font-bold bg-gradient-to-r from-light-primary to-light-accent dark:from-dark-primary dark:to-dark-accent bg-clip-text text-transparent">
-              TTM
+              Aselsan
             </div>
-            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Task Manager</p>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Aselsan</p>
           </div>
           {/* Mobile close button */}
           <button

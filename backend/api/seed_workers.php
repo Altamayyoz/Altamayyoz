@@ -26,8 +26,8 @@ try {
         email VARCHAR(100) UNIQUE
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
 
-    // Default password: 'password'
-    $defaultHash = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+    // Default strong password (temporary) for seeded users
+    $defaultHash = password_hash('Aselsan#2025!', PASSWORD_DEFAULT);
 
     $defaults = [
         ['username' => 'tech.user1', 'name' => 'Technician 1', 'role' => 'Technician', 'email' => 'tech1@example.com'],

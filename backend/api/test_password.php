@@ -18,7 +18,7 @@ if ($conn) {
         echo "Role: " . $user['role'] . "\n\n";
         
         // Test password verification
-        $testPassword = 'password';
+        $testPassword = 'Aselsan#2025!';
         if (password_verify($testPassword, $user['password'])) {
             echo "✅ Password 'password' VERIFIES CORRECTLY\n";
         } else {
@@ -26,7 +26,7 @@ if ($conn) {
             echo "Attempting to fix password...\n";
             
             // Update password
-            $newHash = password_hash('password', PASSWORD_DEFAULT);
+            $newHash = password_hash($testPassword, PASSWORD_DEFAULT);
             $updateQuery = "UPDATE users SET password = :password WHERE username = 'admin'";
             $updateStmt = $conn->prepare($updateQuery);
             $updateStmt->bindParam(':password', $newHash);

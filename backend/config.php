@@ -60,6 +60,42 @@ function validateInput($data, $required_fields) {
     return $errors;
 }
 
+// Password policy validator
+function validatePasswordPolicy($password, $username = null) {
+    $errors = [];
+    if (!is_string($password)) {
+        $errors[] = 'Password must be a string';
+        return $errors;
+    }
+    $length = strlen($password);
+    if ($length < 8) {
+        $errors[] = 'Password must be at least 8 characters long';
+    }
+    if (!preg_match('/[A-Z]/', $password)) {
+        $errors[] = 'Password must contain at least one uppercase letter';
+    }
+    if (!preg_match('/[a-z]/', $password)) {
+        $errors[] = 'Password must contain at least one lowercase letter';
+    }
+    if (!preg_match('/\d/', $password)) {
+        $errors[] = 'Password must contain at least one number';
+    }
+    if (!preg_match('/[^A-Za-z0-9]/', $password)) {
+        $errors[] = 'Password must contain at least one special character';
+    }
+    $common = ['password','123456','12345678','qwerty','admin','letmein'];
+    foreach ($common as $bad) {
+        if (stripos($password, $bad) !== false) {
+            $errors[] = 'Password is too common';
+            break;
+        }
+    }
+    if ($username && stripos($password, (string)$username) !== false) {
+        $errors[] = 'Password must not include your username';
+    }
+    return $errors;
+}
+
 // Sanitize input
 function sanitizeInput($data) {
     return htmlspecialchars(strip_tags(trim($data)));

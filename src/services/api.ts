@@ -19,12 +19,13 @@ async function apiRequest<T>(endpoint: string, options: RequestInit = {}): Promi
 
   try {
     const response = await fetch(url, defaultOptions)
-    
+
     // Handle 404 specifically
     if (response.status === 404) {
       throw new Error(`API endpoint not found: ${endpoint}. Check that the backend server is running and the file exists at the expected path.`)
     }
-    
+
+    // Non-OK status: try to extract JSON error, otherwise text
     if (!response.ok) {
       const errorText = await response.text()
       let errorMessage = `API request failed: ${response.status} ${response.statusText}`
@@ -32,19 +33,32 @@ async function apiRequest<T>(endpoint: string, options: RequestInit = {}): Promi
         const errorData = JSON.parse(errorText)
         errorMessage = errorData.message || errorMessage
       } catch {
-        // If response isn't JSON, use the text or default message
         if (errorText) errorMessage = errorText
       }
       throw new Error(errorMessage)
     }
 
-    const data = await response.json()
-    
-    if (!data.success) {
-      throw new Error(data.message || 'API request failed')
+    // Validate JSON content-type before parsing
+    const contentType = response.headers.get('content-type') || ''
+    if (!contentType.includes('application/json')) {
+      const rawText = await response.text()
+      const snippet = rawText?.slice(0, 200) || ''
+      throw new Error(`Invalid JSON response from ${endpoint}. Received content-type: ${contentType}. Body preview: ${snippet}`)
     }
 
-    return data.data || data as T
+    let data: any
+    try {
+      data = await response.json()
+    } catch (e) {
+      const rawText = await response.text().catch(() => '')
+      throw new Error(`Failed to parse JSON from ${endpoint}. Body preview: ${rawText?.slice(0, 200)}`)
+    }
+
+    if (!data?.success) {
+      throw new Error(data?.message || 'API request failed')
+    }
+
+    return (data.data ?? data) as T
   } catch (error) {
     console.error(`API request error [${endpoint}]:`, error)
     throw error

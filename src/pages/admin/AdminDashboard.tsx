@@ -64,6 +64,44 @@ interface Alert {
   resolved: boolean
 }
 
+// Lightweight animated number for KPIs without extra deps
+const AnimatedNumber: React.FC<{ value: number; durationMs?: number }> = ({ value, durationMs = 600 }) => {
+  const [display, setDisplay] = useState(0)
+  useEffect(() => {
+    const start = performance.now()
+    const from = display
+    const delta = value - from
+    let raf = 0
+    const step = (t: number) => {
+      const p = Math.min(1, (t - start) / durationMs)
+      setDisplay(Math.round(from + delta * p))
+      if (p < 1) raf = requestAnimationFrame(step)
+    }
+    raf = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(raf)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
+  return <>{isNaN(display) ? 0 : display}</>
+}
+
+// Tiny sparkline using inline SVG
+const Sparkline: React.FC<{ points: number[]; colorClass?: string }> = ({ points, colorClass = 'text-light-primary dark:text-dark-primary' }) => {
+  if (!points || points.length === 0) return null
+  const width = 80
+  const height = 28
+  const max = Math.max(...points)
+  const min = Math.min(...points)
+  const norm = (v: number) => (max === min ? height / 2 : height - ((v - min) / (max - min)) * height)
+  const step = width / (points.length - 1 || 1)
+  const d = points.map((v, i) => `${i === 0 ? 'M' : 'L'} ${i * step} ${norm(v)}`).join(' ')
+  return (
+    <svg width={width} height={height} className={`opacity-80 ${colorClass}`} viewBox={`0 0 ${width} ${height}`}
+      aria-hidden="true">
+      <path d={d} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 const AdminDashboard: React.FC = () => {
   const [stats, setStats] = useState<SystemStats | null>(null)
   const [users, setUsers] = useState<User[]>([])
@@ -78,6 +116,9 @@ const AdminDashboard: React.FC = () => {
   const [recentActivity, setRecentActivity] = useState<any[]>([])
   const [planningActivities, setPlanningActivities] = useState<any>(null)
   const [loadingPlanningActivities, setLoadingPlanningActivities] = useState(false)
+  const [globalSearch, setGlobalSearch] = useState('')
+  const [autoRefresh, setAutoRefresh] = useState(false)
+  const [kpiTrend, setKpiTrend] = useState<number[]>([60, 62, 64, 63, 66, 68, 70])
   
   // Modal states
   const [showImportModal, setShowImportModal] = useState(false)
@@ -184,6 +225,20 @@ const AdminDashboard: React.FC = () => {
     loadDashboardData()
   }, [])
 
+  // Auto-refresh toggle
+  useEffect(() => {
+    if (!autoRefresh) return
+    const id = setInterval(() => {
+      loadDashboardData()
+      // Fake-trend update for sparkline visual: shift and add last +/- random
+      setKpiTrend(prev => {
+        const nextVal = Math.max(40, Math.min(98, (prev[prev.length - 1] || 65) + (Math.random() > 0.5 ? 1 : -1) * (1 + Math.floor(Math.random() * 3))))
+        return [...prev.slice(1), nextVal]
+      })
+    }, 15000)
+    return () => clearInterval(id)
+  }, [autoRefresh])
+
   const confirmDelete = async () => {
     if (!deleteItem) return
     
@@ -288,6 +343,7 @@ const AdminDashboard: React.FC = () => {
     if (userFilters.status && userFilters.status !== '' && user.status !== userFilters.status) return false
     if (userFilters.search && !user.name.toLowerCase().includes(userFilters.search.toLowerCase()) && 
         !user.email.toLowerCase().includes(userFilters.search.toLowerCase())) return false
+    if (globalSearch && !(`${user.name} ${user.email} ${user.username}`.toLowerCase().includes(globalSearch.toLowerCase()))) return false
     return true
   })
 
@@ -296,6 +352,7 @@ const AdminDashboard: React.FC = () => {
     if (jobOrderFilters.priority && jobOrderFilters.priority !== '' && order.priority !== jobOrderFilters.priority) return false
     if (jobOrderFilters.search && !order.title.toLowerCase().includes(jobOrderFilters.search.toLowerCase()) && 
         !order.id.toLowerCase().includes(jobOrderFilters.search.toLowerCase())) return false
+    if (globalSearch && !(`${order.title} ${order.id} ${order.assignedSupervisor || ''}`.toLowerCase().includes(globalSearch.toLowerCase()))) return false
     return true
   })
 
@@ -354,7 +411,25 @@ const AdminDashboard: React.FC = () => {
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 mt-1">System administration and oversight</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 items-center">
+          <div className="hidden md:flex items-center gap-2 px-3 py-2 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800">
+            <input
+              value={globalSearch}
+              onChange={(e) => setGlobalSearch(e.target.value)}
+              placeholder="Search users, jobs, alerts..."
+              className="bg-transparent text-sm outline-none text-neutral-800 dark:text-neutral-100 placeholder-neutral-400 w-56"
+            />
+            <button
+              onClick={() => {
+                setActiveTab('users')
+              }}
+              className="px-2 py-1 text-xs rounded-md bg-neutral-100 dark:bg-neutral-700 hover:opacity-90"
+            >Go</button>
+          </div>
+          <label className="flex items-center gap-2 text-xs text-neutral-600 dark:text-neutral-300 cursor-pointer select-none border border-neutral-200 dark:border-neutral-700 rounded-lg px-3 py-2 bg-white dark:bg-neutral-800">
+            <input type="checkbox" checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)} />
+            Auto refresh
+          </label>
           <button 
             onClick={() => setShowImportModal(true)}
             className="px-4 py-2 bg-blue-600 dark:bg-light-primary text-white rounded-lg hover:bg-blue-700 dark:hover:bg-light-primary/90 transition flex items-center gap-2"
@@ -372,46 +447,104 @@ const AdminDashboard: React.FC = () => {
         </div>
       </div>
 
+      {/* Quick Actions */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <button onClick={() => setShowAddUserModal(true)} className="group relative overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-[#1e293b] p-4 text-left hover:shadow transition">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-md bg-blue-100 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300">
+              <Users className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold">Add User</div>
+              <div className="text-xs text-neutral-500">Create a new account</div>
+            </div>
+          </div>
+        </button>
+        <button onClick={() => setActiveTab('joborders')} className="group relative overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-[#1e293b] p-4 text-left hover:shadow transition">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-md bg-emerald-100 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-300">
+              <FileText className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold">Manage Jobs</div>
+              <div className="text-xs text-neutral-500">View and edit job orders</div>
+            </div>
+          </div>
+        </button>
+        <button onClick={() => setShowBackupModal(true)} className="group relative overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-[#1e293b] p-4 text-left hover:shadow transition">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-md bg-violet-100 text-violet-700 dark:bg-violet-900/20 dark:text-violet-300">
+              <Upload className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold">Backup DB</div>
+              <div className="text-xs text-neutral-500">Safeguard your data</div>
+            </div>
+          </div>
+        </button>
+        <button onClick={() => setShowExportModal(true)} className="group relative overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-[#1e293b] p-4 text-left hover:shadow transition">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-md bg-amber-100 text-amber-700 dark:bg-amber-900/20 dark:text-amber-300">
+              <Download className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold">Export</div>
+              <div className="text-xs text-neutral-500">Share reports quickly</div>
+            </div>
+          </div>
+        </button>
+      </div>
+
       {/* System Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-[#1e293b] rounded-lg p-6 shadow border border-neutral-200 dark:border-neutral-700">
+        <div className="bg-white dark:bg-[#1e293b] rounded-lg p-6 shadow border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition">
           <div className="flex items-center justify-between">
             <div>
               <div className="text-sm text-neutral-600 dark:text-neutral-400 font-medium">Total Users</div>
-              <div className="text-3xl font-bold text-light-primary dark:text-dark-primary mt-2">{stats?.totalUsers}</div>
+              <div className="text-3xl font-bold text-light-primary dark:text-dark-primary mt-2">
+                <AnimatedNumber value={stats?.totalUsers || 0} />
+              </div>
               <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">All roles</div>
             </div>
             <Users className="w-8 h-8 text-light-primary dark:text-dark-primary" />
           </div>
+          <div className="mt-4"><Sparkline points={kpiTrend} /></div>
         </div>
 
-        <div className="bg-white dark:bg-[#1e293b] rounded-lg p-6 shadow border border-neutral-200 dark:border-neutral-700">
+        <div className="bg-white dark:bg-[#1e293b] rounded-lg p-6 shadow border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition">
           <div className="flex items-center justify-between">
             <div>
               <div className="text-sm text-neutral-600 dark:text-neutral-400 font-medium">Active Job Orders</div>
-              <div className="text-3xl font-bold text-light-accent dark:text-dark-accent mt-2">{stats?.activeJobOrders}</div>
+              <div className="text-3xl font-bold text-light-accent dark:text-dark-accent mt-2">
+                <AnimatedNumber value={stats?.activeJobOrders || 0} />
+              </div>
               <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">In progress</div>
             </div>
             <Activity className="w-8 h-8 text-light-accent dark:text-dark-accent" />
           </div>
+          <div className="mt-4"><Sparkline points={[...kpiTrend].map(v => v - 10)} colorClass="text-light-accent dark:text-dark-accent" /></div>
         </div>
 
-        <div className="bg-white dark:bg-[#1e293b] rounded-lg p-6 shadow border border-neutral-200 dark:border-neutral-700">
+        <div className="bg-white dark:bg-[#1e293b] rounded-lg p-6 shadow border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition">
           <div className="flex items-center justify-between">
             <div>
               <div className="text-sm text-neutral-600 dark:text-neutral-400 font-medium">Pending Approvals</div>
-              <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mt-2">{stats?.pendingApprovals}</div>
+              <div className="text-3xl font-bold text-orange-600 dark:text-orange-400 mt-2">
+                <AnimatedNumber value={stats?.pendingApprovals || 0} />
+              </div>
               <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">Awaiting review</div>
             </div>
             <Clock className="w-8 h-8 text-orange-600 dark:text-orange-400" />
           </div>
         </div>
 
-        <div className="bg-white dark:bg-[#1e293b] rounded-lg p-6 shadow border border-neutral-200 dark:border-neutral-700">
+        <div className="bg-white dark:bg-[#1e293b] rounded-lg p-6 shadow border border-neutral-200 dark:border-neutral-700 hover:shadow-md transition">
           <div className="flex items-center justify-between">
             <div>
               <div className="text-sm text-neutral-600 dark:text-neutral-400 font-medium">System Alerts</div>
-              <div className="text-3xl font-bold text-red-600 dark:text-red-400 mt-2">{stats?.systemAlerts}</div>
+              <div className="text-3xl font-bold text-red-600 dark:text-red-400 mt-2">
+                <AnimatedNumber value={stats?.systemAlerts || 0} />
+              </div>
               <div className="text-xs text-neutral-600 dark:text-neutral-400 mt-1">Require attention</div>
             </div>
             <AlertTriangle className="w-8 h-8 text-red-600 dark:text-red-400" />

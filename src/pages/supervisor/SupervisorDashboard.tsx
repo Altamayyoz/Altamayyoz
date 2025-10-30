@@ -580,38 +580,7 @@ const SupervisorDashboard: React.FC = () => {
             </div>
           </div>
 
-          {/* Recent Activity */}
-          <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700">
-            <div className="p-6 border-b border-neutral-200 dark:border-neutral-700">
-              <h3 className="font-semibold text-light-text dark:text-dark-text flex items-center gap-2">
-                <Activity className="w-5 h-5" />
-                Recent Activity
-              </h3>
-            </div>
-            <div className="p-6">
-              <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
-                {[
-                  { action: 'Work entry submitted', user: 'Alex Turner', time: '2 minutes ago', type: 'submission' },
-                  { action: 'Task completed', user: 'Bianca Stone', time: '15 minutes ago', type: 'completion' },
-                  { action: 'Alert resolved', user: 'Carlos Mendez', time: '30 minutes ago', type: 'alert' },
-                  { action: 'Work entry approved', user: 'Diana Kim', time: '45 minutes ago', type: 'approval' }
-                ].map((activity, index) => (
-                  <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-neutral-50 dark:bg-neutral-800/50">
-                    <div className={`w-2 h-2 rounded-full ${
-                      activity.type === 'submission' ? 'bg-blue-500' :
-                      activity.type === 'completion' ? 'bg-green-500' :
-                      activity.type === 'alert' ? 'bg-red-500' : 'bg-purple-500'
-                    }`} />
-                    <div className="flex-1">
-                      <div className="text-sm font-medium text-light-text dark:text-dark-text">{activity.action}</div>
-                      <div className="text-xs text-neutral-600 dark:text-neutral-400">{activity.user}</div>
-                    </div>
-                    <div className="text-xs text-neutral-500 dark:text-neutral-400">{activity.time}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          {/* Recent Activity removed as requested */}
         </div>
       )}
 

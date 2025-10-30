@@ -3,7 +3,7 @@
 require_once '../config.php';
 
 $username = 'admin';
-$password = 'password';
+$password = 'Aselsan#2025!';
 
 $db = new Database();
 $conn = $db->getConnection();

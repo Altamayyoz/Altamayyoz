@@ -1,10 +1,15 @@
 <?php
-// Set CORS headers FIRST
-header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
+// Set CORS headers FIRST (dynamic origin to allow credentials)
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
+if ($origin === '*') {
+    header('Access-Control-Allow-Origin: *');
+} else {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
+header('Content-Type: application/json; charset=utf-8');
 
 // Handle OPTIONS request for CORS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -31,6 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if (empty($username) || empty($newPassword)) {
             sendResponse(false, 'Username and new password are required');
+        }
+        
+        // Enforce password policy
+        $policyErrors = validatePasswordPolicy($newPassword, $username);
+        if (!empty($policyErrors)) {
+            sendResponse(false, 'Password policy not met: ' . implode('; ', $policyErrors));
         }
         
         $db = new Database();

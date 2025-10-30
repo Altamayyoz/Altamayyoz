@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Activity, Search, Filter, RefreshCw, Download, Trash2 } from 'lucide-react'
 import api from '../services/api'
 import LoadingSpinner from '../components/common/LoadingSpinner'
@@ -121,10 +121,12 @@ const ActivityHistory: React.FC = () => {
   const [activities, setActivities] = useState<ActivityLog[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
+  const [debouncedSearch, setDebouncedSearch] = useState('')
   const [filterRole, setFilterRole] = useState<string>('all')
   const [filterType, setFilterType] = useState<string>('all')
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage] = useState(50)
+  const [autoRefresh, setAutoRefresh] = useState(false)
 
   const loadActivities = async () => {
     try {
@@ -143,22 +145,51 @@ const ActivityHistory: React.FC = () => {
     loadActivities()
   }, [])
 
+  useEffect(() => {
+    if (!autoRefresh) return
+    const id = setInterval(() => {
+      loadActivities()
+    }, 20000)
+    return () => clearInterval(id)
+  }, [autoRefresh])
+
+  // Debounce search term
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedSearch(searchTerm.trim()), 300)
+    return () => clearTimeout(id)
+  }, [searchTerm])
+
   // Filter activities
-  const filteredActivities = activities.filter(activity => {
-    const matchesSearch = searchTerm === '' || 
-      activity.action.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      activity.user.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredActivities = useMemo(() => activities.filter(activity => {
+    const matchesSearch = debouncedSearch === '' || 
+      activity.action.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+      activity.user.toLowerCase().includes(debouncedSearch.toLowerCase())
     
     const matchesRole = filterRole === 'all' || activity.userRole === filterRole
     const matchesType = filterType === 'all' || activity.type === filterType
     
     return matchesSearch && matchesRole && matchesType
-  })
+  }), [activities, debouncedSearch, filterRole, filterType])
 
   // Pagination
   const totalPages = Math.ceil(filteredActivities.length / itemsPerPage)
   const startIndex = (currentPage - 1) * itemsPerPage
   const paginatedActivities = filteredActivities.slice(startIndex, startIndex + itemsPerPage)
+
+  // Group by calendar day for timeline headers
+  const groupedByDay = useMemo(() => {
+    const groups: Record<string, ActivityLog[]> = {}
+    paginatedActivities.forEach(a => {
+      const d = a.time ? new Date(a.time) : new Date()
+      const key = d.toLocaleDateString()
+      if (!groups[key]) groups[key] = []
+      groups[key].push(a)
+    })
+    // Preserve order by first appearance in paginatedActivities
+    return Object.keys(groups)
+      .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
+      .map(day => ({ day, items: groups[day] }))
+  }, [paginatedActivities])
 
   const formatTime = (timeStr: string) => {
     if (!timeStr) return 'Unknown'
@@ -212,6 +243,47 @@ const ActivityHistory: React.FC = () => {
     return roleColors[role || 'Admin'] || 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
   }
 
+  const getRoleStyles = (role?: string) => {
+    const r = (role || '').toLowerCase()
+    if (r.includes('admin')) return {
+      dot: 'bg-red-500',
+      ring: 'ring-red-100 dark:ring-red-900/30',
+      card: 'bg-red-900/30 dark:bg-red-900/40',
+      shadow: 'shadow-[0_0_0_1px_rgba(239,68,68,0.2)]'
+    }
+    if (r.includes('supervisor')) return {
+      dot: 'bg-purple-500',
+      ring: 'ring-purple-100 dark:ring-purple-900/30',
+      card: 'bg-purple-900/20 dark:bg-purple-900/30',
+      shadow: 'shadow-[0_0_0_1px_rgba(168,85,247,0.2)]'
+    }
+    if (r.includes('engineer') || r.includes('planningengineer')) return {
+      dot: 'bg-amber-500',
+      ring: 'ring-amber-100 dark:ring-amber-900/30',
+      card: 'bg-amber-900/20 dark:bg-amber-900/30',
+      shadow: 'shadow-[0_0_0_1px_rgba(245,158,11,0.2)]'
+    }
+    if (r.includes('quality')) return {
+      dot: 'bg-teal-500',
+      ring: 'ring-teal-100 dark:ring-teal-900/30',
+      card: 'bg-teal-900/20 dark:bg-teal-900/30',
+      shadow: 'shadow-[0_0_0_1px_rgba(20,184,166,0.2)]'
+    }
+    // technician / production worker default
+    if (r.includes('technician') || r.includes('productionworker') || r.includes('worker')) return {
+      dot: 'bg-blue-500',
+      ring: 'ring-blue-100 dark:ring-blue-900/30',
+      card: 'bg-blue-900/20 dark:bg-blue-900/30',
+      shadow: 'shadow-[0_0_0_1px_rgba(59,130,246,0.2)]'
+    }
+    return {
+      dot: 'bg-neutral-500',
+      ring: 'ring-neutral-100 dark:ring-neutral-800',
+      card: 'bg-neutral-800/30',
+      shadow: 'shadow-[0_0_0_1px_rgba(100,116,139,0.2)]'
+    }
+  }
+
   const exportActivities = () => {
     const csvContent = [
       ['Action', 'User', 'Role', 'Type', 'Time', 'Details'],
@@ -235,6 +307,17 @@ const ActivityHistory: React.FC = () => {
     toast.success('Activity history exported successfully')
   }
 
+  const exportJSON = () => {
+    const blob = new Blob([JSON.stringify(filteredActivities, null, 2)], { type: 'application/json' })
+    const url = window.URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `activity-history-${new Date().toISOString().split('T')[0]}.json`
+    a.click()
+    window.URL.revokeObjectURL(url)
+    toast.success('Activity history JSON exported successfully')
+  }
+
   const handleClearOldLogs = async () => {
     if (!confirm('Are you sure you want to clear logs older than 90 days?')) return
     
@@ -254,7 +337,7 @@ const ActivityHistory: React.FC = () => {
   return (
     <div className="flex h-[calc(100vh-120px)] bg-light-bg dark:bg-dark-bg">
       {/* Sidebar */}
-      <aside className="w-80 bg-white dark:bg-[#1e293b] border border-neutral-200 dark:border-neutral-700 rounded-lg p-6 overflow-y-auto">
+      <aside className="w-80 bg-white dark:bg-[#1e293b] border border-neutral-200 dark:border-neutral-700 rounded-lg p-6 overflow-y-auto sticky top-4 self-start h-[calc(100vh-140px)]">
         <div className="flex items-center gap-3 mb-6">
           <Activity className="w-6 h-6 text-light-primary dark:text-dark-primary" />
           <h2 className="text-xl font-bold text-light-text dark:text-dark-text">Activity History</h2>
@@ -270,6 +353,10 @@ const ActivityHistory: React.FC = () => {
             <div className="text-sm text-blue-600 dark:text-blue-400 mb-1">Filtered Results</div>
             <div className="text-3xl font-bold text-blue-700 dark:text-blue-300">{filteredActivities.length}</div>
           </div>
+          <label className="flex items-center gap-2 text-xs text-neutral-600 dark:text-neutral-300 cursor-pointer select-none border border-neutral-200 dark:border-neutral-700 rounded-lg px-3 py-2 bg-white dark:bg-neutral-800">
+            <input type="checkbox" checked={autoRefresh} onChange={(e) => setAutoRefresh(e.target.checked)} />
+            Auto refresh every 20s
+          </label>
         </div>
 
         {/* Search */}
@@ -339,6 +426,13 @@ const ActivityHistory: React.FC = () => {
             Export CSV
           </button>
           <button
+            onClick={exportJSON}
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition"
+          >
+            <Download className="w-4 h-4" />
+            Export JSON
+          </button>
+          <button
             onClick={handleClearOldLogs}
             className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
           >
@@ -364,49 +458,65 @@ const ActivityHistory: React.FC = () => {
                     Activity Log ({filteredActivities.length} {filteredActivities.length === 1 ? 'entry' : 'entries'})
                   </h3>
                 </div>
-                <div className="divide-y divide-neutral-200 dark:divide-neutral-700">
-                  {paginatedActivities.length > 0 ? (
-                    paginatedActivities.map((activity, index) => {
-                      const IconComponent = getRoleIcon(activity.userRole)
-                      return (
-                        <div key={index} className="p-4 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
-                          <div className="flex items-start gap-4">
-                            <div className="flex-shrink-0">
-                              <div className="w-12 h-12 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center">
-                                <IconComponent className="w-8 h-8" />
-                              </div>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-start justify-between gap-4 mb-2">
-                                <div>
-                                  <div className="text-sm font-medium text-light-text dark:text-dark-text mb-1">
-                                    {activity.action}
-                                  </div>
-                                  <div className="flex items-center gap-2 mb-1">
-                                    <span className="text-sm text-neutral-600 dark:text-neutral-400">
-                                      {activity.user}
-                                    </span>
-                                    {activity.userRole && (
-                                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium border ${getRoleBadgeColor(activity.userRole)}`}>
-                                        {activity.userRole}
-                                      </span>
-                                    )}
-                                  </div>
-                                </div>
-                                <div className="text-xs text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
-                                  {formatTime(activity.time)}
-                                </div>
-                              </div>
-                              {activity.details && (
-                                <div className="text-xs text-neutral-500 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800 rounded p-2">
-                                  {activity.details}
-                                </div>
-                              )}
-                            </div>
-                          </div>
+                <div className="relative">
+                  {/* Timeline rail */}
+                  <div className="absolute left-8 top-0 bottom-0 w-px bg-neutral-200 dark:bg-neutral-700" />
+                  {groupedByDay.length > 0 ? (
+                    groupedByDay.map(({ day, items }) => (
+                      <div key={day}>
+                        <div className="sticky top-0 z-10 bg-white/80 dark:bg-[#1e293b]/80 backdrop-blur border-b border-neutral-100 dark:border-neutral-700 px-6 py-2">
+                          <div className="text-xs font-semibold text-neutral-600 dark:text-neutral-300">{day} • {items.length} {items.length === 1 ? 'activity' : 'activities'}</div>
                         </div>
-                      )
-                    })
+                        {items.map((activity, index) => {
+                          const IconComponent = getRoleIcon(activity.userRole)
+                          const roleStyles = getRoleStyles(activity.userRole)
+                          return (
+                            <div key={`${day}-${index}`} className="p-4 pl-16 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition">
+                              <div className="flex items-start gap-4">
+                                {/* Timeline dot */}
+                                <div className={`absolute left-[1.25rem] mt-2 w-3 h-3 rounded-full ring-4 ${roleStyles.ring} ${roleStyles.dot}`} />
+                                {/* Icon card */}
+                                <div className="flex-shrink-0">
+                                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center border border-neutral-200/40 dark:border-neutral-700/40 ${roleStyles.card} ${roleStyles.shadow}`}>
+                                    <IconComponent className="w-8 h-8" />
+                                  </div>
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-start justify-between gap-4 mb-2">
+                                    <div>
+                                      <div className="text-sm font-medium text-light-text dark:text-dark-text mb-1">
+                                        {activity.action}
+                                      </div>
+                                      <div className="flex items-center gap-2 mb-1">
+                                        <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                                          {activity.user}
+                                        </span>
+                                        {activity.userRole && (
+                                          <span className={`px-2 py-0.5 rounded-full text-xs font-medium border ${getRoleBadgeColor(activity.userRole)}`}>
+                                            {activity.userRole}
+                                          </span>
+                                        )}
+                                        <span className={`px-2 py-0.5 rounded-full text-xs font-medium border bg-neutral-50 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 border-neutral-200 dark:border-neutral-700`}>
+                                          {activity.type}
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="text-xs text-neutral-500 dark:text-neutral-400 whitespace-nowrap">
+                                      {formatTime(activity.time)}
+                                    </div>
+                                  </div>
+                                  {activity.details && (
+                                    <div className="text-xs text-neutral-500 dark:text-neutral-400 bg-neutral-50 dark:bg-neutral-800 rounded p-2">
+                                      {activity.details}
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    ))
                   ) : (
                     <div className="p-8 text-center text-neutral-500 dark:text-neutral-400">
                       No activities found

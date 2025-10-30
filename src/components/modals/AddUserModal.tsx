@@ -40,8 +40,16 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose, onUserCrea
 
     if (!formData.password) {
       newErrors.password = 'Password is required'
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters'
+    } else {
+      const pwd = formData.password
+      const reqs: string[] = []
+      if (pwd.length < 8) reqs.push('8+ characters')
+      if (!/[A-Z]/.test(pwd)) reqs.push('one uppercase letter')
+      if (!/[a-z]/.test(pwd)) reqs.push('one lowercase letter')
+      if (!/\d/.test(pwd)) reqs.push('one number')
+      if (!/[^A-Za-z0-9]/.test(pwd)) reqs.push('one special character')
+      if (formData.username && pwd.toLowerCase().includes(formData.username.trim().toLowerCase())) reqs.push('not contain the username')
+      if (reqs.length > 0) newErrors.password = 'Must include: ' + reqs.join(', ')
     }
 
     if (formData.password !== formData.confirmPassword) {
@@ -199,6 +207,7 @@ const AddUserModal: React.FC<AddUserModalProps> = ({ isOpen, onClose, onUserCrea
                 placeholder="Enter password"
               />
             </div>
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Must be 8+ chars and include uppercase, lowercase, number, and special character.</p>
             {errors.password && <p className="mt-1 text-sm text-red-600">{errors.password}</p>}
           </div>
 

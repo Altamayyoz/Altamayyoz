@@ -5,22 +5,20 @@ ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 
 // Start session FIRST before any headers or output
-// Start session and set proper headers
 session_start();
 
-// CORS - allow requests from the requesting origin and allow credentials
-$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
-if ($origin === '*') {
-    // If no origin header present, fall back to wildcard (safe for same-origin testing).
-    header('Access-Control-Allow-Origin: *');
-} else {
-    // When credentials are required, Access-Control-Allow-Origin cannot be '*'
+// Set proper headers
+header('Content-Type: application/json; charset=utf-8');
+// With credentials, Access-Control-Allow-Origin cannot be '*'. Reflect the request origin if present.
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+if (!empty($origin)) {
     header('Access-Control-Allow-Origin: ' . $origin);
+} else {
+    header('Access-Control-Allow-Origin: *'); // same-origin dev
 }
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
-header('Content-Type: application/json; charset=utf-8');
 
 // Handle OPTIONS request for CORS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -45,7 +43,7 @@ try {
     if (!$user_id || $user_role !== 'supervisor') {
         echo json_encode([
             'success' => false,
-            'message' => 'Authentication error: supervisor session not found or role mismatch. Ensure the request includes cookies (fetch option credentials: "include") and that you are logged in as a supervisor.',
+            'message' => 'Authentication error: supervisor session not found or role mismatch. Ensure the request includes cookies (credentials: "include") and that you are logged in as a supervisor.',
             'debug' => [
                 'session_user_id' => $_SESSION['user_id'] ?? null,
                 'session_role' => $_SESSION['role'] ?? null,
@@ -147,20 +145,15 @@ function handlePostRequest() {
     $user_id = $_SESSION['user_id'] ?? null;
     $user_role = $_SESSION['role'] ?? null;
     
-    // Ensure we have a valid supervisor_id. If session is missing, use first supervisor from DB
-    if (!$user_id || $user_role !== 'supervisor') {
-        $dbTmp = new Database();
-        $connTmp = $dbTmp->getConnection();
-        $fallback_stmt = $connTmp->prepare("SELECT user_id FROM users WHERE role = 'supervisor' ORDER BY user_id ASC LIMIT 1");
-        $fallback_stmt->execute();
-        $fallback = $fallback_stmt->fetch();
-        if ($fallback && isset($fallback['user_id'])) {
-            $user_id = (int)$fallback['user_id'];
-            $user_role = 'supervisor';
-        } else {
-            sendResponse(false, 'No supervisor account exists. Please create a supervisor user.');
+    // Require a valid supervisor session; do not fallback to arbitrary accounts
+        // Ensure we have a valid supervisor_id via session only
+        if (!$user_id || $user_role !== 'supervisor') {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Authentication error: supervisor session missing or role mismatch. Please log in again.',
+            ]);
+            exit;
         }
-    }
     
     // Debug: Log the user_id being used
     error_log("handlePostRequest - Using supervisor ID: $user_id");
@@ -189,33 +182,19 @@ function handlePostRequest() {
     $db = new Database();
     $conn = $db->getConnection();
     
-    // Verify supervisor exists; if not, fallback to first available supervisor
+    // Verify supervisor exists and role is correct
     $verify_query = "SELECT user_id FROM users WHERE user_id = :user_id AND role = 'supervisor'";
     $verify_stmt = $conn->prepare($verify_query);
     $verify_stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $verify_stmt->execute();
     $supervisor = $verify_stmt->fetch();
-
     if (!$supervisor) {
-        // Fallback: choose the first supervisor by id
-        $fallback_stmt = $conn->prepare("SELECT user_id FROM users WHERE role = 'supervisor' ORDER BY user_id ASC LIMIT 1");
-        $fallback_stmt->execute();
-        $fallback_supervisor = $fallback_stmt->fetch();
-        if ($fallback_supervisor && isset($fallback_supervisor['user_id'])) {
-            $user_id = (int)$fallback_supervisor['user_id'];
-            error_log("Supervisor fallback applied. Using supervisor_id=" . $user_id);
-        } else {
-            error_log("ERROR: No supervisor account exists in database");
-            echo json_encode([
-                'success' => false,
-                'message' => "No supervisor account exists. Please create a supervisor user.",
-                'debug' => [
-                    'original_user_id' => $_SESSION['user_id'] ?? null,
-                    'session_role' => $_SESSION['role'] ?? null
-                ]
-            ]);
-            exit;
-        }
+        echo json_encode([
+            'success' => false,
+            'message' => 'Supervisor account not found. Contact an administrator.',
+            'debug' => [ 'user_id' => $user_id ]
+        ]);
+        exit;
     }
     
     // Check if task exists and is pending
@@ -298,9 +277,16 @@ function handlePostRequest() {
         // Rollback transaction
         $conn->rollback();
         error_log("Approval error: " . $e->getMessage());
+
+        // Friendlier error for FK violations or missing relationships
+        $msg = $e->getMessage();
+        if (strpos($msg, 'SQLSTATE[23000]') !== false || stripos($msg, 'foreign key constraint') !== false) {
+            $msg = 'Approval could not be saved because the supervisor account could not be validated. Please refresh, log in again as a supervisor, and retry.';
+        }
+
         echo json_encode([
             'success' => false,
-            'message' => 'Failed to process approval: ' . $e->getMessage(),
+            'message' => $msg,
             'debug' => [
                 'user_id' => $user_id,
                 'task_id' => $task_id,

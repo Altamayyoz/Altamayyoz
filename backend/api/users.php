@@ -121,6 +121,16 @@ function handlePostRequest() {
             return;
         }
         
+        // Enforce password policy
+        $policyErrors = validatePasswordPolicy($input['password'], $input['username'] ?? null);
+        if (!empty($policyErrors)) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Password policy not met: ' . implode('; ', $policyErrors)
+            ]);
+            return;
+        }
+        
         $db = new Database();
         $conn = $db->getConnection();
         

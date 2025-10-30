@@ -45,7 +45,20 @@ const LoginPage: React.FC = () => {
       const result = await login(username, password)
       
       if (result) {
-        nav('/')
+        // Role-based redirect for immediate feedback
+        const role = result.role
+        const target = role === 'Admin'
+          ? '/admin-dashboard'
+          : role === 'Supervisor'
+          ? '/supervisor-dashboard'
+          : role === 'PlanningEngineer'
+          ? '/planner-dashboard'
+          : role === 'QualityInspector'
+          ? '/quality-dashboard'
+          : role === 'ProductionWorker' || role === 'Technician'
+          ? '/production-dashboard'
+          : '/'
+        nav(target, { replace: true })
       } else {
         setError('Invalid credentials. Please check your username and password.')
       }
@@ -91,7 +104,7 @@ const LoginPage: React.FC = () => {
             <h1 className="text-3xl font-bold text-steel-blue dark:text-sky-accent mb-2">
               Welcome Back
             </h1>
-            <p className="text-steel-blue/70 dark:text-cool-gray">Sign in to your Task Manager account</p>
+            <p className="text-steel-blue/70 dark:text-cool-gray">Sign in to your Aselsan account</p>
           </div>
 
           {/* Error message */}
@@ -152,6 +165,9 @@ const LoginPage: React.FC = () => {
                 </button>
               </div>
             </div>
+            <p className="mt-2 text-xs text-cool-gray dark:text-muted-steel">
+              Passwords must meet policy: 8+ chars, upper, lower, number, special.
+            </p>
           </div>
 
           {/* Remember me */}

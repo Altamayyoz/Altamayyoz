@@ -82,11 +82,17 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 
-// Set proper headers FIRST
-header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
+// Set proper headers FIRST (dynamic origin for credentialed requests)
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
+if ($origin === '*') {
+    header('Access-Control-Allow-Origin: *');
+} else {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Credentials: true');
+header('Content-Type: application/json; charset=utf-8');
 
 // Handle OPTIONS request for CORS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -97,10 +103,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 try {
     require_once '../config.php';
 
-    // Temporary fix: Skip authentication for testing
-    // TODO: Implement proper API authentication
-    $user_id = 2; // Default to supervisor for testing
-    $user_role = 'supervisor';
+    // Require authenticated supervisor
+    session_start();
+    $user_id = $_SESSION['user_id'] ?? null;
+    $user_role = $_SESSION['role'] ?? null;
+    if (!$user_id || $user_role !== 'supervisor') {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Authentication required: supervisor session not found.'
+        ]);
+        exit;
+    }
 } catch (Exception $e) {
     echo json_encode([
         'success' => false,

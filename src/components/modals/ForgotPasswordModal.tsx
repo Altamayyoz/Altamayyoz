@@ -34,8 +34,16 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({ isOpen, onClo
       return
     }
     
-    if (newPassword.length < 6) {
-      setError('Password must be at least 6 characters long')
+    // Password policy (client-side mirror)
+    const policyErrors: string[] = []
+    if (newPassword.length < 8) policyErrors.push('at least 8 characters')
+    if (!/[A-Z]/.test(newPassword)) policyErrors.push('one uppercase letter')
+    if (!/[a-z]/.test(newPassword)) policyErrors.push('one lowercase letter')
+    if (!/\d/.test(newPassword)) policyErrors.push('one number')
+    if (!/[^A-Za-z0-9]/.test(newPassword)) policyErrors.push('one special character')
+    if (username && newPassword.toLowerCase().includes(username.trim().toLowerCase())) policyErrors.push('not contain your username')
+    if (policyErrors.length > 0) {
+      setError('Password must include: ' + policyErrors.join(', '))
       return
     }
     
@@ -167,6 +175,9 @@ const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({ isOpen, onClo
                   )}
                 </button>
               </div>
+              <p className="mt-2 text-xs text-cool-gray dark:text-muted-steel">
+                Must be at least 8 characters and include uppercase, lowercase, number, and special character.
+              </p>
             </div>
 
             <div>

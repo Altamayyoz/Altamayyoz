@@ -1,10 +1,15 @@
 <?php
-// Set CORS headers FIRST
-header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
+// Set CORS headers FIRST (dynamic origin so cookies/sessions can be used)
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
+if ($origin === '*') {
+    header('Access-Control-Allow-Origin: *');
+} else {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Access-Control-Allow-Credentials: true');
+header('Content-Type: application/json; charset=utf-8');
 
 // Handle OPTIONS request for CORS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {

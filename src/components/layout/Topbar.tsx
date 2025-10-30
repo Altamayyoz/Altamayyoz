@@ -17,7 +17,7 @@ const Topbar: React.FC<{ onMenuClick?: () => void }> = ({ onMenuClick }) => {
         >
           <Menu className="w-5 h-5 text-neutral-600 dark:text-neutral-300" />
         </button>
-        <div className="text-lg font-bold text-light-primary dark:text-dark-primary">TTM</div>
+        <div className="text-lg font-bold text-light-primary dark:text-dark-primary">Aselsan</div>
       </div>
       <div className="flex items-center gap-6">
         {/* Dark Mode Toggle */}

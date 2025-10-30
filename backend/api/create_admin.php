@@ -27,7 +27,14 @@ try {
     
     // Create admin user
     $username = 'admin';
-    $password = 'password'; // Default password
+    // Generate a policy-compliant temporary password (min 12 chars, upper, lower, number, special)
+    $alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789@#$%&*?!';
+    $password = '';
+    for ($i = 0; $i < 14; $i++) {
+        $password .= $alphabet[random_int(0, strlen($alphabet) - 1)];
+    }
+    // Ensure minimal policy guarantees
+    $password .= 'A1!';
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     $name = 'System Administrator';
     $email = 'admin@company.com';
