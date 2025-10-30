@@ -9,20 +9,18 @@ import RequireRole from './components/auth/RequireRole'
 
 const LoginPage = lazy(() => import('./pages/Login'))
 const ProductionWorkerDashboard = lazy(() => import('./pages/production/ProductionWorkerDashboard'))
-const TechnicianDashboard = lazy(() => import('./pages/technician/TechnicianDashboard'))
 const SupervisorDashboard = lazy(() => import('./pages/supervisor/SupervisorDashboard'))
 const PlanningEngineerDashboard = lazy(() => import('./pages/planning/PlanningEngineerDashboard'))
-const TestPersonnelDashboard = lazy(() => import('./pages/test/TestPersonnelDashboard'))
 const QualityInspectorDashboard = lazy(() => import('./pages/quality/QualityInspectorDashboard'))
 const JobOrdersPage = lazy(() => import('./pages/JobOrders'))
 const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const AccessDeniedPage = lazy(() => import('./pages/AccessDenied'))
 const DeviceTrackingPage = lazy(() => import('./pages/DeviceTracking'))
 const ProductionWorkLogsPage = lazy(() => import('./pages/production/ProductionWorkLogsPage'))
-const TestLogsPage = lazy(() => import('./pages/test/TestLogsPage'))
 const PendingInspectionsPage = lazy(() => import('./pages/quality/PendingInspectionsPage'))
 const QualityReportsPage = lazy(() => import('./pages/quality/QualityReportsPage'))
 const WorkApprovalsPage = lazy(() => import('./pages/supervisor/WorkApprovalsPage'))
+const ActivityHistoryPage = lazy(() => import('./pages/ActivityHistory'))
 
 const App: React.FC = () => {
   const { user } = useAuth()
@@ -53,8 +51,6 @@ const App: React.FC = () => {
                       ? '/production-dashboard'
                       : user?.role === 'Technician'
                       ? '/technician-dashboard'
-                      : user?.role === 'TestPersonnel'
-                      ? '/test-dashboard'
                       : user?.role === 'QualityInspector'
                       ? '/quality-dashboard'
                       : '/login'
@@ -82,7 +78,7 @@ const App: React.FC = () => {
               path="technician-dashboard"
               element={
                 <RequireRole roles={["Technician"] as Role[]}>
-                  <TechnicianDashboard />
+                  <ProductionWorkerDashboard />
                 </RequireRole>
               }
             />
@@ -103,14 +99,6 @@ const App: React.FC = () => {
               }
             />
             <Route
-              path="test-dashboard"
-              element={
-                <RequireRole roles={["TestPersonnel"] as Role[]}>
-                  <TestPersonnelDashboard />
-                </RequireRole>
-              }
-            />
-            <Route
               path="quality-dashboard"
               element={
                 <RequireRole roles={["QualityInspector"] as Role[]}>
@@ -121,10 +109,10 @@ const App: React.FC = () => {
             <Route path="job-orders" element={<JobOrdersPage />} />
             <Route path="device-tracking" element={<DeviceTrackingPage />} />
             <Route path="production-work-logs" element={<ProductionWorkLogsPage />} />
-            <Route path="test-logs" element={<TestLogsPage />} />
             <Route path="pending-inspections" element={<PendingInspectionsPage />} />
             <Route path="quality-reports" element={<QualityReportsPage />} />
             <Route path="work-approvals" element={<WorkApprovalsPage />} />
+            <Route path="activity-history" element={<ActivityHistoryPage />} />
           </Route>
           <Route path="*" element={<Navigate to={user ? '/' : '/login'} />} />
         </Routes>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Bell, Menu, Sun, Moon } from 'lucide-react'
+import { Menu, Sun, Moon } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 import { useApp } from '../../contexts/AppContext'
 
@@ -31,11 +31,6 @@ const Topbar: React.FC<{ onMenuClick?: () => void }> = ({ onMenuClick }) => {
           ) : (
             <Moon className="w-5 h-5 text-neutral-600 dark:text-neutral-300" />
           )}
-        </button>
-
-        <button aria-label="notifications" className="relative p-2 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 transition group">
-          <Bell className="w-5 h-5 text-neutral-600 dark:text-neutral-300 group-hover:text-light-primary dark:group-hover:text-dark-primary transition" />
-          <span className="absolute top-1 right-1 inline-flex items-center justify-center w-5 h-5 text-xs font-bold leading-none text-white bg-danger rounded-full">3</span>
         </button>
 
         <div className="h-6 w-px bg-neutral-200 dark:bg-neutral-600"></div>

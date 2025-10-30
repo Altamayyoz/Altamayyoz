@@ -6,19 +6,25 @@ import type { Role } from '../../types'
 const NAV_BY_ROLE: Record<Role, Array<{ to: string; label: string }>> = {
   Admin: [
     { to: '/admin-dashboard', label: '🛠️ Admin Dashboard' },
+    { to: '/activity-history', label: '📊 Activity History' },
     { to: '/device-tracking', label: '📱 Device Tracking' }
   ],
   ProductionWorker: [
-    { to: '/production-dashboard', label: '🔧 Production Dashboard' },
-    { to: '/job-orders', label: '📋 Job Orders' }
+    { to: '/production-dashboard', label: '🔧 Technician Dashboard' }
+  ],
+  Technician: [
+    { to: '/technician-dashboard', label: '🔧 Technician Dashboard' },
+    { to: '/activity-history', label: '📊 Activity History' }
   ],
   Supervisor: [
     { to: '/supervisor-dashboard', label: '👔 Supervisor Dashboard' },
+    { to: '/activity-history', label: '📊 Activity History' },
     { to: '/work-approvals', label: '✅ Work Approvals' },
     { to: '/job-orders', label: '📋 Job Orders' }
   ],
   PlanningEngineer: [
     { to: '/planner-dashboard', label: '🗓️ Planner Dashboard' },
+    { to: '/activity-history', label: '📊 Activity History' },
     { to: '/job-orders', label: '📋 Job Orders' },
     { to: '/device-tracking', label: '📱 Device Tracking' }
   ],

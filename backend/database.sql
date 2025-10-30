@@ -268,6 +268,27 @@ FROM job_orders jo
 LEFT JOIN tasks t ON jo.job_order_id = t.job_order_id AND t.status = 'approved'
 GROUP BY jo.job_order_id, jo.total_devices, jo.due_date, jo.status;
 
+-- Approval history table (used by backend/api/approvals.php)
+CREATE TABLE IF NOT EXISTS approval_history (
+    approval_history_id INT AUTO_INCREMENT PRIMARY KEY,
+    task_id INT NOT NULL,
+    supervisor_id INT NOT NULL,
+    technician_id INT NULL,
+    action_type ENUM('approved', 'rejected') NOT NULL,
+    comments TEXT,
+    approval_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (task_id) REFERENCES tasks(task_id) ON DELETE CASCADE,
+    FOREIGN KEY (supervisor_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (technician_id) REFERENCES technicians(technician_id) ON DELETE SET NULL
+);
+
+-- Ensure at least one supervisor user exists for FK on approvals.supervisor_id
+INSERT INTO users (username, password, role, name, email)
+SELECT 'supervisor1', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'supervisor', 'John Supervisor', 'supervisor@company.com'
+WHERE NOT EXISTS (
+    SELECT 1 FROM users WHERE role = 'supervisor'
+);
+
 -- Supervisor notifications table
 CREATE TABLE supervisor_notifications (
     notification_id INT AUTO_INCREMENT PRIMARY KEY,

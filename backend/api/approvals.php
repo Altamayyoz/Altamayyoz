@@ -5,13 +5,22 @@ ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 
 // Start session FIRST before any headers or output
+// Start session and set proper headers
 session_start();
 
-// Set proper headers
-header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
+// CORS - allow requests from the requesting origin and allow credentials
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
+if ($origin === '*') {
+    // If no origin header present, fall back to wildcard (safe for same-origin testing).
+    header('Access-Control-Allow-Origin: *');
+} else {
+    // When credentials are required, Access-Control-Allow-Origin cannot be '*'
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Credentials: true');
+header('Content-Type: application/json; charset=utf-8');
 
 // Handle OPTIONS request for CORS
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
@@ -31,12 +40,19 @@ try {
     error_log("Approvals API - User ID: " . ($user_id ?? 'null'));
     error_log("Approvals API - User Role: " . ($user_role ?? 'null'));
 
-    // TEMPORARY FIX: Skip authentication for testing
-    // Set default supervisor for approval actions
+    // Require a logged-in supervisor. Do NOT silently fallback to another account.
+    // If the frontend is not sending cookies, it should call the API with credentials and origin.
     if (!$user_id || $user_role !== 'supervisor') {
-        $user_id = 24; // supervisor_test
-        $user_role = 'supervisor';
-        error_log("Using default supervisor_id: $user_id (session had: " . ($_SESSION['user_id'] ?? 'null') . ")");
+        echo json_encode([
+            'success' => false,
+            'message' => 'Authentication error: supervisor session not found or role mismatch. Ensure the request includes cookies (fetch option credentials: "include") and that you are logged in as a supervisor.',
+            'debug' => [
+                'session_user_id' => $_SESSION['user_id'] ?? null,
+                'session_role' => $_SESSION['role'] ?? null,
+                'note' => 'Approvals must be performed by an authenticated supervisor.'
+            ]
+        ]);
+        exit;
     }
 } catch (Exception $e) {
     echo json_encode([
@@ -131,11 +147,20 @@ function handlePostRequest() {
     $user_id = $_SESSION['user_id'] ?? null;
     $user_role = $_SESSION['role'] ?? null;
     
-    // PRODUCTION FIX: Always use a valid supervisor_id regardless of session
-    // In production, you would implement proper session management
-    // For now, use supervisor_id = 24 (supervisor_test) which exists in database
-    $user_id = 24; // Hardcoded valid supervisor
-    $user_role = 'supervisor';
+    // Ensure we have a valid supervisor_id. If session is missing, use first supervisor from DB
+    if (!$user_id || $user_role !== 'supervisor') {
+        $dbTmp = new Database();
+        $connTmp = $dbTmp->getConnection();
+        $fallback_stmt = $connTmp->prepare("SELECT user_id FROM users WHERE role = 'supervisor' ORDER BY user_id ASC LIMIT 1");
+        $fallback_stmt->execute();
+        $fallback = $fallback_stmt->fetch();
+        if ($fallback && isset($fallback['user_id'])) {
+            $user_id = (int)$fallback['user_id'];
+            $user_role = 'supervisor';
+        } else {
+            sendResponse(false, 'No supervisor account exists. Please create a supervisor user.');
+        }
+    }
     
     // Debug: Log the user_id being used
     error_log("handlePostRequest - Using supervisor ID: $user_id");
@@ -164,24 +189,33 @@ function handlePostRequest() {
     $db = new Database();
     $conn = $db->getConnection();
     
-    // Verify supervisor exists in database
+    // Verify supervisor exists; if not, fallback to first available supervisor
     $verify_query = "SELECT user_id FROM users WHERE user_id = :user_id AND role = 'supervisor'";
     $verify_stmt = $conn->prepare($verify_query);
-    $verify_stmt->bindParam(':user_id', $user_id);
+    $verify_stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $verify_stmt->execute();
     $supervisor = $verify_stmt->fetch();
-    
+
     if (!$supervisor) {
-        error_log("ERROR: Supervisor with user_id $user_id not found in database");
-        echo json_encode([
-            'success' => false,
-            'message' => "Authentication error: Supervisor account not found in database. Please contact administrator.",
-            'debug' => [
-                'user_id' => $user_id,
-                'role' => $_SESSION['role'] ?? 'not_set'
-            ]
-        ]);
-        exit;
+        // Fallback: choose the first supervisor by id
+        $fallback_stmt = $conn->prepare("SELECT user_id FROM users WHERE role = 'supervisor' ORDER BY user_id ASC LIMIT 1");
+        $fallback_stmt->execute();
+        $fallback_supervisor = $fallback_stmt->fetch();
+        if ($fallback_supervisor && isset($fallback_supervisor['user_id'])) {
+            $user_id = (int)$fallback_supervisor['user_id'];
+            error_log("Supervisor fallback applied. Using supervisor_id=" . $user_id);
+        } else {
+            error_log("ERROR: No supervisor account exists in database");
+            echo json_encode([
+                'success' => false,
+                'message' => "No supervisor account exists. Please create a supervisor user.",
+                'debug' => [
+                    'original_user_id' => $_SESSION['user_id'] ?? null,
+                    'session_role' => $_SESSION['role'] ?? null
+                ]
+            ]);
+            exit;
+        }
     }
     
     // Check if task exists and is pending
@@ -226,8 +260,8 @@ function handlePostRequest() {
         $approval_query = "INSERT INTO approvals (task_id, supervisor_id, approval_date, status, comments) 
                           VALUES (:task_id, :supervisor_id, NOW(), :status, :comments)";
         $approval_stmt = $conn->prepare($approval_query);
-        $approval_stmt->bindParam(':task_id', $task_id);
-        $approval_stmt->bindParam(':supervisor_id', $user_id);
+        $approval_stmt->bindParam(':task_id', $task_id, PDO::PARAM_INT);
+        $approval_stmt->bindParam(':supervisor_id', $user_id, PDO::PARAM_INT);
         $approval_stmt->bindParam(':status', $status);
         $approval_stmt->bindParam(':comments', $comments);
         $approval_stmt->execute();

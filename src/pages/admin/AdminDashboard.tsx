@@ -490,7 +490,7 @@ const AdminDashboard: React.FC = () => {
               </h3>
             </div>
             <div className="p-6">
-              <div className="space-y-4">
+              <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
                 {recentActivity.length > 0 ? (
                   recentActivity.map((activity, index) => {
                     const timeAgo = activity.time ? (() => {

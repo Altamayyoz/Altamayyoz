@@ -40,7 +40,7 @@ try {
 function handleGetRequest($conn) {
     $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 20;
     
-    $query = "SELECT al.*, u.name as user_name, u.username 
+    $query = "SELECT al.*, u.name as user_name, u.username, u.role 
               FROM activity_log al
               LEFT JOIN users u ON al.user_id = u.user_id
               ORDER BY al.created_at DESC
@@ -50,7 +50,7 @@ function handleGetRequest($conn) {
     $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
     $stmt->execute();
     
-    $activities = $stmt->fetchAll();
+    $activities = $stmt->fetchAll(PDO::FETCH_ASSOC);
     
     // Map to frontend format
     $mappedActivities = array_map(function($activity) {
@@ -66,12 +66,29 @@ function handleGetRequest($conn) {
             $type = 'report';
         }
         
+        // Map backend role to frontend role format
+        $role = $activity['role'] ?? 'Unknown';
+        if (strpos(strtolower($role), 'admin') !== false) {
+            $role = 'Admin';
+        } elseif (strpos(strtolower($role), 'supervisor') !== false) {
+            $role = 'Supervisor';
+        } elseif (strpos(strtolower($role), 'engineer') !== false || strpos(strtolower($role), 'planner') !== false) {
+            $role = 'PlanningEngineer';
+        } elseif (strpos(strtolower($role), 'technician') !== false) {
+            $role = 'Technician';
+        } elseif (strpos(strtolower($role), 'quality') !== false) {
+            $role = 'QualityInspector';
+        } elseif (strpos(strtolower($role), 'worker') !== false) {
+            $role = 'ProductionWorker';
+        }
+        
         return [
             'action' => $activity['action'],
             'user' => $activity['user_name'] ?? $activity['username'] ?? 'System',
             'time' => $activity['created_at'],
             'type' => $type,
-            'details' => $activity['details']
+            'details' => $activity['details'],
+            'userRole' => $role
         ];
     }, $activities);
     

@@ -1,4 +1,86 @@
 <?php
+// Basic JSON API to return recent approval history
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+
+session_start();
+
+// CORS
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
+if ($origin === '*') {
+    header('Access-Control-Allow-Origin: *');
+} else {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
+header('Access-Control-Allow-Methods: GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Credentials: true');
+header('Content-Type: application/json; charset=utf-8');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
+try {
+    require_once '../config.php';
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 20;
+    if ($limit <= 0 || $limit > 200) { $limit = 20; }
+
+    // Join to enrich with names and task details
+    $sql = "
+        SELECT 
+            ah.approval_history_id,
+            ah.task_id,
+            ah.supervisor_id,
+            ah.technician_id,
+            ah.action_type,
+            ah.comments,
+            ah.approval_date,
+            t.operation_name,
+            t.devices_completed,
+            t.efficiency_percentage,
+            jo.job_order_id,
+            su.name AS supervisor_name,
+            tu.name AS technician_name
+        FROM approval_history ah
+        LEFT JOIN tasks t ON ah.task_id = t.task_id
+        LEFT JOIN job_orders jo ON t.job_order_id = jo.job_order_id
+        LEFT JOIN users su ON ah.supervisor_id = su.user_id
+        LEFT JOIN technicians tech ON ah.technician_id = tech.technician_id
+        LEFT JOIN users tu ON tech.user_id = tu.user_id
+        ORDER BY ah.approval_date DESC
+        LIMIT :limit
+    ";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->execute();
+    $rows = $stmt->fetchAll();
+
+    echo json_encode([
+        'success' => true,
+        'message' => 'Approval history loaded',
+        'data' => $rows
+    ]);
+} catch (Exception $e) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Error: ' . $e->getMessage(),
+    ]);
+} catch (Error $e) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Fatal error: ' . $e->getMessage(),
+    ]);
+}
+?>
+
+<?php
 // Disable error display to prevent HTML output
 error_reporting(E_ALL);
 ini_set('display_errors', 0);

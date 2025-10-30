@@ -1,4 +1,82 @@
 <?php
+// Minimal API to list supervisor notifications
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+
+session_start();
+
+// CORS
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
+if ($origin === '*') {
+    header('Access-Control-Allow-Origin: *');
+} else {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
+header('Access-Control-Allow-Methods: GET, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Credentials: true');
+header('Content-Type: application/json; charset=utf-8');
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
+
+try {
+    require_once '../config.php';
+    $db = new Database();
+    $conn = $db->getConnection();
+
+    $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 50;
+    if ($limit <= 0 || $limit > 200) { $limit = 50; }
+
+    $sql = "
+        SELECT 
+            sn.notification_id AS id,
+            sn.job_order_id,
+            sn.technician_id,
+            sn.task_id,
+            sn.notification_type,
+            sn.message,
+            sn.status,
+            sn.created_at,
+            t.operation_name,
+            t.devices_completed,
+            t.actual_time_minutes,
+            t.efficiency_percentage,
+            u.name AS technician_name
+        FROM supervisor_notifications sn
+        LEFT JOIN tasks t ON sn.task_id = t.task_id
+        LEFT JOIN technicians tech ON sn.technician_id = tech.technician_id
+        LEFT JOIN users u ON tech.user_id = u.user_id
+        ORDER BY sn.created_at DESC
+        LIMIT :limit
+    ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->execute();
+    $rows = $stmt->fetchAll();
+
+    echo json_encode([
+        'success' => true,
+        'message' => 'Supervisor notifications loaded',
+        'data' => $rows
+    ]);
+} catch (Exception $e) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Error: ' . $e->getMessage(),
+    ]);
+} catch (Error $e) {
+    echo json_encode([
+        'success' => false,
+        'message' => 'Fatal error: ' . $e->getMessage(),
+    ]);
+}
+?>
+
+<?php
 // Disable error display to prevent HTML output
 error_reporting(E_ALL);
 ini_set('display_errors', 0);

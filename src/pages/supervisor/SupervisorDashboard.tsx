@@ -18,7 +18,8 @@ import {
   UserCheck,
   UserX,
   Timer,
-  FileText
+  FileText,
+  User
 } from 'lucide-react'
 import api from '../../services/api'
 import LoadingSpinner from '../../components/common/LoadingSpinner'
@@ -514,10 +515,9 @@ const SupervisorDashboard: React.FC = () => {
       {/* Navigation Tabs */}
       <div className="border-b border-neutral-200 dark:border-neutral-700">
         <nav className="flex space-x-8">
-          {[
+          {[ 
             { id: 'overview', label: 'Overview', icon: BarChart3 },
             { id: 'approvals', label: 'Pending Approvals', icon: Clock },
-            { id: 'pendingtasks', label: 'Pending Tasks', icon: CheckCircle },
             { id: 'taskcompletions', label: 'Task Completions', icon: MessageSquare },
             { id: 'technicians', label: 'Team Performance', icon: Users },
             { id: 'joborders', label: 'Job Orders', icon: FileText },
@@ -589,7 +589,7 @@ const SupervisorDashboard: React.FC = () => {
               </h3>
             </div>
             <div className="p-6">
-              <div className="space-y-4">
+              <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
                 {[
                   { action: 'Work entry submitted', user: 'Alex Turner', time: '2 minutes ago', type: 'submission' },
                   { action: 'Task completed', user: 'Bianca Stone', time: '15 minutes ago', type: 'completion' },
@@ -1228,7 +1228,6 @@ const SupervisorDashboard: React.FC = () => {
       />
 
       {/* Comment Modal for Approve/Reject */}
-      {console.log('Modal render check - showCommentModal:', showCommentModal)}
       {showCommentModal && (
         <div className="fixed inset-0 z-50 overflow-y-auto">
           <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">

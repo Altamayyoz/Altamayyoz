@@ -60,7 +60,7 @@ const ProductionWorkerDashboard: React.FC = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            🔧 Production Dashboard
+            🔧 Technician Dashboard
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
             Manage your production work and track progress
