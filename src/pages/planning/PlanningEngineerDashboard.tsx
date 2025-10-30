@@ -21,10 +21,10 @@ import {
   Package,
   Bell,
   X,
-  Send,
   ArrowUp,
   ArrowDown,
-  RefreshCw
+  RefreshCw,
+  Send
 } from 'lucide-react'
 import api from '../../services/api'
 import LoadingSpinner from '../../components/common/LoadingSpinner'
@@ -39,7 +39,6 @@ import ViewTemplateModal from '../../components/modals/ViewTemplateModal'
 import EditTemplateModal from '../../components/modals/EditTemplateModal'
 import MetricDetailsModal from '../../components/modals/MetricDetailsModal'
 import EditJobOrderModal from '../../components/modals/EditJobOrderModal'
-import SendAlertModal from '../../components/modals/SendAlertModal'
 import Modal from '../../components/common/Modal'
 import ConfirmationDialog from '../../components/common/ConfirmationDialog'
 import { toast } from 'react-hot-toast'
@@ -99,6 +98,8 @@ const PlanningEngineerDashboard: React.FC = () => {
   const [deletingJobOrder, setDeletingJobOrder] = useState<JobOrder | null>(null)
   const [showDeleteTemplateConfirm, setShowDeleteTemplateConfirm] = useState(false)
   const [deletingTemplate, setDeletingTemplate] = useState<{ id: string; name: string } | null>(null)
+  const [sendingBottleneckAlert, setSendingBottleneckAlert] = useState(false)
+  const [showBottleneckSendConfirm, setShowBottleneckSendConfirm] = useState(false)
   
   // Filter and warehouse state
   const [filters, setFilters] = useState<Record<string, any>>({})
@@ -123,9 +124,6 @@ const PlanningEngineerDashboard: React.FC = () => {
     senderName: string
     senderRole: string
   }>>([])
-  const [showSendAlertModal, setShowSendAlertModal] = useState(false)
-  const [selectedJobOrderForAlert, setSelectedJobOrderForAlert] = useState<string | undefined>(undefined)
-  const [defaultAlertTarget, setDefaultAlertTarget] = useState<'supervisor' | 'admin' | undefined>(undefined)
 
   useEffect(() => {
     loadDashboardData()
@@ -164,7 +162,7 @@ const PlanningEngineerDashboard: React.FC = () => {
           createdAt: j.created_date || j.createdAt || new Date().toISOString(),
           dueDate: j.due_date || j.dueDate,
           status: j.status || 'active',
-          priority: ['High', 'Medium', 'Low'][Math.floor(Math.random() * 3)] as 'High' | 'Medium' | 'Low'
+          priority: (j.priority || ['Critical', 'High', 'Medium', 'Low'][Math.floor(Math.random() * 4)]) as 'Critical' | 'High' | 'Medium' | 'Low'
         }
       })
 
@@ -216,14 +214,67 @@ const PlanningEngineerDashboard: React.FC = () => {
     }
   }
   
-  const handleSendAlert = (target?: 'supervisor' | 'admin', jobOrderId?: string) => {
-    setDefaultAlertTarget(target)
-    setSelectedJobOrderForAlert(jobOrderId)
-    setShowSendAlertModal(true)
+  const handleSendBottleneckAlert = () => {
+    setShowBottleneckSendConfirm(true)
   }
   
-  const handleAlertSent = () => {
-    loadDashboardData()
+  const confirmSendBottleneckAlert = async () => {
+    if (!metrics?.bottleneckTasks || metrics.bottleneckTasks.length === 0) {
+      toast.error('No bottleneck tasks to send')
+      return
+    }
+    
+    setSendingBottleneckAlert(true)
+    try {
+      // Format the bottleneck tasks for the alert message
+      const tasksList = metrics.bottleneckTasks.join(', ')
+      const alertMessage = `Bottleneck Tasks identified requiring attention and resource allocation: ${tasksList}`
+      
+      // Make API call using fetch with proper path
+      const response = await fetch('/api/admin_alerts.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          alert_type: 'bottleneck_warning',
+          message: alertMessage,
+          severity: 'Warning',
+          technician_id: null
+        })
+      })
+      
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error('HTTP error:', response.status, errorText)
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      
+      const result = await response.json()
+      console.log('Alert API response:', result)
+      
+      if (result.success) {
+        toast.success('Bottleneck alert sent to admin successfully!')
+        setShowBottleneckSendConfirm(false)
+        // Reload dashboard to refresh alerts if needed
+        setTimeout(() => {
+          loadDashboardData()
+        }, 500)
+      } else {
+        console.error('Failed to send alert:', result.message)
+        toast.error(result.message || 'Failed to send bottleneck alert')
+      }
+    } catch (error) {
+      console.error('Error sending bottleneck alert:', error)
+      if (error instanceof Error) {
+        toast.error(`Failed: ${error.message}`)
+      } else {
+        toast.error('Failed to send bottleneck alert. Please check console for details.')
+      }
+    } finally {
+      setSendingBottleneckAlert(false)
+    }
   }
   
   const getSeverityColor = (severity: string) => {
@@ -243,6 +294,7 @@ const PlanningEngineerDashboard: React.FC = () => {
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
+      case 'Critical': return 'text-red-700 bg-red-200 dark:text-red-300 dark:bg-red-900/40 border border-red-400'
       case 'High': return 'text-red-600 bg-red-100 dark:text-red-400 dark:bg-red-900/20'
       case 'Medium': return 'text-yellow-600 bg-yellow-100 dark:text-yellow-400 dark:bg-yellow-900/20'
       case 'Low': return 'text-green-600 bg-green-100 dark:text-green-400 dark:bg-green-900/20'
@@ -757,26 +809,45 @@ const PlanningEngineerDashboard: React.FC = () => {
             {/* Bottlenecks */}
             <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700">
               <div className="p-6 border-b border-neutral-200 dark:border-neutral-700">
-                <h3 className="font-semibold text-light-text dark:text-dark-text flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-orange-500" />
-                  Bottleneck Tasks
-                </h3>
+                <div className="flex items-center justify-between">
+                  <h3 className="font-semibold text-light-text dark:text-dark-text flex items-center gap-2">
+                    <AlertTriangle className="w-5 h-5 text-orange-500" />
+                    Bottleneck Tasks
+                  </h3>
+                  {metrics?.bottleneckTasks && metrics.bottleneckTasks.length > 0 && (
+                    <button
+                      onClick={handleSendBottleneckAlert}
+                      disabled={sendingBottleneckAlert}
+                      className="px-4 py-2 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-sm flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <Send className="w-4 h-4" />
+                      {sendingBottleneckAlert ? 'Sending...' : 'Send to Admin'}
+                    </button>
+                  )}
+                </div>
               </div>
               <div className="p-6">
                 <div className="space-y-3">
-                  {metrics?.bottleneckTasks.map((task, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-orange-50 dark:bg-orange-900/20">
-                      <span className="text-sm font-medium text-orange-800 dark:text-orange-200">{task}</span>
-                      <span className="text-xs text-orange-600 dark:text-orange-400">+15% avg delay</span>
+                  {metrics?.bottleneckTasks && metrics.bottleneckTasks.length > 0 ? (
+                    metrics.bottleneckTasks.map((task, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-orange-50 dark:bg-orange-900/20">
+                        <span className="text-sm font-medium text-orange-800 dark:text-orange-200">{task}</span>
+                        <span className="text-xs text-orange-600 dark:text-orange-400">+15% avg delay</span>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-8 text-neutral-500 dark:text-neutral-400">
+                      <AlertTriangle className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                      <p>No bottleneck tasks identified</p>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             </div>
 
             {/* Top Performers */}
-      <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700">
-        <div className="p-6 border-b border-neutral-200 dark:border-neutral-700">
+            <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700">
+              <div className="p-6 border-b border-neutral-200 dark:border-neutral-700">
                 <h3 className="font-semibold text-light-text dark:text-dark-text flex items-center gap-2">
                   <Users className="w-5 h-5 text-green-500" />
                   Top Performers
@@ -784,12 +855,25 @@ const PlanningEngineerDashboard: React.FC = () => {
               </div>
               <div className="p-6">
                 <div className="space-y-3">
-                  {metrics?.topPerformers.map((performer, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-green-50 dark:bg-green-900/20">
-                      <span className="text-sm font-medium text-green-800 dark:text-green-200">{performer}</span>
-                      <span className="text-xs text-green-600 dark:text-green-400">95%+ efficiency</span>
+                  {metrics?.topPerformers && metrics.topPerformers.length > 0 ? (
+                    metrics.topPerformers.map((performer, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors">
+                        <div className="flex items-center gap-2">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white font-bold text-sm">
+                            {performer.charAt(0).toUpperCase()}
+                          </div>
+                          <span className="text-sm font-medium text-green-800 dark:text-green-200">{performer}</span>
+                        </div>
+                        <span className="text-xs text-green-600 dark:text-green-400">95%+ efficiency</span>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="text-center py-8 text-neutral-500 dark:text-neutral-400">
+                      <Users className="w-12 h-12 mx-auto mb-2 opacity-50" />
+                      <p>No top performers identified</p>
+                      <p className="text-xs mt-1">Technicians with 90%+ efficiency</p>
                     </div>
-                  ))}
+                  )}
                 </div>
               </div>
             </div>
@@ -914,13 +998,6 @@ const PlanningEngineerDashboard: React.FC = () => {
                             title="Edit job order"
                           >
                             <Edit className="w-4 h-4" />
-                          </button>
-                          <button 
-                            onClick={() => handleSendAlert(undefined, order.id)}
-                            className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-all duration-200 hover:scale-110 active:scale-95"
-                            title="Send alert for this job order"
-                          >
-                            <Send className="w-4 h-4" />
                           </button>
                           <button 
                             onClick={() => handleDeleteJobOrderClick(order)}
@@ -1160,38 +1237,6 @@ const PlanningEngineerDashboard: React.FC = () => {
             </div>
           </div>
 
-          {/* Quick Actions - Send Alert */}
-          <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700 p-6">
-            <h3 className="font-semibold text-light-text dark:text-dark-text mb-4">
-              Send Alert / Instruction
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <button
-                onClick={() => handleSendAlert('supervisor')}
-                className="p-4 border-2 border-blue-300 dark:border-blue-700 rounded-lg bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:border-blue-400 dark:hover:border-blue-600 transition-all duration-200 hover:scale-105 active:scale-95 text-left"
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <Users className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                  <div className="font-medium text-blue-900 dark:text-blue-100">To Supervisor</div>
-                </div>
-                <p className="text-xs text-blue-600 dark:text-blue-400">
-                  Send instructions, schedule updates, or priority changes to supervisors
-                </p>
-              </button>
-              <button
-                onClick={() => handleSendAlert('admin')}
-                className="p-4 border-2 border-purple-300 dark:border-purple-700 rounded-lg bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 dark:hover:bg-purple-900/30 hover:border-purple-400 dark:hover:border-purple-600 transition-all duration-200 hover:scale-105 active:scale-95 text-left"
-              >
-                <div className="flex items-center gap-3 mb-2">
-                  <AlertTriangle className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                  <div className="font-medium text-purple-900 dark:text-purple-100">To Admin</div>
-                </div>
-                <p className="text-xs text-purple-600 dark:text-purple-400">
-                  Alert admin about resource needs, bottlenecks, or escalation requests
-                </p>
-              </button>
-            </div>
-          </div>
           </div>
         )}
 
@@ -1864,18 +1909,18 @@ const PlanningEngineerDashboard: React.FC = () => {
         type="danger"
       />
 
-      {/* Send Alert Modal */}
-      <SendAlertModal
-        isOpen={showSendAlertModal}
-        onClose={() => {
-          setShowSendAlertModal(false)
-          setSelectedJobOrderForAlert(undefined)
-          setDefaultAlertTarget(undefined)
-        }}
-        jobOrderId={selectedJobOrderForAlert}
-        defaultTarget={defaultAlertTarget}
-        onAlertSent={handleAlertSent}
+      {/* Send Bottleneck Alert Confirmation Dialog */}
+      <ConfirmationDialog
+        isOpen={showBottleneckSendConfirm}
+        onClose={() => setShowBottleneckSendConfirm(false)}
+        onConfirm={confirmSendBottleneckAlert}
+        title="Send Bottleneck Alert to Admin"
+        message={`Are you sure you want to send an alert about ${metrics?.bottleneckTasks?.length || 0} bottleneck task(s) to the admin?`}
+        confirmText="Send Alert"
+        cancelText="Cancel"
+        type="warning"
       />
+
     </div>
   )
 }

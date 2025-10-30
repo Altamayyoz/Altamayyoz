@@ -25,6 +25,8 @@ import LoadingSpinner from '../../components/common/LoadingSpinner'
 import BulkApproveModal from '../../components/modals/BulkApproveModal'
 import AssignTaskModal from '../../components/modals/AssignTaskModal'
 import FilterModal from '../../components/modals/FilterModal'
+import TaskCompletionNotification from '../../components/modals/TaskCompletionNotification'
+import { toast } from 'react-hot-toast'
 import type { JobOrder } from '../../types'
 
 interface PendingApproval {
@@ -54,106 +56,210 @@ interface TechnicianPerformance {
   alerts: number
 }
 
+interface ApprovalHistory {
+  approval_id: number
+  task_id: number
+  supervisor_id: number
+  technician_id: number | null
+  action_type: 'approved' | 'rejected'
+  comments: string | null
+  approval_date: string
+  operation_name: string
+  devices_completed: number
+  efficiency_percentage: number
+  supervisor_name: string
+  technician_name: string | null
+  job_order_id: string
+}
+
+interface TaskCompletionNotification {
+  id: string
+  jobOrderId: string
+  technicianId: string
+  technicianName: string
+  taskId: string
+  type: string
+  message: string
+  status: 'pending' | 'read' | 'resolved'
+  createdAt: string
+  operationName: string
+  devicesCompleted: number
+  actualTimeMinutes: number
+  efficiencyPercentage: number
+  serialNumbers: string[]
+  notes: string
+  totalDevices: number
+}
+
 const SupervisorDashboard: React.FC = () => {
   const [pendingApprovals, setPendingApprovals] = useState<PendingApproval[]>([])
   const [technicians, setTechnicians] = useState<TechnicianPerformance[]>([])
   const [jobOrders, setJobOrders] = useState<JobOrder[]>([])
+  const [approvalHistory, setApprovalHistory] = useState<ApprovalHistory[]>([])
+  const [taskCompletionNotifications, setTaskCompletionNotifications] = useState<TaskCompletionNotification[]>([])
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState('overview')
   const [searchTerm, setSearchTerm] = useState('')
   const [filterStatus, setFilterStatus] = useState('all')
+  const [historyFilter, setHistoryFilter] = useState<'all' | 'approved' | 'rejected'>('all')
   
   // Modal states
   const [showBulkApproveModal, setShowBulkApproveModal] = useState(false)
   const [showAssignTaskModal, setShowAssignTaskModal] = useState(false)
   const [showFilterModal, setShowFilterModal] = useState(false)
   
+  // Comment modal states
+  const [showCommentModal, setShowCommentModal] = useState(false)
+  const [selectedApprovalId, setSelectedApprovalId] = useState<string | null>(null)
+  const [approvalComment, setApprovalComment] = useState('')
+  const [approvalAction, setApprovalAction] = useState<'approve' | 'reject'>('approve')
+  
+  // Task completion notification modal states
+  const [showTaskCompletionModal, setShowTaskCompletionModal] = useState(false)
+  const [selectedTaskCompletion, setSelectedTaskCompletion] = useState<TaskCompletionNotification | null>(null)
+  
   // Enhanced filter state
   const [filters, setFilters] = useState<Record<string, any>>({})
 
-  useEffect(() => {
-    const loadDashboardData = async () => {
-      try {
-        // Mock pending approvals data
-        const mockApprovals: PendingApproval[] = [
-          {
-            id: '1',
-            technicianName: 'Alex Turner',
-            technicianId: 'u1',
-            taskName: 'Quality Assemblage I',
-            devicesCompleted: 5,
-            deviceSerials: ['A340-001', 'A340-002', 'A340-003', 'A340-004', 'A340-005'],
-            actualTime: 95,
-            standardTime: 90,
-            submittedAt: '2024-01-15T14:30:00Z',
-            notes: 'Minor delay due to component alignment issue',
-            efficiency: 94.7
-          },
-          {
-            id: '2',
-            technicianName: 'Bianca Stone',
-            technicianId: 'u2',
-            taskName: 'Final Inspection',
-            devicesCompleted: 3,
-            deviceSerials: ['A340-006', 'A340-007', 'A340-008'],
-            actualTime: 42,
-            standardTime: 39,
-            submittedAt: '2024-01-15T15:15:00Z',
-            efficiency: 92.9
-          },
-          {
-            id: '3',
-            technicianName: 'Carlos Mendez',
-            technicianId: 'u3',
-            taskName: 'Unit Test',
-            devicesCompleted: 4,
-            deviceSerials: ['A340-009', 'A340-010', 'A340-011', 'A340-012'],
-            actualTime: 85,
-            standardTime: 80,
-            submittedAt: '2024-01-15T16:00:00Z',
-            notes: 'One device required additional calibration',
-            efficiency: 94.1
-          }
-        ]
-
-        // Mock technician performance data
-        const mockTechnicians: TechnicianPerformance[] = [
-          { id: 'u1', name: 'Alex Turner', efficiency: 94.7, productivity: 88.2, utilization: 92.1, tasksCompleted: 12, totalHours: 8.5, status: 'Active', currentTask: 'Quality Assemblage II', alerts: 0 },
-          { id: 'u2', name: 'Bianca Stone', efficiency: 92.9, productivity: 85.7, utilization: 89.3, tasksCompleted: 10, totalHours: 8.2, status: 'Active', currentTask: 'Final Inspection', alerts: 1 },
-          { id: 'u3', name: 'Carlos Mendez', efficiency: 94.1, productivity: 87.4, utilization: 91.8, tasksCompleted: 11, totalHours: 8.3, status: 'Active', currentTask: 'Unit Test', alerts: 0 },
-          { id: 'u4', name: 'Diana Kim', efficiency: 89.2, productivity: 82.1, utilization: 85.6, tasksCompleted: 9, totalHours: 7.8, status: 'Idle', alerts: 2 },
-          { id: 'u5', name: 'Ethan Cole', efficiency: 96.3, productivity: 91.2, utilization: 94.7, tasksCompleted: 13, totalHours: 8.7, status: 'Active', currentTask: 'Packing', alerts: 0 },
-          { id: 'u6', name: 'Fiona Li', efficiency: 87.8, productivity: 79.4, utilization: 83.2, tasksCompleted: 8, totalHours: 7.5, status: 'On Break', alerts: 3 },
-          { id: 'u7', name: 'George Hall', efficiency: 93.5, productivity: 86.8, utilization: 90.4, tasksCompleted: 11, totalHours: 8.1, status: 'Active', currentTask: 'Adjustment', alerts: 0 },
-          { id: 'u8', name: 'Hina Patel', efficiency: 91.7, productivity: 84.3, utilization: 88.9, tasksCompleted: 10, totalHours: 8.0, status: 'Active', currentTask: 'Immersion Test', alerts: 1 },
-          { id: 'u9', name: 'Ian Becker', efficiency: 88.4, productivity: 81.6, utilization: 86.1, tasksCompleted: 9, totalHours: 7.9, status: 'Idle', alerts: 2 },
-          { id: 'u10', name: 'Jia Chen', efficiency: 95.1, productivity: 89.7, utilization: 93.2, tasksCompleted: 12, totalHours: 8.4, status: 'Active', currentTask: 'Quality Assemblage I', alerts: 0 },
-          { id: 'u11', name: 'Kyle Reed', efficiency: 90.6, productivity: 83.5, utilization: 87.8, tasksCompleted: 10, totalHours: 8.0, status: 'Active', currentTask: 'Final Inspection', alerts: 1 },
-          { id: 'u12', name: 'Laura Gomez', efficiency: 92.3, productivity: 85.9, utilization: 89.6, tasksCompleted: 11, totalHours: 8.2, status: 'Active', currentTask: 'Unit Test', alerts: 0 },
-          { id: 'u13', name: 'Marco Rossi', efficiency: 89.8, productivity: 82.7, utilization: 86.4, tasksCompleted: 9, totalHours: 7.8, status: 'Idle', alerts: 2 },
-          { id: 'u14', name: 'Nina Shah', efficiency: 94.6, productivity: 88.1, utilization: 91.9, tasksCompleted: 12, totalHours: 8.5, status: 'Active', currentTask: 'Packing', alerts: 0 }
-        ]
-
-        // Mock job orders data
-        const jobOrdersData = await api.getJobOrders()
-        const mockJobOrders = jobOrdersData.map(j => ({
-          ...j,
-          assignedTechnicians: [`Technician ${Math.floor(Math.random() * 14) + 1}`, `Technician ${Math.floor(Math.random() * 14) + 1}`],
-          totalDevices: j.totalDevices || Math.floor(Math.random() * 50) + 10,
-          completedDevices: j.completedDevices || Math.floor(Math.random() * 30) + 5,
-          priority: ['High', 'Medium', 'Low'][Math.floor(Math.random() * 3)] as 'High' | 'Medium' | 'Low'
+  const loadDashboardData = async () => {
+    setLoading(true)
+    
+    let approvals: PendingApproval[] = []
+    let techs: TechnicianPerformance[] = []
+    let orders: JobOrder[] = []
+    let history: ApprovalHistory[] = []
+    let notifications: TaskCompletionNotification[] = []
+    
+    try {
+      // Fetch pending approvals from API
+      const response = await fetch('/api/approvals.php', {
+        credentials: 'include'
+      })
+      const result = await response.json()
+      
+      if (result.success && result.data) {
+        // Map API data to PendingApproval format
+        approvals = result.data.map((task: any) => ({
+          id: String(task.task_id),
+          technicianName: task.technician_name || 'Unknown',
+          technicianId: String(task.technician_id),
+          taskName: task.operation_name || 'Task',
+          devicesCompleted: task.devices_completed || 0,
+          deviceSerials: task.serial_numbers || [],
+          actualTime: task.actual_time_minutes || 0,
+          standardTime: task.standard_time_minutes || 0,
+          submittedAt: task.created_at || new Date().toISOString(),
+          notes: task.notes || '',
+          efficiency: parseFloat(task.efficiency_percentage) || 0
         }))
-
-        setPendingApprovals(mockApprovals)
-        setTechnicians(mockTechnicians)
-        setJobOrders(mockJobOrders)
-        setLoading(false)
-      } catch (error) {
-        // Error loading supervisor dashboard
-        setLoading(false)
       }
+    } catch (apiError) {
+      console.error('API fetch error, using mock data:', apiError)
+      // Use mock data as fallback
+      approvals = [
+        {
+          id: '1',
+          technicianName: 'Alex Turner',
+          technicianId: 'u1',
+          taskName: 'Quality Assemblage I',
+          devicesCompleted: 5,
+          deviceSerials: ['A340-001', 'A340-002', 'A340-003', 'A340-004', 'A340-005'],
+          actualTime: 95,
+          standardTime: 90,
+          submittedAt: '2024-01-15T14:30:00Z',
+          notes: 'Minor delay due to component alignment issue',
+          efficiency: 94.7
+        },
+        {
+          id: '2',
+          technicianName: 'Bianca Stone',
+          technicianId: 'u2',
+          taskName: 'Final Inspection',
+          devicesCompleted: 3,
+          deviceSerials: ['A340-006', 'A340-007', 'A340-008'],
+          actualTime: 42,
+          standardTime: 39,
+          submittedAt: '2024-01-15T15:15:00Z',
+          efficiency: 92.9
+        },
+        {
+          id: '3',
+          technicianName: 'Carlos Mendez',
+          technicianId: 'u3',
+          taskName: 'Unit Test',
+          devicesCompleted: 4,
+          deviceSerials: ['A340-009', 'A340-010', 'A340-011', 'A340-012'],
+          actualTime: 85,
+          standardTime: 80,
+          submittedAt: '2024-01-15T16:00:00Z',
+          notes: 'One device required additional calibration',
+          efficiency: 94.1
+        }
+      ]
     }
+    
+    // Always load technician and job order data
+    techs = [
+      { id: 'u1', name: 'Alex Turner', efficiency: 94.7, productivity: 88.2, utilization: 92.1, tasksCompleted: 12, totalHours: 8.5, status: 'Active', currentTask: 'Quality Assemblage II', alerts: 0 },
+      { id: 'u2', name: 'Bianca Stone', efficiency: 92.9, productivity: 85.7, utilization: 89.3, tasksCompleted: 10, totalHours: 8.2, status: 'Active', currentTask: 'Final Inspection', alerts: 1 },
+      { id: 'u3', name: 'Carlos Mendez', efficiency: 94.1, productivity: 87.4, utilization: 91.8, tasksCompleted: 11, totalHours: 8.3, status: 'Active', currentTask: 'Unit Test', alerts: 0 },
+      { id: 'u4', name: 'Diana Kim', efficiency: 89.2, productivity: 82.1, utilization: 85.6, tasksCompleted: 9, totalHours: 7.8, status: 'Idle', alerts: 2 },
+      { id: 'u5', name: 'Ethan Cole', efficiency: 96.3, productivity: 91.2, utilization: 94.7, tasksCompleted: 13, totalHours: 8.7, status: 'Active', currentTask: 'Packing', alerts: 0 },
+      { id: 'u6', name: 'Fiona Li', efficiency: 87.8, productivity: 79.4, utilization: 83.2, tasksCompleted: 8, totalHours: 7.5, status: 'On Break', alerts: 3 },
+      { id: 'u7', name: 'George Hall', efficiency: 93.5, productivity: 86.8, utilization: 90.4, tasksCompleted: 11, totalHours: 8.1, status: 'Active', currentTask: 'Adjustment', alerts: 0 },
+      { id: 'u8', name: 'Hina Patel', efficiency: 91.7, productivity: 84.3, utilization: 88.9, tasksCompleted: 10, totalHours: 8.0, status: 'Active', currentTask: 'Immersion Test', alerts: 1 },
+      { id: 'u9', name: 'Ian Becker', efficiency: 88.4, productivity: 81.6, utilization: 86.1, tasksCompleted: 9, totalHours: 7.9, status: 'Idle', alerts: 2 },
+      { id: 'u10', name: 'Jia Chen', efficiency: 95.1, productivity: 89.7, utilization: 93.2, tasksCompleted: 12, totalHours: 8.4, status: 'Active', currentTask: 'Quality Assemblage I', alerts: 0 },
+      { id: 'u11', name: 'Kyle Reed', efficiency: 90.6, productivity: 83.5, utilization: 87.8, tasksCompleted: 10, totalHours: 8.0, status: 'Active', currentTask: 'Final Inspection', alerts: 1 },
+      { id: 'u12', name: 'Laura Gomez', efficiency: 92.3, productivity: 85.9, utilization: 89.6, tasksCompleted: 11, totalHours: 8.2, status: 'Active', currentTask: 'Unit Test', alerts: 0 },
+      { id: 'u13', name: 'Marco Rossi', efficiency: 89.8, productivity: 82.7, utilization: 86.4, tasksCompleted: 9, totalHours: 7.8, status: 'Idle', alerts: 2 },
+      { id: 'u14', name: 'Nina Shah', efficiency: 94.6, productivity: 88.1, utilization: 91.9, tasksCompleted: 12, totalHours: 8.5, status: 'Active', currentTask: 'Packing', alerts: 0 }
+    ]
+    
+    try {
+      const jobOrdersData = await api.getJobOrders()
+      orders = jobOrdersData.map(j => ({
+        ...j,
+        assignedTechnicians: [`Technician ${Math.floor(Math.random() * 14) + 1}`, `Technician ${Math.floor(Math.random() * 14) + 1}`],
+        totalDevices: j.totalDevices || Math.floor(Math.random() * 50) + 10,
+        completedDevices: j.completedDevices || Math.floor(Math.random() * 30) + 5,
+        priority: ['High', 'Medium', 'Low'][Math.floor(Math.random() * 3)] as 'High' | 'Medium' | 'Low'
+      }))
+    } catch (error) {
+      console.error('Error loading job orders:', error)
+    }
+    
+    // Load approval history
+    try {
+      const historyResponse = await fetch('/api/approval_history.php?limit=20', {
+        credentials: 'include'
+      })
+      const historyResult = await historyResponse.json()
+      
+      if (historyResult.success && historyResult.data) {
+        history = historyResult.data
+      }
+    } catch (error) {
+      console.error('Error loading approval history:', error)
+    }
+    
+    // Load task completion notifications
+    try {
+      notifications = await api.getSupervisorNotifications()
+    } catch (error) {
+      console.error('Error loading task completion notifications:', error)
+    }
+    
+    // Set all state at once
+    setPendingApprovals(approvals)
+    setTechnicians(techs)
+    setJobOrders(orders)
+    setApprovalHistory(history)
+    setTaskCompletionNotifications(notifications)
+    setLoading(false)
+  }
 
+  useEffect(() => {
     loadDashboardData()
   }, [])
 
@@ -209,13 +315,93 @@ const SupervisorDashboard: React.FC = () => {
   }
 
   const handleApproval = (approvalId: string, approved: boolean) => {
-    setPendingApprovals(prev => prev.filter(approval => approval.id !== approvalId))
-    // In a real app, this would make an API call
-    // Approval action completed
+    console.log('handleApproval called:', { approvalId, approved })
+    setSelectedApprovalId(approvalId)
+    setApprovalAction(approved ? 'approve' : 'reject')
+    setApprovalComment('')
+    setShowCommentModal(true)
+    console.log('Modal should be open, showCommentModal:', true)
+  }
+
+  const confirmApproval = async () => {
+    if (!selectedApprovalId) return
+    
+    // Validation for reject
+    if (approvalAction === 'reject' && !approvalComment.trim()) {
+      toast.error('Please provide a reason for rejection')
+      return
+    }
+    
+    try {
+      console.log('Sending approval request:', {
+        task_id: selectedApprovalId,
+        action: approvalAction,
+        comments: approvalComment.trim()
+      })
+      
+      // Call API to approve/reject the task
+      const response = await fetch('/api/approvals.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          task_id: selectedApprovalId,
+          action: approvalAction,
+          comments: approvalComment.trim()
+        })
+      })
+      
+      console.log('Response status:', response.status)
+      const result = await response.json()
+      console.log('Response data:', result)
+      
+      if (result.success) {
+        const actionText = approvalAction === 'approve' ? 'approved' : 'rejected'
+        
+        // Remove the approval from the list
+        setPendingApprovals(prev => prev.filter(approval => approval.id !== selectedApprovalId))
+        
+        toast.success(`Work log ${actionText} successfully!`)
+        
+        // Close modal
+        setShowCommentModal(false)
+        setSelectedApprovalId(null)
+        setApprovalComment('')
+        
+        // Reload dashboard data to get fresh data from database
+        setTimeout(() => {
+          loadDashboardData()
+        }, 500)
+      } else {
+        // Show debug info if available
+        const errorMsg = result.debug ? 
+          `${result.message}\nDebug: ${JSON.stringify(result.debug)}` : 
+          result.message
+        
+        toast.error(errorMsg || `Failed to ${approvalAction} work log`)
+        
+        // Log full error for debugging
+        console.error('Approval failed:', result)
+      }
+    } catch (error) {
+      console.error('Approval error:', error)
+      toast.error(`Failed to ${approvalAction} work log. Please check your connection.`)
+    }
   }
 
   const bulkApprove = () => {
     setShowBulkApproveModal(true)
+  }
+
+  const handleTaskCompletionAction = () => {
+    loadDashboardData() // Reload data after action
+  }
+
+  const openTaskCompletionModal = (notification: TaskCompletionNotification) => {
+    setSelectedTaskCompletion(notification)
+    setShowTaskCompletionModal(true)
   }
 
   return (
@@ -305,6 +491,7 @@ const SupervisorDashboard: React.FC = () => {
           {[
             { id: 'overview', label: 'Overview', icon: BarChart3 },
             { id: 'approvals', label: 'Pending Approvals', icon: Clock },
+            { id: 'taskcompletions', label: 'Task Completions', icon: MessageSquare },
             { id: 'technicians', label: 'Team Performance', icon: Users },
             { id: 'joborders', label: 'Job Orders', icon: FileText },
             { id: 'alerts', label: 'Alerts', icon: AlertTriangle }
@@ -459,22 +646,30 @@ const SupervisorDashboard: React.FC = () => {
 
                 <div className="flex flex-col gap-2 ml-6">
                   <button
-                    onClick={() => handleApproval(approval.id, true)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      console.log('Approve button clicked for approval:', approval.id)
+                      handleApproval(approval.id, true)
+                    }}
+                    type="button"
                     className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center gap-2"
                   >
                     <CheckCircle className="w-4 h-4" />
                     Approve
                   </button>
                   <button
-                    onClick={() => handleApproval(approval.id, false)}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      console.log('Reject button clicked for approval:', approval.id)
+                      handleApproval(approval.id, false)
+                    }}
+                    type="button"
                     className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition flex items-center gap-2"
                   >
                     <XCircle className="w-4 h-4" />
                     Reject
-                  </button>
-                  <button className="px-4 py-2 bg-neutral-200 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 rounded-lg hover:bg-neutral-300 dark:hover:bg-neutral-600 transition flex items-center gap-2">
-                    <MessageSquare className="w-4 h-4" />
-                    Comment
                   </button>
                 </div>
               </div>
@@ -487,6 +682,125 @@ const SupervisorDashboard: React.FC = () => {
               <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-2">All Caught Up!</h3>
               <p className="text-neutral-600 dark:text-neutral-400">No pending approvals at this time.</p>
             </div>
+          )}
+        </div>
+      )}
+
+      {activeTab === 'taskcompletions' && (
+        <div className="space-y-4">
+          {/* Header with notification count */}
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-lg font-semibold text-light-text dark:text-dark-text">
+                Task Completion Notifications
+              </h3>
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                {taskCompletionNotifications.filter(n => n.status === 'pending').length} pending notifications
+              </p>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+              <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                {taskCompletionNotifications.filter(n => n.status === 'pending').length} new
+              </span>
+            </div>
+          </div>
+
+          {/* Notifications List */}
+          {taskCompletionNotifications.length === 0 ? (
+            <div className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700 p-12 text-center">
+              <MessageSquare className="w-16 h-16 text-neutral-400 mx-auto mb-4" />
+              <h3 className="text-lg font-semibold text-light-text dark:text-dark-text mb-2">No Notifications</h3>
+              <p className="text-neutral-600 dark:text-neutral-400">No task completion notifications at this time.</p>
+            </div>
+          ) : (
+            taskCompletionNotifications.map((notification) => (
+              <div key={notification.id} className="bg-white dark:bg-[#1e293b] rounded-lg shadow border border-neutral-200 dark:border-neutral-700 p-6">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className={`w-3 h-3 rounded-full ${notification.status === 'pending' ? 'bg-red-500' : 'bg-green-500'}`}></div>
+                      <div>
+                        <h4 className="font-semibold text-light-text dark:text-dark-text">
+                          {notification.technicianName}
+                        </h4>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                          {notification.operationName} - Job Order {notification.jobOrderId}
+                        </p>
+                        <p className="text-xs text-neutral-500 dark:text-neutral-500">
+                          {new Date(notification.createdAt).toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                      <div>
+                        <span className="text-sm text-neutral-600 dark:text-neutral-400">Devices:</span>
+                        <p className="font-medium text-light-text dark:text-dark-text">
+                          {notification.devicesCompleted}
+                        </p>
+                      </div>
+                      <div>
+                        <span className="text-sm text-neutral-600 dark:text-neutral-400">Time:</span>
+                        <p className="font-medium text-light-text dark:text-dark-text">
+                          {notification.actualTimeMinutes} min
+                        </p>
+                      </div>
+                      <div>
+                        <span className="text-sm text-neutral-600 dark:text-neutral-400">Efficiency:</span>
+                        <p className={`font-medium ${
+                          notification.efficiencyPercentage >= 100 ? 'text-green-600 dark:text-green-400' :
+                          notification.efficiencyPercentage >= 80 ? 'text-yellow-600 dark:text-yellow-400' :
+                          'text-red-600 dark:text-red-400'
+                        }`}>
+                          {notification.efficiencyPercentage}%
+                        </p>
+                      </div>
+                      <div>
+                        <span className="text-sm text-neutral-600 dark:text-neutral-400">Status:</span>
+                        <p className={`font-medium ${
+                          notification.status === 'pending' ? 'text-red-600 dark:text-red-400' :
+                          notification.status === 'read' ? 'text-yellow-600 dark:text-yellow-400' :
+                          'text-green-600 dark:text-green-400'
+                        }`}>
+                          {notification.status.charAt(0).toUpperCase() + notification.status.slice(1)}
+                        </p>
+                      </div>
+                    </div>
+
+                    {notification.notes && (
+                      <div className="mb-4">
+                        <span className="text-sm text-neutral-600 dark:text-neutral-400">Notes:</span>
+                        <p className="text-sm text-light-text dark:text-dark-text mt-1 bg-neutral-50 dark:bg-neutral-800 p-3 rounded-lg">
+                          {notification.notes}
+                        </p>
+                      </div>
+                    )}
+
+                    <div className="mb-4">
+                      <span className="text-sm text-neutral-600 dark:text-neutral-400">Serial Numbers:</span>
+                      <div className="flex flex-wrap gap-2 mt-1">
+                        {notification.serialNumbers?.map((sn, index) => (
+                          <span key={index} className="px-2 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 text-xs rounded">
+                            {sn}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-2 ml-4">
+                    <button
+                      onClick={() => openTaskCompletionModal(notification)}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2"
+                    >
+                      <Eye className="w-4 h-4" />
+                      Review
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))
           )}
         </div>
       )}
@@ -750,6 +1064,90 @@ const SupervisorDashboard: React.FC = () => {
             type: 'text'
           }
         ]}
+      />
+
+      {/* Comment Modal for Approve/Reject */}
+      {console.log('Modal render check - showCommentModal:', showCommentModal)}
+      {showCommentModal && (
+        <div className="fixed inset-0 z-50 overflow-y-auto">
+          <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+              onClick={() => setShowCommentModal(false)}
+            />
+            
+            {/* Dialog */}
+            <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="p-6">
+                <div className="flex items-start">
+                  <div className="flex-shrink-0">
+                    <div className={`w-6 h-6 ${approvalAction === 'approve' ? 'text-green-600' : 'text-red-600'}`}>
+                      {approvalAction === 'approve' ? '✓' : '⚠️'}
+                    </div>
+                  </div>
+                  <div className="ml-4 flex-1">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                      {approvalAction === 'approve' ? 'Approve' : 'Reject'} Work Log
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                      {approvalAction === 'approve' ? 'Add a comment for approval (optional):' : 'Please provide a reason for rejection:'}
+                    </p>
+                    
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        {approvalAction === 'approve' ? 'Comment' : 'Reason for rejection'} {approvalAction === 'reject' && '*'}
+                      </label>
+                      <textarea
+                        value={approvalComment}
+                        onChange={(e) => setApprovalComment(e.target.value)}
+                        rows={3}
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder={approvalAction === 'approve' ? 'Add your comment here...' : 'Please provide a reason for rejection...'}
+                        required={approvalAction === 'reject'}
+                      />
+                    </div>
+                    
+                    {/* Actions */}
+                    <div className="flex justify-end space-x-3">
+                      <button
+                        onClick={() => {
+                          setShowCommentModal(false)
+                          setApprovalComment('')
+                        }}
+                        className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-lg transition-colors"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={confirmApproval}
+                        disabled={approvalAction === 'reject' && !approvalComment.trim()}
+                        className={`px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                          approvalAction === 'approve' 
+                            ? 'bg-green-600 hover:bg-green-700' 
+                            : 'bg-red-600 hover:bg-red-700'
+                        }`}
+                      >
+                        {approvalAction === 'approve' ? 'Approve' : 'Reject'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Task Completion Notification Modal */}
+      <TaskCompletionNotification
+        isOpen={showTaskCompletionModal}
+        onClose={() => {
+          setShowTaskCompletionModal(false)
+          setSelectedTaskCompletion(null)
+        }}
+        notification={selectedTaskCompletion}
+        onAction={handleTaskCompletionAction}
       />
     </div>
   )

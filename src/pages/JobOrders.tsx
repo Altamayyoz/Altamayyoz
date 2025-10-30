@@ -4,6 +4,7 @@ import { toast } from 'react-hot-toast'
 import api from '../services/api'
 import LoadingSpinner from '../components/common/LoadingSpinner'
 import ConfirmationDialog from '../components/common/ConfirmationDialog'
+import TaskCompletionModal from '../components/modals/TaskCompletionModal'
 
 const JobOrdersPage: React.FC = () => {
   const [orders, setOrders] = useState<any[]>([])
@@ -11,16 +12,24 @@ const JobOrdersPage: React.FC = () => {
   
   // Action dialog states
   const [showMarkCompleteDialog, setShowMarkCompleteDialog] = useState(false)
+  const [showTaskCompletionModal, setShowTaskCompletionModal] = useState(false)
   const [selectedOrder, setSelectedOrder] = useState<any | null>(null)
   const [downloadingId, setDownloadingId] = useState<string | null>(null)
 
   useEffect(() => {
     let mounted = true
     ;(async () => {
-      const j = await api.getJobOrders()
-      if (mounted) {
-        setOrders(j)
-        setLoading(false)
+      try {
+        const j = await api.getJobOrders()
+        if (mounted) {
+          setOrders(j)
+          setLoading(false)
+        }
+      } catch (error) {
+        console.error('Error loading job orders:', error)
+        if (mounted) {
+          setLoading(false)
+        }
       }
     })()
     return () => {
@@ -42,23 +51,18 @@ const JobOrdersPage: React.FC = () => {
 
   const handleMarkComplete = (order: any) => {
     setSelectedOrder(order)
-    setShowMarkCompleteDialog(true)
+    setShowTaskCompletionModal(true)
   }
 
-  const confirmMarkComplete = async () => {
-    if (!selectedOrder) return
-    
+  const handleTaskCompletionSuccess = async () => {
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      toast.success(`Job order "${selectedOrder.title}" marked as complete!`)
-      setShowMarkCompleteDialog(false)
-      setSelectedOrder(null)
-      // Reload orders
+      // Reload orders to reflect any changes
       const updatedOrders = await api.getJobOrders()
       setOrders(updatedOrders)
+      setShowTaskCompletionModal(false)
+      setSelectedOrder(null)
     } catch (error) {
-      toast.error('Failed to mark job order as complete')
+      console.error('Error reloading orders:', error)
     }
   }
 
@@ -165,16 +169,15 @@ const JobOrdersPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Confirmation Dialog */}
-      <ConfirmationDialog
-        isOpen={showMarkCompleteDialog}
-        onClose={() => setShowMarkCompleteDialog(false)}
-        onConfirm={confirmMarkComplete}
-        title="Mark as Complete"
-        message={`Mark job order "${selectedOrder?.title}" as complete? This will update the status to completed.`}
-        type="success"
-        confirmText="Mark Complete"
-        cancelText="Cancel"
+      {/* Task Completion Modal */}
+      <TaskCompletionModal
+        isOpen={showTaskCompletionModal}
+        onClose={() => {
+          setShowTaskCompletionModal(false)
+          setSelectedOrder(null)
+        }}
+        jobOrder={selectedOrder}
+        onSuccess={handleTaskCompletionSuccess}
       />
     </div>
   )

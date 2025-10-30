@@ -31,6 +31,14 @@ module.exports = {
           light: '#E0FBFC',
           dark: '#64748b',
         },
+        /* Text Colors for Light/Dark Mode */
+        'light-primary': '#4b7a9f',
+        'dark-primary': '#334155',
+        'light-accent': '#8ebcca',
+        'dark-accent': '#64748b',
+        /* Text Colors */
+        'light-text': '#1e293b',
+        'dark-text': '#e2e8f0',
         danger: {
           DEFAULT: '#cc0000',
           light: '#ff4444',

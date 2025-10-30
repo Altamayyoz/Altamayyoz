@@ -9,6 +9,7 @@ import RequireRole from './components/auth/RequireRole'
 
 const LoginPage = lazy(() => import('./pages/Login'))
 const ProductionWorkerDashboard = lazy(() => import('./pages/production/ProductionWorkerDashboard'))
+const TechnicianDashboard = lazy(() => import('./pages/technician/TechnicianDashboard'))
 const SupervisorDashboard = lazy(() => import('./pages/supervisor/SupervisorDashboard'))
 const PlanningEngineerDashboard = lazy(() => import('./pages/planning/PlanningEngineerDashboard'))
 const TestPersonnelDashboard = lazy(() => import('./pages/test/TestPersonnelDashboard'))
@@ -50,6 +51,8 @@ const App: React.FC = () => {
                       ? '/planner-dashboard'
                       : user?.role === 'ProductionWorker'
                       ? '/production-dashboard'
+                      : user?.role === 'Technician'
+                      ? '/technician-dashboard'
                       : user?.role === 'TestPersonnel'
                       ? '/test-dashboard'
                       : user?.role === 'QualityInspector'
@@ -72,6 +75,14 @@ const App: React.FC = () => {
               element={
                 <RequireRole roles={["ProductionWorker"] as Role[]}>
                   <ProductionWorkerDashboard />
+                </RequireRole>
+              }
+            />
+            <Route
+              path="technician-dashboard"
+              element={
+                <RequireRole roles={["Technician"] as Role[]}>
+                  <TechnicianDashboard />
                 </RequireRole>
               }
             />

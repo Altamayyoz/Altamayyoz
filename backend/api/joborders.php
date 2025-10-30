@@ -21,7 +21,15 @@ require_once '../config.php';
 
 // Get authenticated user from session
 session_start();
-$user_id = $_SESSION['user_id'] ?? 1; // Default to admin for testing
+
+// Check if user is authenticated
+if (!isset($_SESSION['user_id'])) {
+    // Return 200 with error message instead of 401 to avoid browser auth popup
+    echo json_encode(['success' => false, 'message' => 'Authentication required']);
+    exit;
+}
+
+$user_id = $_SESSION['user_id'];
 $user_role = $_SESSION['role'] ?? 'engineer';
 
 // Handle different HTTP methods

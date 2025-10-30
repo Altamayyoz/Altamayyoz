@@ -1284,6 +1284,61 @@ const api = {
       console.error('Clear logs error:', error)
       return false
     }
+  },
+
+  // Supervisor Notifications
+  async getSupervisorNotifications(): Promise<any[]> {
+    if (USE_MOCK) {
+      await ensureGenerated()
+      return [
+        {
+          id: '1',
+          jobOrderId: 'JO-2024-001',
+          technicianId: '3',
+          technicianName: 'John Technician',
+          taskId: '1',
+          type: 'task_completion',
+          message: 'Task completion submitted by technician for Job Order JO-2024-001. Operation: Assemblage I, Devices: 2, Time: 30 minutes',
+          status: 'pending',
+          createdAt: new Date().toISOString(),
+          operationName: 'Assemblage I',
+          devicesCompleted: 2,
+          actualTimeMinutes: 30,
+          efficiencyPercentage: 106.7,
+          serialNumbers: ['SN001', 'SN002'],
+          notes: 'Completed successfully',
+          totalDevices: 10
+        }
+      ]
+    }
+
+    try {
+      return await apiRequest<any[]>('/api/supervisor_notifications.php')
+    } catch (error) {
+      console.error('Get supervisor notifications error:', error)
+      return []
+    }
+  },
+
+  async updateSupervisorNotification(notificationId: string, action: 'read' | 'approve' | 'reject', comments?: string): Promise<boolean> {
+    if (USE_MOCK) {
+      return true
+    }
+
+    try {
+      await apiRequest<any>('/api/supervisor_notifications.php', {
+        method: 'PUT',
+        body: JSON.stringify({
+          notification_id: notificationId,
+          action: action,
+          comments: comments || ''
+        })
+      })
+      return true
+    } catch (error) {
+      console.error('Update supervisor notification error:', error)
+      return false
+    }
   }
 }
 

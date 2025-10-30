@@ -556,7 +556,7 @@ const AdminDashboard: React.FC = () => {
               </button>
               <button 
                 onClick={() => setShowAddUserModal(true)}
-                className="px-4 py-2 bg-light-primary text-white rounded-lg hover:bg-light-primary/90 transition flex items-center gap-2"
+                className="px-4 py-2 bg-light-primary dark:bg-sky-accent text-white rounded-lg hover:opacity-90 transition flex items-center gap-2"
               >
                 <Plus className="w-4 h-4" />
                 Add User

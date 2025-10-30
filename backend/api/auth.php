@@ -68,12 +68,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     
-    // Login process
-    $username = sanitizeInput($input['username'] ?? '');
+    // Login process - support both username and email
+    $username = sanitizeInput($input['username'] ?? $input['email'] ?? '');
     $password = $input['password'] ?? '';
     
-    // Validate input
-    $errors = validateInput($input, ['username', 'password']);
+    // Debug logging
+    error_log("Login attempt - Username: '$username', Password: '$password'");
+    error_log("Input array: " . print_r($input, true));
+    
+    // Validate input - check for either username or email
+    $errors = [];
+    if (empty($username)) {
+        $errors[] = 'username or email is required';
+    }
+    if (empty($password)) {
+        $errors[] = 'password is required';
+    }
     if (!empty($errors)) {
         sendResponse(false, 'Validation failed: ' . implode(', ', $errors));
     }
@@ -134,7 +144,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             'station' => $_SESSION['station'] ?? null
         ]);
     } else {
-        sendResponse(false, 'Not authenticated');
+        // Return 200 with error message instead of 401 to avoid browser auth popup
+        echo json_encode(['success' => false, 'message' => 'Not authenticated']);
+        exit;
     }
 }
 

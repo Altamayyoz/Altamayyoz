@@ -1,4 +1,4 @@
-export type Role = 'Admin' | 'ProductionWorker' | 'Supervisor' | 'PlanningEngineer' | 'TestPersonnel' | 'QualityInspector'
+export type Role = 'Admin' | 'ProductionWorker' | 'Supervisor' | 'PlanningEngineer' | 'TestPersonnel' | 'QualityInspector' | 'Technician'
 
 export type User = {
   id: string
@@ -18,7 +18,7 @@ export type JobOrder = {
   createdAt: string
   updatedAt?: string
   dueDate?: string
-  priority?: 'High' | 'Medium' | 'Low'
+  priority?: 'Critical' | 'High' | 'Medium' | 'Low'
   assignedSupervisor?: string
   assignedTechnicians?: string[]
   totalDevices?: number
@@ -94,4 +94,28 @@ export type Device = {
   assignedTo?: string[]
   createdAt: string
   updatedAt?: string
+}
+
+export type TaskCompletion = {
+  id: string
+  jobOrderId: string
+  technicianId: string
+  operation: string
+  actualTimeMinutes: number
+  standardTimeMinutes: number
+  efficiencyPercentage: number
+  serialNumbers: string[]
+  notes: string
+  files: TaskCompletionFile[]
+  status: 'submitted' | 'approved' | 'rejected'
+  createdAt: string
+}
+
+export type TaskCompletionFile = {
+  id: string
+  originalName: string
+  storedName: string
+  path: string
+  size: number
+  uploadedAt: string
 }

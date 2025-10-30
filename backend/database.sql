@@ -32,6 +32,7 @@ CREATE TABLE operations (
     operation_id INT AUTO_INCREMENT PRIMARY KEY,
     operation_name VARCHAR(100) NOT NULL,
     standard_time INT NOT NULL COMMENT 'Standard time in minutes',
+    standard_time_minutes INT NOT NULL COMMENT 'Standard time in minutes (alias)',
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -127,22 +128,22 @@ CREATE TABLE activity_log (
 );
 
 -- Insert sample operations
-INSERT INTO operations (operation_name, standard_time, description) VALUES
-('Assemblage I', 32, 'Primary assembly operation'),
-('Assemblage II', 30, 'Secondary assembly operation'),
-('Assemblage II Tubeless', 13, 'Tubeless assembly variant'),
-('Final Touch - Cleaning&Packing', 10, 'Final cleaning and packing'),
-('Final Touch - Paint&Labeling', 15, 'Painting and labeling'),
-('Quality Test', 18, 'Quality control testing'),
-('Troubleshooting', 25, 'Problem diagnosis and repair'),
-('Calibration', 20, 'Device calibration'),
-('Inspection', 12, 'Visual inspection'),
-('Packaging', 8, 'Final packaging'),
-('Testing', 22, 'Functional testing'),
-('Assembly III', 28, 'Third assembly stage'),
-('Quality Control', 16, 'Quality control check'),
-('Final Assembly', 35, 'Final assembly stage'),
-('Pre-inspection', 14, 'Pre-inspection check');
+INSERT INTO operations (operation_name, standard_time, standard_time_minutes, description) VALUES
+('Assemblage I', 32, 32, 'Primary assembly operation'),
+('Assemblage II', 30, 30, 'Secondary assembly operation'),
+('Assemblage II Tubeless', 13, 13, 'Tubeless assembly variant'),
+('Final Touch - Cleaning&Packing', 10, 10, 'Final cleaning and packing'),
+('Final Touch - Paint&Labeling', 15, 15, 'Painting and labeling'),
+('Quality Test', 18, 18, 'Quality control testing'),
+('Troubleshooting', 25, 25, 'Problem diagnosis and repair'),
+('Calibration', 20, 20, 'Device calibration'),
+('Inspection', 12, 12, 'Visual inspection'),
+('Packaging', 8, 8, 'Final packaging'),
+('Testing', 22, 22, 'Functional testing'),
+('Assembly III', 28, 28, 'Third assembly stage'),
+('Quality Control', 16, 16, 'Quality control check'),
+('Final Assembly', 35, 35, 'Final assembly stage'),
+('Pre-inspection', 14, 14, 'Pre-inspection check');
 
 -- Insert sample users
 INSERT INTO users (username, password, role, name, email) VALUES
@@ -265,6 +266,23 @@ SELECT
 FROM job_orders jo
 LEFT JOIN tasks t ON jo.job_order_id = t.job_order_id AND t.status = 'approved'
 GROUP BY jo.job_order_id, jo.total_devices, jo.due_date, jo.status;
+
+-- Supervisor notifications table
+CREATE TABLE supervisor_notifications (
+    notification_id INT AUTO_INCREMENT PRIMARY KEY,
+    job_order_id VARCHAR(50) NOT NULL,
+    technician_id INT NOT NULL,
+    task_id INT,
+    notification_type ENUM('task_completion', 'approval_request', 'alert') NOT NULL,
+    message TEXT NOT NULL,
+    status ENUM('pending', 'read', 'resolved') DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    read_at TIMESTAMP NULL,
+    resolved_at TIMESTAMP NULL,
+    FOREIGN KEY (job_order_id) REFERENCES job_orders(job_order_id) ON DELETE CASCADE,
+    FOREIGN KEY (technician_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (task_id) REFERENCES tasks(task_id) ON DELETE CASCADE
+);
 
 -- Insert sample activity log entries
 INSERT INTO activity_log (user_id, action, details, created_at) VALUES
